@@ -9,32 +9,32 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Dynamically Typed
 - Full type inference
 
-#### JavaScript vs. r0b0p
+## JavaScript vs. r0b0p
 
-##### Printing to the console
-
-```
-console.log("Hello, world!")          SP3AK["Hello, world!"]
-```
-
-##### Assignments
-
-
-##### Booleans
+#### Printing to the console
 
 ```
-true                                  b1p
-false                                 b0p
-let x = true;                         x = b1p;
-let y = false;                        y = b0p;
+console.log("Hello, world!")                  SP3AK["Hello, world!"]
 ```
 
-##### Loops
+#### Assignments
+
+
+#### Booleans
 
 ```
-for (let i = 0; i < 10; i++) {        C0UNT[i:0->10] {
-  console.log(i);                       SP3AK[i];
-}                                     }
+true                                          b1p
+false                                         b0p
+let x = true;                                 x = b1p;
+let y = false;                                y = b0p;
+```
+
+#### Loops
+
+```
+for (let i = 0; i < 10; i++) {                C0UNT[i:0->10] {
+  console.log(i);                               SP3AK[i];
+}                                             }
 ```
 
 ## Example Programs
