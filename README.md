@@ -43,7 +43,7 @@ x > y                                         x > y
 x <= y                                        x <= y
 x >= y                                        x >= y
 x === y                                       x == y
-x !== y                                       N0T (x = y)
+x !== y                                       N0T (x == y)
 x = -8                                        x = -8
 ```
 
@@ -128,4 +128,24 @@ PR0GRAM area_of_circle[r] {
 }
 
 area = area_of_circle[10];
+```
+
+#### GCD
+
+```
+function gcd(a, b) {
+  if (b === 0)
+    return a;
+  else
+    return gcd(b, (a % b));
+}
+```
+
+```r0b0p
+PR0GRAM gcd[a, b] {
+  PR3SUM1NG[b == 0] {
+    G1V3 a;
+  }
+  G1V3 gcd[b, (a % b)];
+}
 ```
