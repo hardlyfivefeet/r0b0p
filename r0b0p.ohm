@@ -50,7 +50,6 @@ r0b0p {
   text        = "\"" char* "\"" | text "+" text
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
-  list        =
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
   relop       = ("<" | ">" | "==" | ">=" | "<=")
