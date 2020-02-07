@@ -149,3 +149,25 @@ PR0GRAM gcd[a, b] {
   G1V3 gcd[b, (a % b)];
 }
 ```
+
+#### Fibonacci
+
+```
+var fibb = function(n) {
+    if(n <= 2) {
+        return 1;
+    } else {
+        return fibb(n - 1) + fibb(n - 2);
+    }
+};
+```
+
+```r0b0p
+PR0GRAM fibb[n] {
+  PR3SUM1NG[n <= 2] {
+    G1V3 1;
+  } 3LS3 {
+    G1V3 fibb[n - 1] + fibb[n - 2];
+  }
+}
+```
