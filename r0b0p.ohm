@@ -1,0 +1,55 @@
+r0b0p {
+
+  Program     = (Statement)*
+  Statement   = Exp ";" --simple_statement
+              | CompStmt
+  CompStmt    = FuncDecl
+              | While
+              | ForLoop
+              | Conditional
+  Block       = "{" Statement* "}"
+  Exp         = Assignment | Exp1
+  Exp1        = Exp1 andorop Exp2 --and_or
+              | Exp2
+  Exp2        = Exp2 relop Exp3 --relop
+              | Exp3
+  Exp3        = Exp3 addop Exp4 --addop
+              | Exp4
+  Exp4        = Exp4 mulop Exp5 --mulop
+              | Exp5
+  Exp5        = "-" Exp6 --negation
+              | Exp6
+  Exp6        = "N0T" Exp7 --not
+              | Exp7
+  Exp7        = "(" Exp ")" --parens
+              | id
+              | number
+              | text
+              | boolean
+              | undefined
+              | FuncCall
+              | Print
+  Assignment  = id "=" Exp
+  FuncExp     = "G1V3" Exp ";" --return
+              | Statement
+  While       = "WH1L3" "[" Exp "]" Block
+  ForLoop     = "C0UNT" "[" (id ":")? number "->" number "]" Block
+  FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (FuncExp)* "}"
+  FuncCall    = id "[" (id ("," id)*)? "]"
+  Conditional = "PR3SUM1NG" "[" Exp "]" Block
+  Print       = "SP3AK" "[" (id | text) "]" --print
+  id          = ~keyword letter (alnum | "_")*
+  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "...")
+  number      = digit+
+  char        = escape
+              | ~"\'" ~"\"" ~"\n" ~"\\" any
+  text        = "\"" char* "\"" | text "+" text
+  boolean     = "b0p" | "b1p"
+  undefined   = "uncl3ar"
+  escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
+  comment     =  "..." (~"\n" any)* "\n"
+  relop       = ("<"|">"|"=="|">="|"<=")
+  addop       = ("+"|"-")
+  mulop       = ("*" | "/")
+  andorop     = ("||" | "&&")
+}
