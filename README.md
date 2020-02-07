@@ -22,8 +22,8 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 ## Reference Types
 
 - `t3xt` (string)
-- `l1st`  (list)
-- `d1ct`  (dictionary)
+- `l1st` (list)
+- `d1ct` (dictionary)
 
 ## JavaScript vs. r0b0p
 
@@ -45,6 +45,14 @@ x >= y                                        x >= y
 x === y                                       x == y
 x !== y                                       N0T (x = y)
 x = -8                                        x = -8
+```
+
+#### Reference Types
+
+```
+let x = [1, 2, 3, 4];                         x = {1, 2, 3, 4};
+let y = {a: 1, b: 2};                         y = {a: 1, b: 2};
+let z = "Hello world!";                       z = "Hello world!";
 ```
 
 #### Printing to the console
@@ -98,9 +106,9 @@ while (x < 6) {                               WH1L3[x < 6] {
 
 r0b0p does not support multi-line comments. Just add more dots!
 
-````
+```
 // This is a comment!                         ...This is a comment!
-````
+```
 
 ## Example Programs
 

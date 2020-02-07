@@ -26,6 +26,8 @@ r0b0p {
               | number
               | text
               | boolean
+              | List
+              | Dict
               | undefined
               | FuncCall
               | Print
@@ -38,14 +40,17 @@ r0b0p {
   FuncCall    = id "[" (id ("," id)*)? "]"
   Conditional = "PR3SUM1NG" "[" Exp "]" Block
   Print       = "SP3AK" "[" (id | text) "]" --print
+  List        = "{" (Exp ("," Exp )*)? "}"
+  Dict        = "{" (id ":" Exp ("," id ":" Exp)*)? "}"
   id          = ~keyword letter (alnum | "_")*
-  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "...")
+  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st" | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "...")
   number      = digit+
   char        = escape
               | ~"\'" ~"\"" ~"\n" ~"\\" any
   text        = "\"" char* "\"" | text "+" text
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
+  list        =
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
   relop       = ("<"|">"|"=="|">="|"<=")
