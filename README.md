@@ -10,6 +10,7 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Scripting Language
 - Dynamically Typed
 - Full type inference
+- Escape sequences
 
 ## Primitive Types
 
@@ -20,9 +21,31 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 
 ## Reference Types
 
-- `t3xt`
+- `t3xt` (string)
+- `l1st`  (list)
+- `d1ct`  (dictionary)
 
 ## JavaScript vs. r0b0p
+
+#### Operators
+
+```
+3 + 5                                         3 + 5
+10 - 3                                        10 - 3
+3 * 8                                         3 * 8
+21 / 7                                        21 / 7
+
+x && y                                        x && y
+x || y                                        x || y
+
+x < y                                         x < y
+x > y                                         x > y
+x <= y                                        x <= y
+x >= y                                        x >= y
+x === y                                       x == y
+x !== y                                       N0T (x = y)
+x = -8                                        x = -8
+```
 
 #### Printing to the console
 
@@ -47,6 +70,15 @@ let x = true;                                 x = b1p;
 let y = false;                                y = b0p;
 ```
 
+#### Conditionals
+
+```
+let x = 3;                                    x = 3;
+if (x < 6) {                                  PR3SUM1NG[x < 6] {
+  console.log("X is less than 6!");             SP3AK["X is less than 6!"];
+}                                             }
+```
+
 #### Loops
 
 ```
@@ -62,6 +94,14 @@ while (x < 6) {                               WH1L3[x < 6] {
 }                                             }
 ```
 
+#### Comments
+
+r0b0p does not support multi-line comments. Just add more dots!
+
+````
+// This is a comment!                         ...This is a comment!
+````
+
 ## Example Programs
 
 #### Getting the area of a circle:
@@ -70,24 +110,14 @@ while (x < 6) {                               WH1L3[x < 6] {
 function areaOfCircle(r) {
   return Math.PI * r * r;
 }
+
+let area = areaOfCircle(10);
 ```
 
 ```r0b0p
 PR0GRAM area_of_circle[r] {
   G1V3 Math.PI * r * r;
 }
-```
 
-```Javascript
-let x = 3;
-if(x < 6) {
-  console.log("X is less than 6!");
-}
-```
-
-```r0b0p
-x = 3;
-PR3SUM1NG[x < 6] {
-	SP3AK["X is less than 6!"];
-}
+area = area_of_circle[10];
 ```
