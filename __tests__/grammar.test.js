@@ -16,6 +16,20 @@ describe("assignment", () => {
   });
 });
 
+describe("types", () => {
+  it("lets us check if something is unclear/undefined", () => {
+    results = r0b0p.match("PR3SUM1NG[x == uncl3ar] { SP3AK[5]; }");
+    assert(results.succeeded());
+  });
+});
+
+describe("math", () => {
+  it("lets us use operations such as +, -, *, /", () => {
+    results = r0b0p.match("y = (5 * 9 / (54 % 10 + 33) - 1);");
+    assert(results.succeeded());
+  });
+});
+
 describe("functions", () => {
   it("lets us declare a simple function", () => {
     results = r0b0p.match("PR0GRAM addTwo[x, y] { G1V3 x + y; }");
@@ -29,7 +43,9 @@ describe("functions", () => {
 
 describe("conditionals and loops", () => {
   it("lets us write a conditional statement", () => {
-    results = r0b0p.match("i = 3; PR3SUM1NG[i < 5] { z = 3 + 6; } 3LS3 1F[i > 7] { z = 1 + i; } 3LS3 { z = 4; }");
+    results = r0b0p.match(
+      "i = 3; PR3SUM1NG[i < 5] { z = 3 + 6; } 3LS3 1F[i > 7] { z = 1 + i; } 3LS3 { z = 4; }"
+    );
     assert(results.succeeded());
   });
   it("lets us call a for-loop", () => {
