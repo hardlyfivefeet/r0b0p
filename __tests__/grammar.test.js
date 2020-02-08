@@ -40,22 +40,22 @@ describe("conditionals and loops", () => {
 
 describe("strings", () => {
   it("lets us create a string variable", () => {
-    results = r0b0p.match('x = "hello, world!"');
+    results = r0b0p.match('x = "hello, world!";');
     assert(results.succeeded());
   });
   it("lets us concatenate strings", () => {
-    results = r0b0p.match('x = "hello," + " world!"');
+    results = r0b0p.match('x = "hello," + " world!";');
     assert(results.succeeded());
   });
 });
 
 describe("lists and dictionaries", () => {
   it("lets us create a dictionary variable", () => {
-    results = r0b0p.match("x = {a: 1, b: 2}");
+    results = r0b0p.match("x = {a: 1, b: 2};");
     assert(results.succeeded());
   });
   it("lets us create a list variable", () => {
-    results = r0b0p.match("x = {1, 2}");
+    results = r0b0p.match("x = {1, 2};");
     assert(results.succeeded());
   });
 });
