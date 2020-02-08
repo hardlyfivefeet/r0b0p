@@ -15,3 +15,14 @@ describe("assignment", () => {
     assert(results.succeeded());
   });
 });
+
+describe("functions", () => {
+  it("lets us declare a simple function", () => {
+    results = r0b0p.match("PR0GRAM addTwo[x, y] { G1V3 x + y; }");
+    assert(results.succeeded());
+  });
+  it("lets us call a function", () => {
+    results = r0b0p.match("SP3AK[addTwo[5, 6]];");
+    assert(results.succeeded());
+  });
+});
