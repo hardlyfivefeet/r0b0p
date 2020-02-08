@@ -37,3 +37,14 @@ describe("strings", () => {
     assert(results.succeeded());
   });
 });
+
+describe("lists and dictionaries", () => {
+  it("lets us create a dictionary variable", () => {
+    results = r0b0p.match("x = {a: 1, b: 2}");
+    assert(results.succeeded());
+  });
+  it("lets us create a list variable", () => {
+    results = r0b0p.match("x = {1, 2}");
+    assert(results.succeeded());
+  });
+});
