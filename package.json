@@ -1,0 +1,24 @@
+{
+  "name": "r0b0p",
+  "version": "1.0.0",
+  "description": "Maddie, Merissa, and Adriana's programming language!",
+  "main": "r0b0p.ohm",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hardlyfivefeet/r0b0p.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hardlyfivefeet/r0b0p/issues"
+  },
+  "homepage": "https://github.com/hardlyfivefeet/r0b0p#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "jest": "^25.1.0",
+    "ohm-js": "^0.14.0"
+  }
+}
