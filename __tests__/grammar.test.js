@@ -52,6 +52,10 @@ describe("conditionals and loops", () => {
     results = r0b0p.match("C0UNT[i:0->10] { SP3AK[i]; }");
     assert(results.succeeded());
   });
+  it("lets us call a while-loop", () => {
+    results = r0b0p.match('x = 0; WH1L3[x < 3] { SP3AK["Adding to x"]; x = x + 1; }');
+    assert(results.succeeded());
+  });
 });
 
 describe("strings", () => {
