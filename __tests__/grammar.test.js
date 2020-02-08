@@ -53,7 +53,9 @@ describe("conditionals and loops", () => {
     assert(results.succeeded());
   });
   it("lets us call a while-loop", () => {
-    results = r0b0p.match('x = 0; WH1L3[x < 3] { SP3AK["Adding to x"]; x = x + 1; }');
+    results = r0b0p.match(
+      'x = 0; WH1L3[x < 3] { SP3AK["Adding to x"]; x = x + 1; }'
+    );
     assert(results.succeeded());
   });
 });
@@ -77,5 +79,20 @@ describe("lists and dictionaries", () => {
   it("lets us create a list variable", () => {
     results = r0b0p.match("x = {1, 2};");
     assert(results.succeeded());
+  });
+});
+
+describe("things you can't do", () => {
+  it("does not let us write nonsense without a comment", () => {
+    results = r0b0p.match("xasldfadfsafsdafdsds");
+    assert(results.succeeded() === false);
+  });
+  it("does not let us forget a semicolon", () => {
+    results = r0b0p.match("x = {1, 2}");
+    assert(results.succeeded() === false);
+  });
+  it("does not let us forget a closing brace", () => {
+    results = r0b0p.match("PR0GRAM addTwo[x, y { G1V3 x + y; }");
+    assert(results.succeeded() === false);
   });
 });
