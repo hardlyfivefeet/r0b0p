@@ -1,6 +1,6 @@
 r0b0p {
 
-  Program     = (Statement)*
+  Program     = (Statement | comment)*
   Statement   = Exp ";" --simple_statement
               | CompStmt
   CompStmt    = FuncDecl
