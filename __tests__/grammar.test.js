@@ -26,3 +26,14 @@ describe("functions", () => {
     assert(results.succeeded());
   });
 });
+
+describe("strings", () => {
+  it("lets us create a string variable", () => {
+    results = r0b0p.match('x = "hello, world!"');
+    assert(results.succeeded());
+  });
+  it("lets us concatenate strings", () => {
+    results = r0b0p.match('x = "hello," + " world!"');
+    assert(results.succeeded());
+  });
+});
