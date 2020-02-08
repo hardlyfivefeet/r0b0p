@@ -26,3 +26,14 @@ describe("functions", () => {
     assert(results.succeeded());
   });
 });
+
+describe("loops", () => {
+  it("lets us write a conditional statement", () => {
+    results = r0b0p.match("i = 3; PR3SUM1NG[i < 5] { z = 3 + 6; } 3LS3 1F[i > 7] { z = 1 + i; } 3LS3 { z = 4; }");
+    assert(results.succeeded());
+  });
+  it("lets us call a for-loop", () => {
+    results = r0b0p.match("C0UNT[i:0->10] { SP3AK[i]; }");
+    assert(results.succeeded());
+  });
+});
