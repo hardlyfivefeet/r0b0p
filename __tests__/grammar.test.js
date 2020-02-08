@@ -23,6 +23,13 @@ describe("types", () => {
   });
 });
 
+describe("comments", () => {
+  it("lets us write nonsense in a comment", () => {
+    results = r0b0p.match("...asldweroipuqwerpou\n");
+    assert(results.succeeded());
+  });
+});
+
 describe("math", () => {
   it("lets us use operations such as +, -, *, /", () => {
     results = r0b0p.match("y = (5 * 9 / (54 % 10 + 33) - 1);");
