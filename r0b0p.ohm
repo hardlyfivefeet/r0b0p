@@ -3,6 +3,7 @@ r0b0p {
   Program     = (Statement | comment)*
   Statement   = Exp ";" --simple_statement
               | CompStmt
+              | Return ";" --return
   CompStmt    = FuncDecl
               | While
               | ForLoop
@@ -31,12 +32,11 @@ r0b0p {
               | List
               | Dict
               | undefined
+  Return      = "G1V3" Exp
   Assignment  = id "=" Exp
-  FuncExp     = "G1V3" Exp ";" --return
-              | Statement
   While       = "WH1L3" "[" Exp "]" Block
   ForLoop     = "C0UNT" "[" (id ":")? number "->" number "]" Block
-  FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (FuncExp)* "}"
+  FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (Statement)* "}"
   FuncCall    = id "[" ((Exp) ("," (Exp))*)? "]" --function_call
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
   Print       = "SP3AK" "[" (Exp) "]" --print
@@ -52,7 +52,7 @@ r0b0p {
   undefined   = "uncl3ar"
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
-  relop       = ("<" | ">" | "==" | ">=" | "<=")
+  relop       = (">=" | "<=" | "<" | ">" | "==")
   addop       = ("+" | "-")
   mulop       = ("*" | "/" | "%")
   andorop     = ("||" | "&&")
