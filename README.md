@@ -1,7 +1,7 @@
 ![r0b0p logo](images/r0b0p.png)
 
 Project for CMSI 488 Spring 2020  
-Group: Maddie Louis, Merissa Tan, Adriana Donkers
+Group: Adriana Donkers, Maddie Louis, Merissa Tan
 
 Have you ever written JavaScript and wished it felt more robotic? Beep boop bop? Have you ever felt like Elon Musk, and you're trapped in a simulation? Then r0b0p is the language for you. r0b0p is inspired by JavaScript, and is a fun scripting language in which you can write complex programs while having a good time doing so.
 
