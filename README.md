@@ -124,7 +124,7 @@ let area = areaOfCircle(10);
 
 ```r0b0p
 PR0GRAM area_of_circle[r] {
-  G1V3 Math.PI * r * r;
+  G1V3 3.14159265 * r * r;
 }
 
 area = area_of_circle[10];
