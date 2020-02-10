@@ -188,7 +188,7 @@ for (let i = 1; i <= 20; i++) {
 ```
 
 ```r0b0p
-COUNT[i:1->21] {
+C0UNT[i:1->21] {
     PR3SUM1NG[i % 15 == 0] {
         SP3AK["FizzBuzz"];
     } 3LS3 1F[i % 3 == 0] {
@@ -257,3 +257,4 @@ PR0GRAM powers[base, limit, callback] {
     i = i + 1;
   }
 }
+```
