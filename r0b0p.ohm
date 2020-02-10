@@ -43,8 +43,14 @@ r0b0p {
   List        = "{" (Exp ("," Exp )*)? "}"
   Dict        = "{" (id ":" Exp ("," id ":" Exp)*)? "}"
   id          = ~keyword letter (alnum | "_")*
+<<<<<<< HEAD
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st" | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "..." | "3LS3" | "3LS3 1F")
   number      = digit+
+=======
+  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st" | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "...")
+  number      = decimal | digit+
+  decimal     = (digit* "." digit+)
+>>>>>>> a8a3c6131b53b5bce639178bb7f54e22be8caa37
   char        = escape
               | ~"\'" ~"\"" ~"\n" ~"\\" any
   text        = "\"" char* "\"" | text "+" text
@@ -53,7 +59,11 @@ r0b0p {
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
   addop       = ("+" | "-")
+<<<<<<< HEAD
   mulop       = ("*" | "/" | "%")
   relop       = (">=" | "<=" | "<" | ">" | "==")
+=======
+  mulop       = ("**" | "*" | "/" | "%")
+>>>>>>> a8a3c6131b53b5bce639178bb7f54e22be8caa37
   andorop     = ("||" | "&&")
 }

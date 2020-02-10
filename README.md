@@ -200,3 +200,34 @@ COUNT[i:1->21] {
     }
 }
 ```
+#### Collatz
+
+```
+function collatzSteps(n) {
+  let steps = 0;
+  while(n !== 1) {
+    if(n % 2 === 0) {
+      n /= 2;
+    } else {
+      n = (3 * n) + 1;
+    }
+    steps++;
+  }
+  return steps;
+};
+```
+
+```r0b0p
+PR0GRAM collatzSteps[n] {
+  steps = 0;
+  WH1L3[N0T (n == 1)] {
+    PR3SUM1NG[n % 2 == 0] {
+      n = n / 2;
+    } 3LS3 {
+      n = (3 * n) + 1;
+    }
+    steps = steps + 1;
+  }
+  G1V3 steps;
+}
+```
