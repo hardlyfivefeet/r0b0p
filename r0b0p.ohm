@@ -48,13 +48,13 @@ r0b0p {
   decimal     = (digit* "." digit+)
   char        = escape
               | ~"\'" ~"\"" ~"\n" ~"\\" any
-  text        = "\"" char* "\"" | text "+" text
+  text        = "\"" char* "\""
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
-  mulop       = ("**" | "*" | "/" | "%")
-  relop       = (">=" | "<=" | "<" | ">" | "==")
-  addop       = ("+" | "-")
-  andorop     = ("||" | "&&")
+  mulop       = "**" | "*" | "/" | "%"
+  relop       = ">=" | "<=" | "<" | ">" | "=="
+  addop       = "+" | "-"
+  andorop     = "||" | "&&"
 }
