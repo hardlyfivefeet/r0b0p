@@ -43,7 +43,7 @@ r0b0p {
   List        = "{" (Exp ("," Exp )*)? "}"
   Dict        = "{" (id ":" Exp ("," id ":" Exp)*)? "}"
   id          = ~keyword letter (alnum | "_")*
-  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st" | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "...")
+  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st" | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "..." | "3LS3" | "3LS3 1F")
   number      = digit+
   char        = escape
               | ~"\'" ~"\"" ~"\n" ~"\\" any
@@ -52,8 +52,8 @@ r0b0p {
   undefined   = "uncl3ar"
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
-  relop       = (">=" | "<=" | "<" | ">" | "==")
   addop       = ("+" | "-")
   mulop       = ("*" | "/" | "%")
+  relop       = (">=" | "<=" | "<" | ">" | "==")
   andorop     = ("||" | "&&")
 }
