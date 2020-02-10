@@ -153,7 +153,7 @@ PR0GRAM gcd[a, b] {
 #### Fibonacci
 
 ```
-var fibb = function(n) {
+function fibb(n) {
     if(n <= 2) {
         return 1;
     } else {
@@ -200,6 +200,7 @@ COUNT[i:1->21] {
     }
 }
 ```
+
 #### Collatz
 
 ```
@@ -231,3 +232,28 @@ PR0GRAM collatzSteps[n] {
   G1V3 steps;
 }
 ```
+
+#### Powers
+
+```
+function powers(base, limit, callback) {
+  let current = 1;
+  let i = 1;
+  while (current <= limit) {
+    callback(current);
+    current = base ** i;
+    i++;
+  }
+}
+```
+
+```r0b0p
+PR0GRAM powers[base, limit, callback] {
+  current = 1;
+  i = 1;
+  WH1L3[current <= limit] {
+    callback[current];
+    current = base ** i;
+    i = i + 1;
+  }
+}
