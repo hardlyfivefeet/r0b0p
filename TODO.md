@@ -5,3 +5,4 @@
 - Add absolute values
 - Add examples for Dict/List
 - take exp out of statement
+- go through toal's feedback
