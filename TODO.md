@@ -5,3 +5,4 @@
 - Add methods for Dict/List
 - Add absolute values
 - Add 'RANDOM' as random value between 0 and 1, add 'sqrt' as square root
+- Add examples for Dict/List
