@@ -32,18 +32,26 @@ r0b0p {
               | List
               | Dict
               | undefined
+              
   Return      = "G1V3" Exp
   Assignment  = id "=" Exp
+
   While       = "WH1L3" "[" Exp "]" Block
   ForLoop     = "C0UNT" "[" (id ":")? number "->" number "]" Block
+
   FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (Statement)* "}"
   FuncCall    = id "[" ((Exp) ("," (Exp))*)? "]" --function_call
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
   Print       = "SP3AK" "[" (Exp) "]" --print
+
   List        = "{" (Exp ("," Exp )*)? "}"
   Dict        = "{" (id ":" Exp ("," id ":" Exp)*)? "}"
+  
   id          = ~keyword letter (alnum | "_")*
-  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st" | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p" | "b1p" | "..." | "3LS3" | "3LS3 1F")
+  keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
+              | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
+              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT")
+
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
   char        = escape
@@ -51,8 +59,10 @@ r0b0p {
   text        = "\"" char* "\""
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
+
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
+
   mulop       = "**" | "*" | "/" | "%"
   relop       = ">=" | "<=" | "<" | ">" | "=="
   addop       = "+" | "-"
