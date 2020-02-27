@@ -317,6 +317,6 @@ PR0GRAM throw_dart[] {
 }
 
 PR0GRAM calculate_distance_from_center[x, y] {
-  G1V3 SQRT[((x - RADIUS) ** 2)) + ((y - RADIUS) ** 2)];
+  G1V3 SQRT[((x - RADIUS) ** 2) + ((y - RADIUS) ** 2)];
 }
 ```

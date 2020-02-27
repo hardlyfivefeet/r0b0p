@@ -26,6 +26,7 @@ r0b0p {
               | FuncCall
               | Print
               | id
+              | random
               | number
               | text
               | boolean
@@ -37,10 +38,10 @@ r0b0p {
   Assignment  = id "=" Exp
 
   While       = "WH1L3" "[" Exp "]" Block
-  ForLoop     = "C0UNT" "[" (id ":")? number "->" number "]" Block
+  ForLoop     = "C0UNT" "[" (id ":")? (number | id) "->" (number | id) "]" Block
 
   FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (Statement)* "}"
-  FuncCall    = id "[" ((Exp) ("," (Exp))*)? "]" --function_call
+  FuncCall    = (id | mathFunc) "[" ((Exp) ("," (Exp))*)? "]" --function_call
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
   Print       = "SP3AK" "[" (Exp) "]" --print
 
@@ -51,6 +52,7 @@ r0b0p {
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
               | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT")
+  MathFunc    = "SQRT"
 
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
@@ -62,6 +64,7 @@ r0b0p {
 
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
   comment     =  "..." (~"\n" any)* "\n"
+  random      = "UNPR3D1CTABL3"
 
   mulop       = "**" | "*" | "/" | "%"
   relop       = ">=" | "<=" | "<" | ">" | "=="
