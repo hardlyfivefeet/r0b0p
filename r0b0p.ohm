@@ -51,8 +51,8 @@ r0b0p {
   id          = ~keyword letter (alnum | "_")*
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
-              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT")
-  mathFunc    = "SQRT"
+              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT" | "ABS")
+  mathFunc    = "SQRT" | "ABS"
 
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
