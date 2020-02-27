@@ -311,8 +311,8 @@ PR0GRAM throwDarts[num_darts] {
 }
 
 PR0GRAM throw_dart[] {
-  x = RANDOM * 2;
-  y = RANDOM * 2;
+  x = UNPRED1CTABL3 * 2;
+  y = UNPRED1CTABL3 * 2;
   G1V3 calculate_distance_from_center[x, y];
 }
 
