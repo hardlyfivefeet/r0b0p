@@ -260,3 +260,63 @@ PR0GRAM powers[base, limit, callback] {
   }
 }
 ```
+
+#### PiSolver
+
+```
+const RADIUS = 1;
+
+function calculatePi(numDarts) {
+  numDartsInCircle = throwDarts(numDarts);
+  return (4 * (numDartsInCircle / numDarts));
+}
+
+function throwDarts(numDarts) {
+  let circleCount = 0;
+  for (let dartsThrown = 0; dartsThrown < numDarts; dartsThrown++) {
+    if (throwDart() < RADIUS) {
+      circleCount++;
+    }
+  }
+  return circleCount;
+}
+
+function throwDart() {
+  let x = (Math.random() * 2);
+  let y = (Math.random() * 2);
+  return calculateDistanceFromCenter(x, y);
+}
+
+function calculateDistanceFromCenter(x, y) {
+  return Math.sqrt(Math.pow(x - RADIUS, 2) + Math.pow(y - RADIUS, 2));
+}
+```
+
+```r0b0p
+RADIUS = 1;
+
+PR0GRAM calculate_pi[num_darts] {
+  num_darts_in_circle = throw_darts[num_darts];
+  G1V3 (4 * (num_darts_in_circle / num_darts));
+}
+
+PR0GRAM throwDarts[num_darts] {
+  circle_count = 0;
+  C0UNT[darts_thrown:0->num_darts] {
+    PR3SUM1NG[throw_dart[] < RADIUS] {
+      circle_count = circle_count + 1;
+    }
+  }
+  G1V3 circle_count;
+}
+
+PR0GRAM throw_dart[] {
+  x = RANDOM * 2;
+  y = RANDOM * 2;
+  G1V3 calculate_distance_from_center[x, y];
+}
+
+PR0GRAM calculate_distance_from_center[x, y] {
+  G1V3 sqrt[((x - RADIUS) ** 2)) + ((y - RADIUS) ** 2)];
+}
+```
