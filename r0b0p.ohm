@@ -1,6 +1,6 @@
 r0b0p {
 
-  Program     = (Statement | comment)*
+  Program     = Statement*
   Statement   = Exp ";" --simple_statement
               | CompStmt
               | Return ";" --return
@@ -52,7 +52,7 @@ r0b0p {
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
               | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT")
-  MathFunc    = "SQRT"
+  mathFunc    = "SQRT"
 
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
@@ -70,4 +70,6 @@ r0b0p {
   relop       = ">=" | "<=" | "<" | ">" | "=="
   addop       = "+" | "-"
   andorop     = "||" | "&&"
+
+  space      :=  " " | "\t" | "\n" | comment
 }
