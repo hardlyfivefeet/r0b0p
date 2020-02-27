@@ -4,5 +4,4 @@
 - Disallow statements with no side effects, e.g. `2 + 2`
 - Add methods for Dict/List
 - Add absolute values
-- Add 'UNPRED1CTABL3' as random value between 0 and 1, add 'sqrt' as square root
 - Add examples for Dict/List
