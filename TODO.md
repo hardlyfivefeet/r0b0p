@@ -4,3 +4,4 @@
 - Add methods for Dict/List
 - Add absolute values
 - Add examples for Dict/List
+- take exp out of statement
