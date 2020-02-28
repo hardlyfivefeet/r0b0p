@@ -11,7 +11,8 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 
 - Scripting Language
 - Dynamically Typed
-- Full type inference
+- Dictionaries and lists
+- Interpolation (coming soon to a r0b0p near you!)
 - Escape sequences
 
 ## Primitive Types

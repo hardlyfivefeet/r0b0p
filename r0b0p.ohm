@@ -44,7 +44,7 @@ r0b0p {
   ForLoop     = "C0UNT" "[" (id ":")? (number | id) "->" (number | id) "]" Block
 
   FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (Statement)* "}"
-  FuncCall    = (id | mathFunc) "[" ((Exp) ("," (Exp))*)? "]" --function_call
+  FuncCall    = (id | mathFunc | dictFunc | listFunc) "[" ((Exp) ("," (Exp))*)? "]" --function_call
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
   Print       = "SP3AK" "[" (Exp) "]" --print
 
@@ -54,8 +54,12 @@ r0b0p {
   id          = ~keyword letter (alnum | "_")*
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
-              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT" | "ABS")
+              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT" | "ABS"
+              | "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "PLAC3" | "D1SCARD"
+              | "R3TR13V3" | "C0D3S")
   mathFunc    = "SQRT" | "ABS"
+  listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT"
+  dictFunc    = "PLAC3" | "D1SCARD" | "R3TR13V3" | "C0D3S"
 
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
@@ -66,7 +70,7 @@ r0b0p {
   undefined   = "uncl3ar"
 
   escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
-  comment     =  "..." (~"\n" any)* "\n"
+  comment     =  "..." (~"\n" any)*
   random      = "UNPR3D1CTABL3"
 
   mulop       = "*" | "/" | "%"
