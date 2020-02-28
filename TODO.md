@@ -10,6 +10,7 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 - change { } for functions, loops to < > \* maddie
 - add more negative tests \*\* merissa
 - add a few more positive tests \*\* maddie
+- make a new rule for args merissa
 
 optional future additions??:
 
