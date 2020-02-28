@@ -103,3 +103,50 @@ describe("things you can't do", () => {
     assert(results.succeeded() === false);
   });
 });
+
+describe("some example programs", () => {
+  it("lets you solve for pi", () => {
+    results = r0b0p.match(`RADIUS = 1;
+
+    PR0GRAM calculate_pi[num_darts] {
+      num_darts_in_circle = throw_darts[num_darts];
+      G1V3 (4 * (num_darts_in_circle / num_darts));
+    }
+    
+    PR0GRAM throwDarts[num_darts] {
+      circle_count = 0;
+      C0UNT[darts_thrown:0->num_darts] {
+        PR3SUM1NG[throw_dart[] < RADIUS] {
+          circle_count = circle_count + 1;
+        }
+      }
+      G1V3 circle_count;
+    }
+    
+    PR0GRAM throw_dart[] {
+      x = UNPR3D1CTABL3 * 2;
+      y = UNPR3D1CTABL3 * 2;
+      G1V3 calculate_distance_from_center[x, y];
+    }
+    
+    PR0GRAM calculate_distance_from_center[x, y] {
+      G1V3 SQRT[((x - RADIUS) ** 2) + ((y - RADIUS) ** 2)];
+    }`);
+    assert(results.succeeded());
+  });
+  it("lets you do the collatz sequence", () => {
+    results = r0b0p.match(`PR0GRAM collatzSteps[n] {
+      steps = 0;
+      WH1L3[N0T (n == 1)] {
+        PR3SUM1NG[n % 2 == 0] {
+          n = n / 2;
+        } 3LS3 {
+          n = (3 * n) + 1;
+        }
+        steps = steps + 1;
+      }
+      G1V3 steps;
+    }`);
+    assert(results.succeeded());
+  });
+});
