@@ -10,6 +10,8 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 - add more negative tests \*\* merissa
 - add a few more positive tests \*\* maddie
 - add set/replace method for Dict/List
+- add method to get length of List
+- add more built in math functions eg floor, pow
 
 optional future additions??:
 
