@@ -1,8 +1,8 @@
 r0b0p {
 
   Program     = Statement*
-  Statement   = Exp ";" --simple_statement
-              | CompStmt
+  Statement   = CompStmt
+              | Exp ";" --simple_statement
               | Return ";" --return
   CompStmt    = FuncDecl
               | While

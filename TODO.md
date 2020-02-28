@@ -15,3 +15,4 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 - change { } for functions, loops to < > \* maddie
 - add more negative tests \*\* merissa
 - add more positive tests \*\* (to be done after lists, dicts, classes done) maddie
+- comments don't work in certain places. fix this @anyone (for example after closing brace)
