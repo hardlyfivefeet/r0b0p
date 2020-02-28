@@ -4,7 +4,8 @@
   "description": "Maddie, Merissa, and Adriana's programming language!",
   "main": "r0b0p.ohm",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
   },
   "repository": {
     "type": "git",
