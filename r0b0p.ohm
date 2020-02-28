@@ -43,12 +43,12 @@ r0b0p {
   WhileLoop   = "WH1L3" "[" Exp "]" Block
   ForLoop     = "C0UNT" "[" (id ":")? (number | id) "->" (number | id) "]" Block
 
-  FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (Statement)* "}"
-  FuncCall    = (id | mathFunc | dictFunc | listFunc) "[" ((Exp) ("," (Exp))*)? "]"
+  FuncDecl    = "PR0GRAM" id "[" (ListOf<id, ",">)? "]" "{" (Statement)* "}"
+  FuncCall    = (id | mathFunc | dictFunc | listFunc) "[" (ListOf<Exp, ",">)? "]"
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
   Print       = "SP3AK" "[" (Exp) "]"
 
-  List        = "{" (Exp ("," Exp )*)? "}"
+  List        = "{" (ListOf<Exp, ",">)? "}"
   Dict        = "{" (id ":" Exp ("," id ":" Exp)*)? "}"
   
   id          = ~keyword letter (alnum | "_")*
