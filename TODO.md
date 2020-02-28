@@ -9,6 +9,7 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 - change { } for functions, loops to < > \* maddie
 - add more negative tests \*\* merissa
 - add a few more positive tests \*\* maddie
+- add set/replace method for Dict/List
 
 optional future additions??:
 

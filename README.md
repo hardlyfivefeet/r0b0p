@@ -30,6 +30,12 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 
 ## JavaScript vs. r0b0p
 
+#### Printing to the console
+
+```
+console.log("Hello, world!");                 SP3AK["Hello, world!"];
+```
+
 #### Operators
 
 ```
@@ -50,20 +56,6 @@ x !== y                                       N0T (x == y)
 x = -8                                        x = -8
 ```
 
-#### Reference Types
-
-```
-let x = [1, 2, 3, 4];                         x = {1, 2, 3, 4};
-let y = {a: 1, b: 2};                         y = {a: 1, b: 2};
-let z = "Hello world!";                       z = "Hello world!";
-```
-
-#### Printing to the console
-
-```
-console.log("Hello, world!")                  SP3AK["Hello, world!"]
-```
-
 #### Assignments
 
 ```
@@ -79,6 +71,25 @@ true                                          b1p
 false                                         b0p
 let x = true;                                 x = b1p;
 let y = false;                                y = b0p;
+```
+
+#### Lists
+
+````
+let x = [1, 2, 3, 4];                         x = {1, 2, 3, 4};
+x.splice(2, 0, 5);                            x.PLAC3_AT[2, 5];
+x.splice(3, 1);                               x.D1SCARD_AT[3];
+let value = x[0];                             value = x.R3TR13V3_AT[0];
+````
+
+#### Dictionaries
+
+```
+let y = {a: 1, b: 2};                         y = {a: 1, b: 2};
+y[c] = 3;                                     y.PLAC3[c, 3];
+delete y[a];                                  y.D1SCARD[y, a];
+let value = y[a];                             value = y.R3TR13V3[a];
+console.log(Object.keys(y));                  SP3AK[y.C0D3S[]];
 ```
 
 #### Conditionals
