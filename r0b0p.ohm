@@ -2,7 +2,7 @@ r0b0p {
 
   Program     = Statement*
   Statement   = CompStmt
-              | SimpStmt ";"
+              | SimpStmt ";" --simple_statement
   SimpStmt    = Assignment
               | Return
               | Exp
