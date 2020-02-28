@@ -1,178 +1,119 @@
-//definition of AST classes
+class Block {
+  constructor(statements) {
+    Object.assign(this, { statements });
+  }
+}
 
-// class ArrayExp {
-//   constructor(type, size, fill) {
-//     Object.assign(this, { type, size, fill });
-//   }
-// }
+class Assignment {
+  constructor(id, exp) {
+    Object.assign(this, { id, exp });
+  }
+}
 
-// class ArrayType {
-//   constructor(memberType) {
-//     Object.assign(this, { memberType });
-//   }
-// }
+class Return {
+  constructor(exp) {
+    Object.assign(this, { exp });
+  }
+}
 
-// class Assignment {
-//   constructor(target, source) {
-//     Object.assign(this, { target, source });
-//   }
-// }
+class FuncDecl {
+  constructor(name, params, statements) {
+    Object.assign(this, { name, params, statements });
+  }
+}
 
-// class BinaryExp {
-//   constructor(op, left, right) {
-//     Object.assign(this, { op, left, right });
-//   }
-// }
+class WhileLoop {
+  constructor(condition, block) {
+    Object.assign(this, { condition, block });
+  }
+}
 
-// class Binding {
-//   constructor(id, value) {
-//     Object.assign(this, { id, value });
-//   }
-// }
+class ForLoop {
+  constructor(id, start, end, block) {
+    Object.assign(this, { id, start, end, block });
+  }
+}
 
-// class Break {}
+class Conditional {
+  constructor(condition, block, elseIfBlock, elseBlock) {
+    Object.assign(this, {
+      condition,
+      block,
+      elseIfBlock,
+      elseBlock
+    });
+  }
+}
 
-// class Call {
-//   constructor(callee, args) {
-//     Object.assign(this, { callee, args });
-//   }
-// }
+class FuncCall {
+  constructor(name, params) {
+    Object.assign(this, { name, params });
+  }
+}
 
-// class ExpSeq {
-//   constructor(exps) {
-//     Object.assign(this, { exps });
-//   }
-// }
+class Print {
+  constructor(str) {
+    Object.assign(this, { str });
+  }
+}
 
-// class Field {
-//   constructor(id, type) {
-//     Object.assign(this, { id, type });
-//   }
-// }
+class List {
+  constructor(items) {
+    Object.assign(this, { items });
+  }
+}
 
-// class ForExp {
-//   constructor(index, low, high, body) {
-//     Object.assign(this, { index, low, high, body });
-//   }
-// }
+class Dict {
+  constructor(pairs) {
+    Object.assign(this, { pairs });
+  }
+}
 
-// class Func {
-//   constructor(id, params, returnType, body) {
-//     Object.assign(this, { id, params, returnType, body });
-//   }
-// }
+class BinaryExp {
+  constructor(left, right) {
+    Object.assign(this, { left, right });
+  }
+}
 
-// class IdExp {
-//   constructor(ref) {
-//     Object.assign(this, { ref });
-//   }
-// }
+class NegationExp {
+  constructor(operand) {
+    Object.assign(this, { operand });
+  }
+}
 
-// class IfExp {
-//   constructor(test, consequent, alternate) {
-//     Object.assign(this, { test, consequent, alternate });
-//   }
-// }
+class ParensExp {
+  constructor(exp) {
+    Object.assign(this, { exp });
+  }
+}
 
-// class LetExp {
-//   constructor(decs, body) {
-//     Object.assign(this, { decs, body });
-//   }
-// }
+class NotExp {
+  constructor(operand) {
+    Object.assign(this, { operand });
+  }
+}
 
-// class Literal {
-//   constructor(value) {
-//     Object.assign(this, { value });
-//   }
-// }
+class SimpleStatement {
+  constructor(statement) {
+    Object.assign(this, { statement });
+  }
+}
 
-// class MemberExp {
-//   constructor(record, id) {
-//     Object.assign(this, { record, id });
-//   }
-// }
-
-// class NegationExp {
-//   constructor(operand) {
-//     Object.assign(this, { operand });
-//   }
-// }
-
-// class Nil {}
-
-// class Param {
-//   constructor(id, type) {
-//     Object.assign(this, { id, type });
-//   }
-// }
-
-// class PrimitiveType {
-//   constructor(id) {
-//     Object.assign(this, { id });
-//   }
-// }
-
-// class RecordExp {
-//   constructor(type, bindings) {
-//     Object.assign(this, { type, bindings });
-//   }
-// }
-
-// class RecordType {
-//   constructor(fields) {
-//     Object.assign(this, { fields });
-//   }
-// }
-
-// class SubscriptedExp {
-//   constructor(array, subscript) {
-//     Object.assign(this, { array, subscript });
-//   }
-// }
-
-// class TypeDec {
-//   constructor(id, type) {
-//     Object.assign(this, { id, type });
-//   }
-// }
-
-// class Variable {
-//   constructor(id, type, init) {
-//     Object.assign(this, { id, type, init });
-//   }
-// }
-
-// class WhileExp {
-//   constructor(test, body) {
-//     Object.assign(this, { test, body });
-//   }
-// }
-
-// module.exports = {
-//   ArrayExp,
-//   ArrayType,
-//   Assignment,
-//   BinaryExp,
-//   Binding,
-//   Break,
-//   Call,
-//   ExpSeq,
-//   Field,
-//   ForExp,
-//   Func,
-//   IdExp,
-//   IfExp,
-//   LetExp,
-//   Literal,
-//   MemberExp,
-//   NegationExp,
-//   Nil,
-//   Param,
-//   PrimitiveType,
-//   RecordExp,
-//   RecordType,
-//   SubscriptedExp,
-//   TypeDec,
-//   Variable,
-//   WhileExp
-// };
+module.exports = {
+  Block,
+  Assignment,
+  Return,
+  FuncDecl,
+  WhileLoop,
+  ForLoop,
+  Conditional,
+  FuncCall,
+  Print,
+  List,
+  Dict,
+  BinaryExp,
+  NegationExp,
+  ParensExp,
+  NotExp,
+  SimpleStatement
+};

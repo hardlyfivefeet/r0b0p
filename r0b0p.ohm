@@ -2,26 +2,26 @@ r0b0p {
 
   Program     = Statement*
   Statement   = CompStmt
-              | SimpStmt ";" --simple_statement
+              | SimpStmt ";" --simple
   SimpStmt    = Assignment
               | Return
               | Exp
   CompStmt    = FuncDecl
-              | While
+              | WhileLoop
               | ForLoop
               | Conditional
   Block       = "{" Statement* "}"
-  Exp        = Exp andorop Exp1 --and_or
+  Exp        = Exp andorop Exp1 --binary
               | Exp1
-  Exp1        = Exp1 relop Exp2 --relop
+  Exp1        = Exp1 relop Exp2 --binary
               | Exp2
-  Exp2        = Exp2 addop Exp3 --addop
+  Exp2        = Exp2 addop Exp3 --binary
               | Exp3
-  Exp3        = Exp3 mulop Exp4 --mulop
+  Exp3        = Exp3 mulop Exp4 --binary
               | Exp4
   Exp4        = "-" Exp5 --negation
               | Exp5
-  Exp5        = Exp6 expop Exp5 --expop
+  Exp5        = Exp6 expop Exp5 --binary
               | Exp6
   Exp6        = "N0T" Exp7 --not
               | Exp7
@@ -40,13 +40,13 @@ r0b0p {
   Return      = "G1V3" Exp
   Assignment  = id "=" Exp
 
-  While       = "WH1L3" "[" Exp "]" Block
+  WhileLoop   = "WH1L3" "[" Exp "]" Block
   ForLoop     = "C0UNT" "[" (id ":")? (number | id) "->" (number | id) "]" Block
 
   FuncDecl    = "PR0GRAM" id "[" (id ("," id)*)? "]" "{" (Statement)* "}"
-  FuncCall    = (id | mathFunc | dictFunc | listFunc) "[" ((Exp) ("," (Exp))*)? "]" --function_call
+  FuncCall    = (id | mathFunc | dictFunc | listFunc) "[" ((Exp) ("," (Exp))*)? "]"
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
-  Print       = "SP3AK" "[" (Exp) "]" --print
+  Print       = "SP3AK" "[" (Exp) "]"
 
   List        = "{" (Exp ("," Exp )*)? "}"
   Dict        = "{" (id ":" Exp ("," id ":" Exp)*)? "}"
