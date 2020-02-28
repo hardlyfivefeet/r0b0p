@@ -2,23 +2,26 @@ r0b0p {
 
   Program     = Statement*
   Statement   = CompStmt
-              | Exp ";" --simple_statement
-              | Return ";" --return
+              | SimpStmt ";"
+  SimpStmt    = Assignment
+              | Return
+              | Exp
   CompStmt    = FuncDecl
               | While
               | ForLoop
               | Conditional
   Block       = "{" Statement* "}"
-  Exp         = Assignment | Exp1
-  Exp1        = Exp1 andorop Exp2 --and_or
+  Exp        = Exp andorop Exp1 --and_or
+              | Exp1
+  Exp1        = Exp1 relop Exp2 --relop
               | Exp2
-  Exp2        = Exp2 relop Exp3 --relop
+  Exp2        = Exp2 addop Exp3 --addop
               | Exp3
-  Exp3        = Exp3 addop Exp4 --addop
+  Exp3        = Exp3 mulop Exp4 --mulop
               | Exp4
-  Exp4        = Exp4 mulop Exp5 --mulop
+  Exp4        = "-" Exp5 --negation
               | Exp5
-  Exp5        = "-" Exp6 --negation
+  Exp5        = Exp6 expop Exp5 --expop
               | Exp6
   Exp6        = "N0T" Exp7 --not
               | Exp7
@@ -66,7 +69,8 @@ r0b0p {
   comment     =  "..." (~"\n" any)* "\n"
   random      = "UNPR3D1CTABL3"
 
-  mulop       = "**" | "*" | "/" | "%"
+  mulop       = "*" | "/" | "%"
+  expop        = "**"
   relop       = ">=" | "<=" | "<" | ">" | "=="
   addop       = "+" | "-"
   andorop     = "||" | "&&"
