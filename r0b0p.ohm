@@ -63,13 +63,14 @@ r0b0p {
 
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
-  char        = escape
-              | ~"\'" ~"\"" ~"\n" ~"\\" any
+  char        = ~"\'" ~"\"" ~"\n" ~"\\" any
+              | escape
   text        = "\"" char* "\""
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
 
-  escape      = "\\\'" | "\\\"" | "\\n" | "\\\\"
+  escape      = "\\" ("\'" | "\"" | "n" | "t" | "\\" | codepoint)
+  codepoint   = "u{" hexDigit+ "}"
   comment     =  "..." (~"\n" any)*
   random      = "UNPR3D1CTABL3"
 
