@@ -14,4 +14,4 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 - add interpolation \*\* maddie
 - change { } for functions, loops to < > \* maddie
 - add more negative tests \*\* merissa
-- add big positive test (added pisolver, but will add more once classes/dicts/lists are done.) \* maddie
+- add more positive tests \*\* (to be done after lists, dicts, classes done) maddie
