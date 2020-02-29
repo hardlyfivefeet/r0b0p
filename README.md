@@ -77,19 +77,19 @@ let y = false;                                y = b0p;
 
 ```
 let x = [1, 2, 3, 4];                         x = {1, 2, 3, 4};
-x.splice(2, 0, 5);                            x.PLAC3_AT[2, 5];
-x.splice(3, 1);                               x.D1SCARD_AT[3];
-let value = x[0];                             value = x.R3TR13V3_AT[0];
+x.splice(2, 0, 5);                            PLAC3_AT[x, 2, 5];
+x.splice(3, 1);                               D1SCARD_AT[x, 3];
+let value = x[0];                             value = R3TR13V3_AT[x, 0];
 ```
 
 #### Dictionaries
 
 ```
 let y = {a: 1, b: 2};                         y = {a: 1, b: 2};
-y[c] = 3;                                     y.PLAC3[c, 3];
-delete y[a];                                  y.D1SCARD[y, a];
-let value = y[a];                             value = y.R3TR13V3[a];
-console.log(Object.keys(y));                  SP3AK[y.C0D3S[]];
+y[c] = 3;                                     PLAC3[y, c, 3];
+delete y[a];                                  D1SCARD[y, a];
+let value = y[a];                             value = R3TR13V3[y, a];
+console.log(Object.keys(y));                  SP3AK[C0D3S[y]];
 ```
 
 #### Conditionals
