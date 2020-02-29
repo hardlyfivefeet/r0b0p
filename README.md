@@ -345,3 +345,26 @@ PR0GRAM calculate_distance_from_center[x, y] <
   G1V3 SQRT[((x - RADIUS) ** 2) + ((y - RADIUS) ** 2)];
 >
 ```
+
+#### Average of Triples
+
+```
+function tripleAverages(arr) {
+  let averages = [];
+  for (int i = 0; i < arr.length - 2; i++) {
+    let ave = (arr[i] + arr[i + 1] + arr[i + 2]) / 3;
+    averages.push(ave);
+  }
+}
+```
+
+```
+PR0GRAM triple_averages[arr] <
+  averages = {};
+  arr_length = S1Z3[arr];
+  C0UNT[i:0->arr_length] <
+    ave = (R3TR13V3_AT[arr, i] + R3TR13V3_AT[arr, i + 1] + R3TR13V3_AT[arr, i + 2]) / 3;
+    PLAC3_AT[averages, i, ave];
+  >
+>
+```

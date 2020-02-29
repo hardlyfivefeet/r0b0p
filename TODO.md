@@ -2,7 +2,6 @@
 
 number of stars means NUMBER OF DIFFICULTY LEVELS
 
-- Add examples for Dict/List \* merissa
 - add more negative tests \*\* merissa
 
 optional future additions??:
