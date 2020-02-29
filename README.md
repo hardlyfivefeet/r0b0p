@@ -77,15 +77,18 @@ let y = false;                                y = b0p;
 
 ```
 let x = [1, 2, 3, 4];                         x = {1, 2, 3, 4};
+x[0] = 100;                                   SUBST1TUT3[x, 0, 100];
 x.splice(2, 0, 5);                            PLAC3_AT[x, 2, 5];
 x.splice(3, 1);                               D1SCARD_AT[x, 3];
 let value = x[0];                             value = R3TR13V3_AT[x, 0];
+let arrayLength = x.length;                   array_length = S1Z3[x];
 ```
 
 #### Dictionaries
 
 ```
 let y = {a: 1, b: 2};                         y = {a: 1, b: 2};
+y[a] = 5;                                     SUBST1TUT3[y, a, 5];
 y[c] = 3;                                     PLAC3[y, c, 3];
 delete y[a];                                  D1SCARD[y, a];
 let value = y[a];                             value = R3TR13V3[y, a];

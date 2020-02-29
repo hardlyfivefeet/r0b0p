@@ -56,10 +56,10 @@ r0b0p {
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
               | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT" | "ABS"
               | "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "PLAC3" | "D1SCARD"
-              | "R3TR13V3" | "C0D3S")
+              | "R3TR13V3" | "C0D3S" | "S1Z3" | "SUBST1TUT3")
   mathFunc    = "SQRT" | "ABS"
-  listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT"
-  dictFunc    = "PLAC3" | "D1SCARD" | "R3TR13V3" | "C0D3S"
+  listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "SUBST1TUT3" | "S1Z3"
+  dictFunc    = "PLAC3" | "D1SCARD" | "R3TR13V3" | "C0D3S" | "SUBST1TUT3"
 
   number      = decimal | digit+
   decimal     = (digit* "." digit+)
