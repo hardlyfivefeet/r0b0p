@@ -5,7 +5,8 @@ r0b0p {
               | SimpStmt ";" --simple
   SimpStmt    = Assignment
               | Return
-              | Exp
+              | FuncCall
+              | Print
   CompStmt    = FuncDecl
               | WhileLoop
               | ForLoop
@@ -27,7 +28,6 @@ r0b0p {
               | Exp7
   Exp7        = "(" Exp ")" --parens
               | FuncCall
-              | Print
               | id
               | random
               | number

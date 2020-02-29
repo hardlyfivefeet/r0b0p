@@ -2,7 +2,6 @@
 
 number of stars means NUMBER OF DIFFICULTY LEVELS
 
-- Disallow statements with no side effects, e.g. `2 + 2` \* maddie
 - Add examples for Dict/List \* merissa
 - 'by being dynamically typed, i'm not sure how much you can do for static checking at compile time' \*\* merissa
 - add interpolation \*\* maddie
