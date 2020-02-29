@@ -12,7 +12,7 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Scripting Language
 - Dynamically Typed
 - Dictionaries and lists
-- Interpolation (coming soon to a r0b0p near you!)
+- String Interpolation
 - Escape sequences
 
 ## Primitive Types
@@ -122,6 +122,16 @@ r0b0p does not support multi-line comments. Just add more dots!
 
 ```
 // This is a comment!                         ...This is a comment!
+```
+
+#### String Interpolation
+
+```
+let bananas = 3;                              bananas = 3;
+console.log(`I have ${bananas} bananas`);     SP3AK["I have 'bananas' bananas"];
+
+let quote = "Hello, world!"                   quote = "Hello, world!"
+console.log(`She said \'${quote}\'`);         SP3AK["She said \''quote'\'"];
 ```
 
 ## Example Programs
