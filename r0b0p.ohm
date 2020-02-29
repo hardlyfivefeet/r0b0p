@@ -44,7 +44,7 @@ r0b0p {
   ForLoop     = "C0UNT" "[" (id ":")? (number | id) "->" (number | id) "]" Block
 
   FuncDecl    = "PR0GRAM" id "[" (ListOf<id, ",">)? "]" Block
-  FuncCall    = (id | mathFunc | dictFunc | listFunc) "[" (ListOf<Exp, ",">)? "]"
+  FuncCall    = (id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ("3LS3 1F" "[" Exp "]" Block)* ("3LS3" Block)?
   Print       = "SP3AK" "[" (Exp) "]"
 
@@ -54,10 +54,9 @@ r0b0p {
   id          = ~keyword letter (alnum | "_")*
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
-              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "SQRT" | "ABS"
-              | "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "PLAC3" | "D1SCARD"
-              | "R3TR13V3" | "C0D3S" | "S1Z3" | "SUBST1TUT3")
-  mathFunc    = "SQRT" | "ABS"
+              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3"
+              | mathFunc | listFunc | dictFunc)
+  mathFunc    = "SQRT" | "ABS" | "FLOOR" | "POW"
   listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "SUBST1TUT3" | "S1Z3"
   dictFunc    = "PLAC3" | "D1SCARD" | "R3TR13V3" | "C0D3S" | "SUBST1TUT3"
 
@@ -82,3 +81,4 @@ r0b0p {
 
   space      :=  " " | "\t" | "\n" | comment
 }
+

@@ -4,7 +4,6 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 
 - Add examples for Dict/List \* merissa
 - add more negative tests \*\* merissa
-- add more built in math functions eg floor, pow
 
 optional future additions??:
 
