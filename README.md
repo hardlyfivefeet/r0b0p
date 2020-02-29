@@ -75,12 +75,12 @@ let y = false;                                y = b0p;
 
 #### Lists
 
-````
+```
 let x = [1, 2, 3, 4];                         x = {1, 2, 3, 4};
 x.splice(2, 0, 5);                            x.PLAC3_AT[2, 5];
 x.splice(3, 1);                               x.D1SCARD_AT[3];
 let value = x[0];                             value = x.R3TR13V3_AT[0];
-````
+```
 
 #### Dictionaries
 
@@ -96,24 +96,24 @@ console.log(Object.keys(y));                  SP3AK[y.C0D3S[]];
 
 ```
 let x = 3;                                    x = 3;
-if (x < 6) {                                  PR3SUM1NG[x < 6] {
+if (x < 6) {                                  PR3SUM1NG[x < 6] <
   console.log("X is less than 6!");             SP3AK["X is less than 6!"];
-}                                             }
+}                                             >
 ```
 
 #### Loops
 
 ```
-for (let i = 0; i < 10; i++) {                C0UNT[i:0->10] {
+for (let i = 0; i < 10; i++) {                C0UNT[i:0->10] <
   console.log(i);                               SP3AK[i];
-}                                             }
+}                                             >
 
 
 let x = 0;                                    x = 0;
-while (x < 6) {                               WH1L3[x < 6] {
+while (x < 6) {                               WH1L3[x < 6] <
   console.log("Adding to x");                   SP3AK["Adding to x"];
   x++;                                          x = x + 1;
-}                                             }
+}                                             >
 ```
 
 #### Comments
@@ -137,9 +137,9 @@ let area = areaOfCircle(10);
 ```
 
 ```r0b0p
-PR0GRAM area_of_circle[r] {
+PR0GRAM area_of_circle[r] <
   G1V3 3.14159265 * r * r;
-}
+>
 
 area = area_of_circle[10];
 ```
@@ -156,12 +156,12 @@ function gcd(a, b) {
 ```
 
 ```r0b0p
-PR0GRAM gcd[a, b] {
-  PR3SUM1NG[b == 0] {
+PR0GRAM gcd[a, b] <
+  PR3SUM1NG[b == 0] <
     G1V3 a;
-  }
+  >
   G1V3 gcd[b, (a % b)];
-}
+>
 ```
 
 #### Fibonacci
@@ -177,13 +177,13 @@ function fibb(n) {
 ```
 
 ```r0b0p
-PR0GRAM fibb[n] {
-  PR3SUM1NG[n <= 2] {
+PR0GRAM fibb[n] <
+  PR3SUM1NG[n <= 2] <
     G1V3 1;
-  } 3LS3 {
+  > 3LS3 <
     G1V3 fibb[n - 1] + fibb[n - 2];
-  }
-}
+  >
+>
 ```
 
 #### FizzBuzz
@@ -202,17 +202,17 @@ for (let i = 1; i <= 20; i++) {
 ```
 
 ```r0b0p
-C0UNT[i:1->21] {
-    PR3SUM1NG[i % 15 == 0] {
+C0UNT[i:1->21] <
+    PR3SUM1NG[i % 15 == 0] <
         SP3AK["FizzBuzz"];
-    } 3LS3 1F[i % 3 == 0] {
+    > 3LS3 1F[i % 3 == 0] <
         SP3AK["Fizz"];
-    } 3LS3 1F[i % 5 == 0] {
+    > 3LS3 1F[i % 5 == 0] <
         SP3AK["Buzz"];
-    } 3LS3 {
+    > 3LS3 <
         SP3AK[i];
-    }
-}
+    >
+>
 ```
 
 #### Collatz
@@ -233,18 +233,18 @@ function collatzSteps(n) {
 ```
 
 ```r0b0p
-PR0GRAM collatzSteps[n] {
+PR0GRAM collatzSteps[n] <
   steps = 0;
-  WH1L3[N0T (n == 1)] {
-    PR3SUM1NG[n % 2 == 0] {
+  WH1L3[N0T (n == 1)] <
+    PR3SUM1NG[n % 2 == 0] <
       n = n / 2;
-    } 3LS3 {
+    > 3LS3 <
       n = (3 * n) + 1;
-    }
+    >
     steps = steps + 1;
-  }
+  >
   G1V3 steps;
-}
+>
 ```
 
 #### Powers
@@ -262,15 +262,15 @@ function powers(base, limit, callback) {
 ```
 
 ```r0b0p
-PR0GRAM powers[base, limit, callback] {
+PR0GRAM powers[base, limit, callback] <
   current = 1;
   i = 1;
-  WH1L3[current <= limit] {
+  WH1L3[current <= limit] <
     callback[current];
     current = base ** i;
     i = i + 1;
-  }
-}
+  >
+>
 ```
 
 #### PiSolver
@@ -307,28 +307,28 @@ function calculateDistanceFromCenter(x, y) {
 ```r0b0p
 RADIUS = 1;
 
-PR0GRAM calculate_pi[num_darts] {
+PR0GRAM calculate_pi[num_darts] <
   num_darts_in_circle = throw_darts[num_darts];
   G1V3 (4 * (num_darts_in_circle / num_darts));
-}
+>
 
-PR0GRAM throwDarts[num_darts] {
+PR0GRAM throwDarts[num_darts] <
   circle_count = 0;
-  C0UNT[darts_thrown:0->num_darts] {
-    PR3SUM1NG[throw_dart[] < RADIUS] {
+  C0UNT[darts_thrown:0->num_darts] <
+    PR3SUM1NG[throw_dart[] < RADIUS] <
       circle_count = circle_count + 1;
-    }
-  }
+    >
+  >
   G1V3 circle_count;
-}
+>
 
-PR0GRAM throw_dart[] {
+PR0GRAM throw_dart[] <
   x = UNPR3D1CTABL3 * 2;
   y = UNPR3D1CTABL3 * 2;
   G1V3 calculate_distance_from_center[x, y];
-}
+>
 
-PR0GRAM calculate_distance_from_center[x, y] {
+PR0GRAM calculate_distance_from_center[x, y] <
   G1V3 SQRT[((x - RADIUS) ** 2) + ((y - RADIUS) ** 2)];
-}
+>
 ```
