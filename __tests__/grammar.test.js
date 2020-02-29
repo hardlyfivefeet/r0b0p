@@ -149,4 +149,56 @@ describe("some example programs", () => {
   >`);
     assert(results.succeeded());
   });
+  it("lets you calculate powers", () => {
+    results = r0b0p.match(`PR0GRAM powers[base, limit, callback] <
+    current = 1;
+    i = 1;
+    WH1L3[current <= limit] <
+      callback[current];
+      current = base ** i;
+      i = i + 1;
+    >
+    >`);
+    assert(results.succeeded());
+  });
+  it("lets us do fizz buzz", () => {
+    results = r0b0p.match(`C0UNT[i:1->21] <
+    PR3SUM1NG[i % 15 == 0] <
+        SP3AK["FizzBuzz"];
+    > 3LS3 1F[i % 3 == 0] <
+        SP3AK["Fizz"];
+    > 3LS3 1F[i % 5 == 0] <
+        SP3AK["Buzz"];
+    > 3LS3 <
+        SP3AK[i];
+    >
+    >`);
+    assert(results.succeeded());
+  });
+  it("lets us see fibb sequence", () => {
+    results = r0b0p.match(`PR0GRAM fibb[n] <
+    PR3SUM1NG[n <= 2] <
+      G1V3 1;
+    > 3LS3 <
+      G1V3 fibb[n - 1] + fibb[n - 2];
+    >
+    >`);
+    assert(results.succeeded());
+  });
+  it("lets you calculate gcd", () => {
+    results = r0b0p.match(`PR0GRAM gcd[a, b] <
+    PR3SUM1NG[b == 0] <
+      G1V3 a;
+    >
+    G1V3 gcd[b, (a % b)];
+    >`);
+    assert(results.succeeded());
+  });
+  it("lets us calculate the area of a circle", () => {
+    results = r0b0p.match(`PR0GRAM area_of_circle[r] <
+    G1V3 3.14159265 * r * r;
+    >
+    area = area_of_circle[10];`);
+    assert(results.succeeded());
+  });
 });
