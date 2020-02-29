@@ -2,9 +2,7 @@
 
 number of stars means NUMBER OF DIFFICULTY LEVELS
 
-- add more negative tests \*\* merissa
-
-optional future additions??:
+optional future additions:
 
 - add classes
 - add kwargs

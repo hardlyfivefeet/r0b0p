@@ -14,6 +14,14 @@ describe("assignment", () => {
     results = r0b0p.match("x = (y + 9);");
     assert(results.succeeded());
   });
+  it("does not let us assign a number to a keyword", () => {
+    results = r0b0p.match("S1Z3 = 3;");
+    assert(results.succeeded() === false);
+  });
+  it("does not let us assign an id to a statement", () => {
+    results = r0b0p.match('x = SP3AK["This is a statement"];');
+    assert(results.succeeded() === false);
+  });
 });
 
 describe("types", () => {
@@ -25,8 +33,12 @@ describe("types", () => {
 
 describe("comments", () => {
   it("lets us write nonsense in a comment", () => {
-    results = r0b0p.match("...asldweroipuqwerpou\n");
+    results = r0b0p.match("...asldweroipuqwerpou");
     assert(results.succeeded());
+  });
+  it("does not let us write a comment in the middle of a statement", () => {
+    results = r0b0p.match("x = ...comment5;");
+    assert(results.succeeded() === false);
   });
 });
 
@@ -35,15 +47,19 @@ describe("math", () => {
     results = r0b0p.match("y = (5 * 9 / (54 % 10 + 33) - 1);");
     assert(results.succeeded());
   });
+  it("does not let us use math operations on statements", () => {
+    results = r0b0p.match('x = 5 + SP3AK["This is a statement"];');
+    assert(results.succeeded() === false);
+  });
 });
 
 describe("functions", () => {
   it("lets us declare a simple function", () => {
-    results = r0b0p.match("PR0GRAM addTwo[x, y] < G1V3 x + y; >");
+    results = r0b0p.match("PR0GRAM add_two[x, y] < G1V3 x + y; >");
     assert(results.succeeded());
   });
   it("lets us call a function", () => {
-    results = r0b0p.match("SP3AK[addTwo[5, 6]];");
+    results = r0b0p.match("SP3AK[add_two[5, 6]];");
     assert(results.succeeded());
   });
 });
@@ -54,6 +70,14 @@ describe("conditionals and loops", () => {
       "i = 3; PR3SUM1NG[i < 5] < z = 3 + 6; > 3LS3 1F[i > 7] < z = 1 + i; > 3LS3 < z = 4; >"
     );
     assert(results.succeeded());
+  });
+  it("does not let us use a statement as condition", () => {
+    results = r0b0p.match('PR3SUM1NG[SP3AK["This is a statement"]] < z = 3 + 6; >;');
+    assert(results.succeeded() === false);
+  });
+  it("does not let us use a statement as for-loop index", () => {
+    results = r0b0p.match("C0UNT[i:0->SP3AK[10]] < SP3AK[i]; >");
+    assert(results.succeeded() === false);
   });
   it("lets us call a for-loop", () => {
     results = r0b0p.match("C0UNT[i:0->10] < SP3AK[i]; >");
@@ -72,6 +96,10 @@ describe("strings", () => {
     results = r0b0p.match('x = "hello, world!";');
     assert(results.succeeded());
   });
+  it("does not let us create a string variable with single quotes", () => {
+    results = r0b0p.match("y = 'hello, world!';");
+    assert(results.succeeded() === false);
+  });
   it("lets us concatenate strings", () => {
     results = r0b0p.match('x = "hello," + " world!";');
     assert(results.succeeded());
@@ -83,13 +111,21 @@ describe("lists and dictionaries", () => {
     results = r0b0p.match("x = {a: 1, b: 2};");
     assert(results.succeeded());
   });
+  it("does not let us use a statement as dictionary value", () => {
+    results = r0b0p.match("y = {a: x = 3};");
+    assert(results.succeeded() === false);
+  });
   it("lets us create a list variable", () => {
     results = r0b0p.match("x = {1, 2};");
     assert(results.succeeded());
   });
+  it("does not let us have a statement in list", () => {
+    results = r0b0p.match("y = {1, 2, 3, SP3AK[4]};");
+    assert(results.succeeded() === false);
+  });
 });
 
-describe("things you can't do", () => {
+describe("general things you can't do", () => {
   it("does not let us write nonsense without a comment", () => {
     results = r0b0p.match("xasldfadfsafsdafdsds");
     assert(results.succeeded() === false);
@@ -98,8 +134,12 @@ describe("things you can't do", () => {
     results = r0b0p.match("x = {1, 2}");
     assert(results.succeeded() === false);
   });
-  it("does not let us forget a closing brace", () => {
-    results = r0b0p.match("PR0GRAM addTwo[x, y < G1V3 x + y; >");
+  it("does not let us have mismatched brackets", () => {
+    results = r0b0p.match("PR0GRAM add_two[x, y < G1V3 x + y; >");
+    assert(results.succeeded() === false);
+  });
+  it("does not let us have mismatched < >", () => {
+    results = r0b0p.match("PR0GRAM return_three[] < G1V3 3; ");
     assert(results.succeeded() === false);
   });
 });
