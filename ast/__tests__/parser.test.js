@@ -29,9 +29,13 @@ const {
 } = require("../../ast");
 
 const fixture = {
-  hello: [
-    String.raw`SP3AK["Hello, world"];`,
-    new SimpleStatement('SP3AK["Hello, world"]', ";")
+  // hello: [
+  //   String.raw`SP3AK["Hello, world"];`,
+  //   new SimpleStatement('SP3AK["Hello, world"]', ";")
+  // ],
+  conditional: [
+    String.raw`PR3SUM1NG[x < 5] < >`,
+    new Conditional(new BinaryExp("x", "5"), new Block(), null, null)
   ]
 };
 

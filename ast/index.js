@@ -45,6 +45,18 @@ class Conditional {
   }
 }
 
+class ElseIfBlock {
+  constructor(exp, block) {
+    Object.assign(this, { exp, block });
+  }
+}
+
+class ElseBlock {
+  constructor(block) {
+    Object.assign(this, { block });
+  }
+}
+
 class FuncCall {
   constructor(name, params) {
     Object.assign(this, { name, params });
@@ -53,6 +65,7 @@ class FuncCall {
 
 class Print {
   constructor(str) {
+    console.log("str in print class is " + str);
     Object.assign(this, { str });
   }
 }
@@ -95,6 +108,8 @@ class NotExp {
 
 class SimpleStatement {
   constructor(statement) {
+    console.log("statement in simple statement class is ");
+    console.log(statement);
     Object.assign(this, { statement });
   }
 }
@@ -107,6 +122,8 @@ module.exports = {
   WhileLoop,
   ForLoop,
   Conditional,
+  ElseBlock,
+  ElseIfBlock,
   FuncCall,
   Print,
   List,

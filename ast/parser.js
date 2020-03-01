@@ -9,6 +9,8 @@ const {
   WhileLoop,
   ForLoop,
   Conditional,
+  ElseBlock,
+  ElseIfBlock,
   FuncCall,
   Print,
   List,
@@ -56,14 +58,20 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       elseBlock.ast()
     );
   },
+  ElseIfBlock(_elseIf, _lb, exp, _rb, block) {
+    return new ElseIfBlock(exp.ast(), block.ast());
+  },
+  ElseBlock(_else, block) {
+    return new ElseBlock(block.ast());
+  },
   FuncCall(name, _lb, params, _rb) {
     console.log("FUNC CALL!!!!!!");
     return new FuncCall(name.ast(), params.ast());
   },
   Print(_speak, _lb, exp, _rb) {
     console.log("print!!!!!!");
-    // console.log("exp is ");
-    // console.log(exp);
+    console.log("exp is ");
+    console.log(exp);
     return new Print(exp.ast());
   },
   List(_lcb, items, _rcb) {
@@ -104,6 +112,12 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Statement_simple(statement, _semicolon) {
     console.log("simple statement!!!");
     return new SimpleStatement(statement.ast());
+  },
+  id(_firstChar, _restChars) {
+    return this.sourceString;
+  },
+  _terminal() {
+    return this.sourceString;
   }
 });
 /* eslint-enable no-unused-vars */
