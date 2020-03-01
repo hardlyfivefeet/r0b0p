@@ -13,6 +13,7 @@ const {
   Print,
   List,
   Dict,
+  text,
   BinaryExp,
   NegationExp,
   ParensExp,
@@ -38,13 +39,13 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Return(_give, exp) {
     return new Return(exp.ast());
   },
-  FuncDecl(_program, name, _lb, params, _rb, _lcb, statements, _rcb) {
+  FuncDecl(_program, name, _lb, params, _rb, block) {
     return new FuncDecl(name.ast(), params.ast(), statements.ast());
   },
   WhileLoop(_while, _lb, condition, _rb, block) {
     return new WhileLoop(condition.ast(), block.ast());
   },
-  ForLoop(_count, _lb, id, start, _arrow, end, _rb, block) {
+  ForLoop(_count, _lb, id, _colon, start, _arrow, end, _rb, block) {
     return new ForLoop(id.ast(), start.ast(), end.ast(), block.ast());
   },
   Conditional(_if, _lb, condition, _rb, block, elseIfBlock, elseBlock) {
@@ -56,9 +57,13 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     );
   },
   FuncCall(name, _lb, params, _rb) {
+    console.log("FUNC CALL!!!!!!");
     return new FuncCall(name.ast(), params.ast());
   },
   Print(_speak, _lb, exp, _rb) {
+    console.log("print!!!!!!");
+    // console.log("exp is ");
+    // console.log(exp);
     return new Print(exp.ast());
   },
   List(_lcb, items, _rcb) {
@@ -66,6 +71,11 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   Dict(_lcb, items, _rcb) {
     return new Dict(items.ast());
+  },
+  text(_lq, chars, _rq) {
+    console.log("text!!!!!!");
+    console.log(chars);
+    return this.sourceString;
   },
   Exp_binary(left, op, right) {
     return new BinaryExp(op.ast(), left.ast(), right.ast());
@@ -92,6 +102,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new NotExp(exp.ast());
   },
   Statement_simple(statement, _semicolon) {
+    console.log("simple statement!!!");
     return new SimpleStatement(statement.ast());
   }
 });
