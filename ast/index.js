@@ -83,8 +83,8 @@ class Dict {
 }
 
 class BinaryExp {
-  constructor(left, right) {
-    Object.assign(this, { left, right });
+  constructor(op, left, right) {
+    Object.assign(this, { op, left, right });
   }
 }
 

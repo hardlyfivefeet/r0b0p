@@ -17,6 +17,8 @@ const {
   WhileLoop,
   ForLoop,
   Conditional,
+  ElseIfBlock,
+  ElseBlock,
   FuncCall,
   Print,
   List,
@@ -35,7 +37,7 @@ const fixture = {
   // ],
   conditional: [
     String.raw`PR3SUM1NG[x < 5] < >`,
-    new Conditional(new BinaryExp("x", "5"), new Block(), null, null)
+    new Conditional(new BinaryExp("<", "x", "5"), new Block(), new ElseIfBlock(new Block()), new ElseBlock(new Block()))
   ]
 };
 
