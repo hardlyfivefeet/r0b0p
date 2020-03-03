@@ -143,5 +143,5 @@ module.exports = {
   NotExp,
   IntLit,
   FloatLit,
-  Text,
+  Text
 };

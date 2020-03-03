@@ -59,6 +59,38 @@ const fixture = {
       )
     ]
   ],
+  conditionalWithElseIf: [
+    String.raw`PR3SUM1NG[x < 5] < x = 62; > 3LS3 1F[x < 20] < x = 96; >`,
+    [
+      new Conditional(
+        new BinaryExp("<", "x", new IntLit(5)),
+        new Block([new Assignment("x", new IntLit("62"))]),
+        [
+          new ElseIfBlock(
+            new BinaryExp("<", "x", new IntLit("20")),
+            new Block([new Assignment("x", new IntLit("96"))])
+          )
+        ],
+        null
+      )
+    ]
+  ],
+  conditionalWithElseIfAndElse: [
+    String.raw`PR3SUM1NG[x < 5] < x = 62; > 3LS3 1F[x < 20] < x = 96; > 3LS3 < x = 100; >`,
+    [
+      new Conditional(
+        new BinaryExp("<", "x", new IntLit(5)),
+        new Block([new Assignment("x", new IntLit("62"))]),
+        [
+          new ElseIfBlock(
+            new BinaryExp("<", "x", new IntLit("20")),
+            new Block([new Assignment("x", new IntLit("96"))])
+          )
+        ],
+        new ElseBlock(new Block([new Assignment("x", new IntLit("100"))]))
+      )
+    ]
+  ],
   while: [
     String.raw`WH1L3[y > 20] < >`,
     [new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))]
