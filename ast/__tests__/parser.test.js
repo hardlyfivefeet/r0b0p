@@ -35,14 +35,42 @@ const {
 const fixture = {
   hello: [
     String.raw`SP3AK["Hello, world"];`,
-    [new Print(new Text('Hello, world'))]
+    [new Print(new Text("Hello, world"))]
   ],
   conditional: [
     String.raw`PR3SUM1NG[x < 5] < >`,
-    [new Conditional(new BinaryExp("<", "x", new IntLit(5)), 
-                    new Block([]),
-                    [],
-                    null)]
+    [
+      new Conditional(
+        new BinaryExp("<", "x", new IntLit(5)),
+        new Block([]),
+        [],
+        null
+      )
+    ]
+  ],
+  conditionalWithContent: [
+    String.raw`PR3SUM1NG[x < 5] < x = 62; >`,
+    [
+      new Conditional(
+        new BinaryExp("<", "x", new IntLit(5)),
+        new Block([new Assignment("x", new IntLit("62"))]),
+        [],
+        null
+      )
+    ]
+  ],
+  while: [
+    String.raw`WH1L3[y > 20] < >`,
+    [new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))]
+  ],
+  whileWithContent: [
+    String.raw`WH1L3[y > 20] < y = y - 1; >`,
+    [
+      new WhileLoop(
+        new BinaryExp(">", "y", new IntLit(20)),
+        new Block([new Assignment("y", new BinaryExp("-", "y", new IntLit(1)))])
+      )
+    ]
   ]
 };
 
