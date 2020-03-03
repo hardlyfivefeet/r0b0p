@@ -20,7 +20,9 @@ const {
   NegationExp,
   ParensExp,
   NotExp,
-  SimpleStatement
+  SimpleStatement,
+  IntLit,
+  FloatLit,
 } = require("../ast");
 
 const grammar = ohm.grammar(fs.readFileSync(__dirname + "/../r0b0p.ohm"));
@@ -42,7 +44,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new Return(exp.ast());
   },
   FuncDecl(_program, name, _lb, params, _rb, block) {
-    return new FuncDecl(name.ast(), params.ast(), statements.ast());
+    return new FuncDecl(name.ast(), params.ast(), block.ast());
   },
   WhileLoop(_while, _lb, condition, _rb, block) {
     return new WhileLoop(condition.ast(), block.ast());
@@ -55,7 +57,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       condition.ast(),
       block.ast(),
       elseIfBlock.ast(),
-      elseBlock.ast()
+      arrayToNullable(elseBlock.ast())
     );
   },
   ElseIfBlock(_elseIf, _lb, exp, _rb, block) {
@@ -65,13 +67,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new ElseBlock(block.ast());
   },
   FuncCall(name, _lb, params, _rb) {
-    console.log("FUNC CALL!!!!!!");
     return new FuncCall(name.ast(), params.ast());
   },
   Print(_speak, _lb, exp, _rb) {
-    console.log("print!!!!!!");
-    console.log("exp is ");
-    console.log(exp);
     return new Print(exp.ast());
   },
   List(_lcb, items, _rcb) {
@@ -81,8 +79,6 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new Dict(items.ast());
   },
   text(_lq, chars, _rq) {
-    console.log("text!!!!!!");
-    console.log(chars);
     return this.sourceString;
   },
   Exp_binary(left, op, right) {
@@ -110,11 +106,16 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new NotExp(exp.ast());
   },
   Statement_simple(statement, _semicolon) {
-    console.log("simple statement!!!");
     return new SimpleStatement(statement.ast());
   },
   id(_firstChar, _restChars) {
     return this.sourceString;
+  },
+  number_integer(digits) {
+    return new IntLit(+this.sourceString);
+  },
+  decimal(_1, _2, _3) {
+    return new FloatLit(+this.sourceString);
   },
   _terminal() {
     return this.sourceString;

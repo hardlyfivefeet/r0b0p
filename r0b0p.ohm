@@ -12,7 +12,7 @@ r0b0p {
               | ForLoop
               | Conditional
   Block       = "<" Statement* ">"
-  Exp        = Exp andorop Exp1 --binary
+  Exp         = Exp andorop Exp1 --binary
               | Exp1
   Exp1        = Exp1 relop Exp2 --binary
               | Exp2
@@ -45,9 +45,9 @@ r0b0p {
 
   FuncDecl    = "PR0GRAM" id "[" (ListOf<id, ",">)? "]" Block
   FuncCall    = (id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
-  Conditional = "PR3SUM1NG" "[" Exp "]" Block ElseIfBlock ElseBlock
-  ElseIfBlock = ("3LS3 1F" "[" Exp "]" Block)*
-  ElseBlock   = ("3LS3" Block)?
+  Conditional = "PR3SUM1NG" "[" Exp "]" Block ElseIfBlock* ElseBlock?
+  ElseIfBlock = "3LS3 1F" "[" Exp "]" Block
+  ElseBlock   = "3LS3" Block
   Print       = "SP3AK" "[" (Exp) "]"
 
   List        = "{" (ListOf<Exp, ",">)? "}"
@@ -63,8 +63,9 @@ r0b0p {
   listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "SUBST1TUT3" | "S1Z3"
   dictFunc    = "PLAC3" | "D1SCARD" | "R3TR13V3" | "C0D3S" | "SUBST1TUT3"
 
-  number      = decimal | digit+
-  decimal     = (digit* "." digit+)
+  number      = decimal 
+              | digit+                       -- integer
+  decimal     = digit* "." digit+
   char        = ~"\'" ~"\"" ~"\n" ~"\\" any
               | escape
   text        = "\"" char* "\""
@@ -77,7 +78,7 @@ r0b0p {
   random      = "UNPR3D1CTABL3"
 
   mulop       = "*" | "/" | "%"
-  expop        = "**"
+  expop       = "**"
   relop       = ">=" | "<=" | "<" | ">" | "=="
   addop       = "+" | "-"
   andorop     = "||" | "&&"

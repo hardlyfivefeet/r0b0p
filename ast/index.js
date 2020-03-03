@@ -35,11 +35,11 @@ class ForLoop {
 }
 
 class Conditional {
-  constructor(condition, block, elseIfBlock, elseBlock) {
+  constructor(condition, block, elseIfBlocks, elseBlock) {
     Object.assign(this, {
       condition,
       block,
-      elseIfBlock,
+      elseIfBlocks,
       elseBlock
     });
   }
@@ -108,9 +108,19 @@ class NotExp {
 
 class SimpleStatement {
   constructor(statement) {
-    console.log("statement in simple statement class is ");
-    console.log(statement);
     Object.assign(this, { statement });
+  }
+}
+
+class IntLit {
+  constructor(value) {
+    this.value = +value;
+  }
+}
+
+class FloatLit {
+  constructor(value) {
+    this.value = +value;
   }
 }
 
@@ -132,5 +142,7 @@ module.exports = {
   NegationExp,
   ParensExp,
   NotExp,
-  SimpleStatement
+  SimpleStatement,
+  IntLit,
+  FloatLit
 };
