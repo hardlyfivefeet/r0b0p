@@ -65,7 +65,6 @@ class FuncCall {
 
 class Print {
   constructor(str) {
-    console.log("str in print class is " + str);
     Object.assign(this, { str });
   }
 }
@@ -106,12 +105,6 @@ class NotExp {
   }
 }
 
-class SimpleStatement {
-  constructor(statement) {
-    Object.assign(this, { statement });
-  }
-}
-
 class IntLit {
   constructor(value) {
     this.value = +value;
@@ -121,6 +114,12 @@ class IntLit {
 class FloatLit {
   constructor(value) {
     this.value = +value;
+  }
+}
+
+class Text {
+  constructor(value) {
+    this.value = value;
   }
 }
 
@@ -142,7 +141,7 @@ module.exports = {
   NegationExp,
   ParensExp,
   NotExp,
-  SimpleStatement,
   IntLit,
-  FloatLit
+  FloatLit,
+  Text,
 };

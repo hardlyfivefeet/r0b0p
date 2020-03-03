@@ -27,20 +27,22 @@ const {
   NegationExp,
   ParensExp,
   NotExp,
-  SimpleStatement
+  Text,
+  IntLit,
+  FloatLit
 } = require("../../ast");
 
 const fixture = {
-  // hello: [
-  //   String.raw`SP3AK["Hello, world"];`,
-  //   new SimpleStatement('SP3AK["Hello, world"]', ";")
-  // ],
+  hello: [
+    String.raw`SP3AK["Hello, world"];`,
+    [new Print(new Text('Hello, world'))]
+  ],
   conditional: [
     String.raw`PR3SUM1NG[x < 5] < >`,
-    new Conditional(new BinaryExp("<", "x", "5"), 
-                    new Block(),
-                    new ElseIfBlock(new BinaryExp(), new Block()),
-                    new ElseBlock(new Block()))
+    [new Conditional(new BinaryExp("<", "x", new IntLit(5)), 
+                    new Block([]),
+                    [],
+                    null)]
   ]
 };
 

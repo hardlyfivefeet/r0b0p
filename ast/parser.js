@@ -15,12 +15,11 @@ const {
   Print,
   List,
   Dict,
-  text,
+  Text,
   BinaryExp,
   NegationExp,
   ParensExp,
   NotExp,
-  SimpleStatement,
   IntLit,
   FloatLit,
 } = require("../ast");
@@ -79,7 +78,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new Dict(items.ast());
   },
   text(_lq, chars, _rq) {
-    return this.sourceString;
+    return new Text(chars.ast().join(''));
   },
   Exp_binary(left, op, right) {
     return new BinaryExp(op.ast(), left.ast(), right.ast());
@@ -106,7 +105,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new NotExp(exp.ast());
   },
   Statement_simple(statement, _semicolon) {
-    return new SimpleStatement(statement.ast());
+    return statement.ast();
   },
   id(_firstChar, _restChars) {
     return this.sourceString;
