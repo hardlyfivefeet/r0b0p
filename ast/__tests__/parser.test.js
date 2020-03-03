@@ -137,10 +137,7 @@ const fixture = {
     [
       new FuncDecl(
         "add_five",
-        //TODO:
-        //No clue why I need it to be an array inside an array below here if someone wants to
-        //figure that out and explain it to me! Something to do with "NonemptyListOf" in parser
-        [["value"]],
+        ["value"],
         new Block([new Return(new BinaryExp("+", "value", new IntLit("5")))])
       )
     ]

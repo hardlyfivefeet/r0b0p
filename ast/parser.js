@@ -43,7 +43,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new Return(exp.ast());
   },
   FuncDecl(_program, name, _lb, params, _rb, block) {
-    return new FuncDecl(name.ast(), params.ast(), block.ast());
+    return new FuncDecl(name.ast(), arrayToNullable(params.ast()), block.ast());
   },
   WhileLoop(_while, _lb, condition, _rb, block) {
     return new WhileLoop(condition.ast(), block.ast());
