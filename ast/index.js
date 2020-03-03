@@ -17,8 +17,8 @@ class Return {
 }
 
 class FuncDecl {
-  constructor(name, params, statements) {
-    Object.assign(this, { name, params, statements });
+  constructor(name, params, block) {
+    Object.assign(this, { name, params, block });
   }
 }
 

@@ -11,8 +11,6 @@ const parse = require("../parser");
 
 /*
 still need coverage for: 
-- return
-- funcdecl
 - forloop
 - funccall
 - list
@@ -131,6 +129,19 @@ const fixture = {
             )
           )
         )
+      )
+    ]
+  ],
+  funcDecl: [
+    String.raw`PR0GRAM add_five[value] < G1V3 value + 5; >`,
+    [
+      new FuncDecl(
+        "add_five",
+        //TODO:
+        //No clue why I need it to be an array inside an array below here if someone wants to
+        //figure that out and explain it to me! Something to do with "NonemptyListOf" in parser
+        [["value"]],
+        new Block([new Return(new BinaryExp("+", "value", new IntLit("5")))])
       )
     ]
   ]

@@ -118,6 +118,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   _terminal() {
     return this.sourceString;
+  },
+  NonemptyListOf(first, _separator, rest) {
+    return [first.ast(), ...rest.ast()];
   }
 });
 /* eslint-enable no-unused-vars */
