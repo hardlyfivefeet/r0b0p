@@ -1,6 +1,7 @@
 ## TODO for r0b0p
 
 number of stars means NUMBER OF DIFFICULTY LEVELS
+- change < > for blocks to something else like << >> or other unicode characters
 
 optional future additions:
 

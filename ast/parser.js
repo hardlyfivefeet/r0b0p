@@ -113,7 +113,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   number_integer(digits) {
     return new IntLit(+this.sourceString);
   },
-  decimal(_1, _2, _3) {
+  decimal(_whole, _decimal, _fractional) {
     return new FloatLit(+this.sourceString);
   },
   _terminal() {
