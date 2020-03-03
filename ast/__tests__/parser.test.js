@@ -9,6 +9,17 @@
 
 const parse = require("../parser");
 
+/*
+still need coverage for: 
+- return
+- funcdecl
+- forloop
+- funccall
+- list
+- dict
+- not exp
+*/
+
 const {
   Block,
   Assignment,
@@ -101,6 +112,25 @@ const fixture = {
       new WhileLoop(
         new BinaryExp(">", "y", new IntLit(20)),
         new Block([new Assignment("y", new BinaryExp("-", "y", new IntLit(1)))])
+      )
+    ]
+  ],
+  mathExp: [
+    String.raw`z = (-16.4 * 32) ** 8;`,
+    [
+      new Assignment(
+        "z",
+        new BinaryExp(
+          "**",
+          new IntLit("8"),
+          new ParensExp(
+            new BinaryExp(
+              "*",
+              new NegationExp(new FloatLit("16.4")),
+              new IntLit("32")
+            )
+          )
+        )
       )
     ]
   ]
