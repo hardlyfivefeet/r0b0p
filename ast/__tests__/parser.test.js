@@ -12,7 +12,6 @@ const parse = require("../parser");
 /*
 still need coverage for: 
 - forloop
-- funccall
 - list
 - dict
 - not exp
@@ -38,7 +37,8 @@ const {
   NotExp,
   Text,
   IntLit,
-  FloatLit
+  FloatLit,
+  BoolLit
 } = require("../../ast");
 
 const fixture = {
@@ -104,6 +104,20 @@ const fixture = {
     String.raw`WH1L3[y > 20] < >`,
     [new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))]
   ],
+  forLoop: [
+    String.raw`x_is_even = b0p; C0UNT[x:0->5] < x_is_even = N0T x_is_even; >`,
+    [
+      //TODO:
+      //The parser doesn't recognize b0p as BoolLit. How to make him recognize??
+      new Assignment("x_is_even", "b0p"),
+      new ForLoop(
+        ["x"],
+        new IntLit(0),
+        new IntLit("5"),
+        new Block([new Assignment("x_is_even", new NotExp("x_is_even"))])
+      )
+    ]
+  ],
   whileWithContent: [
     String.raw`WH1L3[y > 20] < y = y - 1; >`,
     [
@@ -141,6 +155,10 @@ const fixture = {
         new Block([new Return(new BinaryExp("+", "value", new IntLit("5")))])
       )
     ]
+  ],
+  funcCall: [
+    String.raw`y = add_five[26];`,
+    [new Assignment("y", new FuncCall("add_five", [new IntLit("26")]))]
   ]
 };
 

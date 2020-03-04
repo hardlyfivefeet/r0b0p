@@ -117,6 +117,12 @@ class FloatLit {
   }
 }
 
+class BoolLit {
+  constructor(value) {
+    this.value = value;
+  }
+}
+
 class Text {
   constructor(value) {
     this.value = value;
@@ -143,5 +149,6 @@ module.exports = {
   NotExp,
   IntLit,
   FloatLit,
+  BoolLit,
   Text
 };

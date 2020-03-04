@@ -21,7 +21,8 @@ const {
   ParensExp,
   NotExp,
   IntLit,
-  FloatLit
+  FloatLit,
+  BoolLit
 } = require("../ast");
 
 const grammar = ohm.grammar(fs.readFileSync(__dirname + "/../r0b0p.ohm"));
@@ -66,7 +67,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new ElseBlock(block.ast());
   },
   FuncCall(name, _lb, params, _rb) {
-    return new FuncCall(name.ast(), params.ast());
+    return new FuncCall(name.ast(), arrayToNullable(params.ast()));
   },
   Print(_speak, _lb, exp, _rb) {
     return new Print(exp.ast());
