@@ -9,12 +9,6 @@
 
 const parse = require("../parser");
 
-/*
-still need coverage for: 
-- list
-- dict
-*/
-
 const {
   Block,
   Assignment,
