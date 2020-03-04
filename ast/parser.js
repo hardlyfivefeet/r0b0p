@@ -15,6 +15,7 @@ const {
   Print,
   List,
   Dict,
+  KeyValue,
   Text,
   BinaryExp,
   NegationExp,
@@ -73,10 +74,13 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new Print(exp.ast());
   },
   List(_lcb, items, _rcb) {
-    return new List(items.ast());
+    return new List(arrayToNullable(items.ast()));
   },
   Dict(_lcb, items, _rcb) {
-    return new Dict(items.ast());
+    return new Dict(arrayToNullable(items.ast()));
+  },
+  KeyValue(id, _colon, exp) {
+    return new KeyValue(id, exp);
   },
   text(_lq, chars, _rq) {
     return new Text(chars.ast().join(""));

@@ -29,6 +29,7 @@ const {
   Print,
   List,
   Dict,
+  KeyValue,
   BinaryExp,
   NegationExp,
   ParensExp,
@@ -157,6 +158,34 @@ const fixture = {
   funcCall: [
     String.raw`y = add_five[26];`,
     [new Assignment("y", new FuncCall("add_five", [new IntLit("26")]))]
+  ],
+  list: [
+    String.raw`x = {1, 2, 3, 4};`,
+    [
+      new Assignment(
+        "x",
+        new List([
+          new IntLit("1"),
+          new IntLit("2"),
+          new IntLit("3"),
+          new IntLit("4")
+        ])
+      )
+    ]
+  ],
+  //TODO:
+  //This test still doesn't work!!!
+  dict: [
+    String.raw`y = {a: 1, b: 2};`,
+    [
+      new Assignment(
+        "y",
+        new Dict([
+          new KeyValue("a", new IntLit(1)),
+          new KeyValue("b", new IntLit(2))
+        ])
+      )
+    ]
   ]
 };
 

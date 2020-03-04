@@ -52,7 +52,7 @@ r0b0p {
 
   List        = "{" (ListOf<Exp, ",">)? "}"
   Dict        = "{" ListOf<KeyValue, ",">? "}"
-  KeyValue    = id ":" Exp
+  KeyValue    = (id | text) ":" Exp
   
   id          = ~keyword letter (alnum | "_")*
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"

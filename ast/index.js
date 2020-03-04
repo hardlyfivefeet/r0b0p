@@ -81,6 +81,12 @@ class Dict {
   }
 }
 
+class KeyValue {
+  constructor(key, value) {
+    Object.assign(this, { key, value });
+  }
+}
+
 class BinaryExp {
   constructor(op, left, right) {
     Object.assign(this, { op, left, right });
@@ -143,6 +149,7 @@ module.exports = {
   Print,
   List,
   Dict,
+  KeyValue,
   BinaryExp,
   NegationExp,
   ParensExp,
