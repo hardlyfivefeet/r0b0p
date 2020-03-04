@@ -80,7 +80,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new Dict(arrayToNullable(items.ast()));
   },
   KeyValue(id, _colon, exp) {
-    return new KeyValue(id, exp);
+    return new KeyValue(id.ast(), exp.ast());
   },
   text(_lq, chars, _rq) {
     return new Text(chars.ast().join(""));
@@ -120,6 +120,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   decimal(_whole, _decimal, _fractional) {
     return new FloatLit(+this.sourceString);
+  },
+  boolean(_value) {
+    return new BoolLit(this.sourceString);
   },
   _terminal() {
     return this.sourceString;

@@ -100,9 +100,7 @@ const fixture = {
   forLoop: [
     String.raw`x_is_even = b0p; C0UNT[x:0->5] < x_is_even = N0T x_is_even; >`,
     [
-      //TODO:
-      //The parser doesn't recognize b0p as BoolLit. How to make him recognize??
-      new Assignment("x_is_even", "b0p"),
+      new Assignment("x_is_even", new BoolLit("b0p")),
       new ForLoop(
         ["x"],
         new IntLit(0),
@@ -167,8 +165,6 @@ const fixture = {
       )
     ]
   ],
-  //TODO:
-  //This test still doesn't work!!!
   dict: [
     String.raw`y = {a: 1, b: 2};`,
     [
