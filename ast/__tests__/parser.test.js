@@ -118,6 +118,25 @@ const fixture = {
       )
     ]
   ],
+  binaryExpWithAndOrOp: [
+    String.raw`b = y == 3 && (x == 5 || z == 6);`,
+    [
+      new Assignment(
+        "b",
+        new BinaryExp(
+          "&&",
+          new BinaryExp("==", "y", new IntLit(3)),
+          new ParensExp(
+            new BinaryExp(
+              "||",
+              new BinaryExp("==", "x", new IntLit(5)),
+              new BinaryExp("==", "z", new IntLit(6))
+            )
+          )
+        )
+      )
+    ]
+  ],
   mathExp: [
     String.raw`z = (-16.4 * 32) ** 8;`,
     [
