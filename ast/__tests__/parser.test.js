@@ -11,10 +11,8 @@ const parse = require("../parser");
 
 /*
 still need coverage for: 
-- forloop
 - list
 - dict
-- not exp
 */
 
 const {
