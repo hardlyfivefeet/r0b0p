@@ -4,9 +4,11 @@ const yargs = require("yargs");
 const parse = require("./ast/parser");
 
 // If compiling from a string, return the AST, IR, or compiled code as a string.
-function compile(sourceCode) {
+function compile(sourceCode, { astOnly }) {
   let program = parse(sourceCode);
-  return util.inspect(program, { depth: null });
+  if (astOnly) {
+    return util.inspect(program, { depth: null });
+  }
 }
 
 // If compiling from a file, write to standard output.
