@@ -14,6 +14,7 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Dictionaries and lists
 - String Interpolation
 - Escape sequences
+- Beep boop bop
 
 ## Primitive Types
 
