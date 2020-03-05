@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1583451170760" clover="3.2.0">
-  <project timestamp="1583451170760" name="All files">
-    <metrics statements="64" coveredstatements="64" conditionals="4" coveredconditionals="4" methods="54" coveredmethods="54" elements="122" coveredelements="122" complexity="0" loc="64" ncloc="64" packages="1" files="2" classes="2"/>
+<coverage generated="1583452007184" clover="3.2.0">
+  <project timestamp="1583452007184" name="All files">
+    <metrics statements="63" coveredstatements="61" conditionals="4" coveredconditionals="4" methods="53" coveredmethods="51" elements="120" coveredelements="116" complexity="0" loc="63" ncloc="63" packages="1" files="2" classes="2"/>
     <file name="index.js" path="/Users/Merissa/OneDrive - lmu.edu/LMU/Spring 2020/Compilers/r0b0p/ast/index.js">
       <metrics statements="23" coveredstatements="23" conditionals="0" coveredconditionals="0" methods="22" coveredmethods="22"/>
-      <line num="3" count="22" type="stmt"/>
-      <line num="9" count="28" type="stmt"/>
-      <line num="15" count="2" type="stmt"/>
-      <line num="21" count="2" type="stmt"/>
+      <line num="3" count="21" type="stmt"/>
+      <line num="9" count="25" type="stmt"/>
+      <line num="15" count="1" type="stmt"/>
+      <line num="21" count="1" type="stmt"/>
       <line num="27" count="4" type="stmt"/>
       <line num="33" count="2" type="stmt"/>
       <line num="39" count="8" type="stmt"/>
       <line num="50" count="4" type="stmt"/>
       <line num="56" count="2" type="stmt"/>
-      <line num="62" count="2" type="stmt"/>
+      <line num="62" count="1" type="stmt"/>
       <line num="68" count="2" type="stmt"/>
-      <line num="74" count="2" type="stmt"/>
-      <line num="80" count="2" type="stmt"/>
-      <line num="86" count="4" type="stmt"/>
-      <line num="92" count="34" type="stmt"/>
+      <line num="74" count="1" type="stmt"/>
+      <line num="80" count="1" type="stmt"/>
+      <line num="86" count="2" type="stmt"/>
+      <line num="92" count="33" type="stmt"/>
       <line num="98" count="2" type="stmt"/>
       <line num="104" count="4" type="stmt"/>
       <line num="110" count="2" type="stmt"/>
-      <line num="116" count="60" type="stmt"/>
+      <line num="116" count="52" type="stmt"/>
       <line num="122" count="2" type="stmt"/>
       <line num="128" count="2" type="stmt"/>
       <line num="134" count="2" type="stmt"/>
       <line num="138" count="1" type="stmt"/>
     </file>
     <file name="parser.js" path="/Users/Merissa/OneDrive - lmu.edu/LMU/Spring 2020/Compilers/r0b0p/ast/parser.js">
-      <metrics statements="41" coveredstatements="41" conditionals="4" coveredconditionals="4" methods="32" coveredmethods="32"/>
+      <metrics statements="40" coveredstatements="38" conditionals="4" coveredconditionals="4" methods="31" coveredmethods="29"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="27" count="1" type="stmt"/>
       <line num="29" count="1" type="stmt"/>
-      <line num="35" count="8" type="cond" truecount="2" falsecount="0"/>
+      <line num="35" count="4" type="cond" truecount="2" falsecount="0"/>
       <line num="39" count="1" type="stmt"/>
-      <line num="41" count="11" type="stmt"/>
+      <line num="41" count="10" type="stmt"/>
       <line num="44" count="14" type="stmt"/>
-      <line num="47" count="1" type="stmt"/>
+      <line num="47" count="0" type="stmt"/>
       <line num="50" count="1" type="stmt"/>
       <line num="53" count="2" type="stmt"/>
       <line num="56" count="1" type="stmt"/>
@@ -49,28 +49,27 @@
       <line num="76" count="1" type="stmt"/>
       <line num="79" count="1" type="stmt"/>
       <line num="82" count="1" type="stmt"/>
-      <line num="85" count="2" type="stmt"/>
+      <line num="85" count="0" type="stmt"/>
       <line num="88" count="1" type="stmt"/>
       <line num="91" count="2" type="stmt"/>
       <line num="94" count="11" type="stmt"/>
-      <line num="97" count="2" type="stmt"/>
+      <line num="97" count="1" type="stmt"/>
       <line num="100" count="1" type="stmt"/>
       <line num="103" count="1" type="stmt"/>
       <line num="106" count="1" type="stmt"/>
       <line num="109" count="2" type="stmt"/>
       <line num="112" count="1" type="stmt"/>
-      <line num="115" count="16" type="stmt"/>
-      <line num="118" count="34" type="stmt"/>
-      <line num="121" count="30" type="stmt"/>
+      <line num="115" count="15" type="stmt"/>
+      <line num="118" count="30" type="stmt"/>
+      <line num="121" count="22" type="stmt"/>
       <line num="124" count="1" type="stmt"/>
       <line num="127" count="1" type="stmt"/>
-      <line num="130" count="29" type="stmt"/>
-      <line num="133" count="4" type="stmt"/>
+      <line num="130" count="28" type="stmt"/>
+      <line num="135" count="1" type="stmt"/>
+      <line num="136" count="15" type="stmt"/>
+      <line num="137" count="15" type="cond" truecount="2" falsecount="0"/>
       <line num="138" count="1" type="stmt"/>
-      <line num="139" count="15" type="stmt"/>
-      <line num="140" count="15" type="cond" truecount="2" falsecount="0"/>
-      <line num="141" count="1" type="stmt"/>
-      <line num="143" count="14" type="stmt"/>
+      <line num="140" count="14" type="stmt"/>
     </file>
   </project>
 </coverage>
