@@ -26,8 +26,8 @@ module.exports = { compile, compileFile };
 // Run the compiler as a command line application.
 if (require.main === module) {
   const { argv } = yargs
-    .usage("$0 [-a] [-o] [-i] filename")
-    .boolean(["a", "o", "i"])
+    .usage("$0 [-a] filename")
+    .boolean(["a"])
     .describe("a", "show abstract syntax tree after parsing then stop")
     .demand(1);
   compileFile(argv._[0], {
