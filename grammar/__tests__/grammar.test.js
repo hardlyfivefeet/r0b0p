@@ -2,7 +2,7 @@ let fs = require("fs");
 let ohm = require("ohm-js");
 let assert = require("assert");
 
-let contents = fs.readFileSync("r0b0p.ohm");
+let contents = fs.readFileSync(__dirname + "/../r0b0p.ohm");
 let r0b0p = ohm.grammar(contents);
 
 describe("assignment", () => {
@@ -72,7 +72,9 @@ describe("conditionals and loops", () => {
     assert(results.succeeded());
   });
   it("does not let us use a statement as condition", () => {
-    results = r0b0p.match('PR3SUM1NG[SP3AK["This is a statement"]] < z = 3 + 6; >;');
+    results = r0b0p.match(
+      'PR3SUM1NG[SP3AK["This is a statement"]] < z = 3 + 6; >;'
+    );
     assert(results.succeeded() === false);
   });
   it("does not let us use a statement as for-loop index", () => {

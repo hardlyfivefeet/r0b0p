@@ -26,7 +26,9 @@ const {
   BoolLit
 } = require("../ast");
 
-const grammar = ohm.grammar(fs.readFileSync(__dirname + "/../r0b0p.ohm"));
+const grammar = ohm.grammar(
+  fs.readFileSync(__dirname + "/../grammar/r0b0p.ohm")
+);
 
 // Ohm turns `x?` into either [x] or [], which we should clean up for our AST.
 function arrayToNullable(a) {
