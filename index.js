@@ -3,7 +3,7 @@ const util = require("util");
 const yargs = require("yargs");
 const parse = require("./ast/parser");
 
-// If compiling from a string, return the AST, IR, or compiled code as a string.
+// If compiling from a string, return the AST
 function compile(sourceCode, { astOnly }) {
   let program = parse(sourceCode);
   if (astOnly) {
