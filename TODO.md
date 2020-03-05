@@ -3,7 +3,7 @@
 number of stars means NUMBER OF DIFFICULTY LEVELS
 
 - change < > for blocks to something else like << >> or other unicode characters (ask toal)
-- add tests for dictionary methods (adriana)
+- add tests for dictionary/list methods (adriana)
 - ast printer
   - toal wants '-a FILE_NAME' to run AST ( see problem 2 on hw )
 
