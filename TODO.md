@@ -5,6 +5,7 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 - change < > for blocks to something else like << >> or other unicode characters (ask toal)
 - add tests for dictionary/list methods (adriana)
 - add string interpolation tests (straight from readme)
+- add program class
 
 optional future additions:
 
