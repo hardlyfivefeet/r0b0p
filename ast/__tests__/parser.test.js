@@ -10,6 +10,7 @@
 const parse = require("../parser");
 
 const {
+  Program,
   Block,
   Assignment,
   Return,
@@ -37,33 +38,33 @@ const {
 const fixture = {
   hello: [
     String.raw`SP3AK["Hello, world"];`,
-    [new Print(new Text("Hello, world"))]
+    new Program([new Print(new Text("Hello, world"))])
   ],
   conditional: [
     String.raw`PR3SUM1NG[x < 5] < >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([]),
         [],
         null
       )
-    ]
+    ])
   ],
   conditionalWithContent: [
     String.raw`PR3SUM1NG[x < 5] < x = 62; >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([new Assignment("x", new IntLit("62"))]),
         [],
         null
       )
-    ]
+    ])
   ],
   conditionalWithElseIf: [
     String.raw`PR3SUM1NG[x < 5] < x = 62; > 3LS3 1F[x < 20] < x = 96; >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([new Assignment("x", new IntLit("62"))]),
@@ -75,11 +76,11 @@ const fixture = {
         ],
         null
       )
-    ]
+    ])
   ],
   conditionalWithElseIfAndElse: [
     String.raw`PR3SUM1NG[x < 5] < x = 62; > 3LS3 1F[x < 20] < x = 96; > 3LS3 < x = 100; >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([new Assignment("x", new IntLit("62"))]),
@@ -91,15 +92,17 @@ const fixture = {
         ],
         new ElseBlock(new Block([new Assignment("x", new IntLit("100"))]))
       )
-    ]
+    ])
   ],
   while: [
     String.raw`WH1L3[y > 20] < >`,
-    [new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))]
+    new Program([
+      new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))
+    ])
   ],
   forLoop: [
     String.raw`x_is_even = b0p; C0UNT[x:0->5] < x_is_even = N0T x_is_even; >`,
-    [
+    new Program([
       new Assignment("x_is_even", new BoolLit("b0p")),
       new ForLoop(
         ["x"],
@@ -107,20 +110,20 @@ const fixture = {
         new IntLit("5"),
         new Block([new Assignment("x_is_even", new NotExp("x_is_even"))])
       )
-    ]
+    ])
   ],
   whileWithContent: [
     String.raw`WH1L3[y > 20] < y = y - 1; >`,
-    [
+    new Program([
       new WhileLoop(
         new BinaryExp(">", "y", new IntLit(20)),
         new Block([new Assignment("y", new BinaryExp("-", "y", new IntLit(1)))])
       )
-    ]
+    ])
   ],
   binaryExpWithAndOrOp: [
     String.raw`b = y == 3 && (x == 5 || z == 6);`,
-    [
+    new Program([
       new Assignment(
         "b",
         new BinaryExp(
@@ -135,11 +138,11 @@ const fixture = {
           )
         )
       )
-    ]
+    ])
   ],
   mathExp: [
     String.raw`z = (-16.4 * 32) ** 8;`,
-    [
+    new Program([
       new Assignment(
         "z",
         new BinaryExp(
@@ -154,25 +157,27 @@ const fixture = {
           )
         )
       )
-    ]
+    ])
   ],
   funcDecl: [
     String.raw`PR0GRAM add_five[value] < G1V3 value + 5; >`,
-    [
+    new Program([
       new FuncDecl(
         "add_five",
         ["value"],
         new Block([new Return(new BinaryExp("+", "value", new IntLit("5")))])
       )
-    ]
+    ])
   ],
   funcCall: [
     String.raw`y = add_five[26];`,
-    [new Assignment("y", new FuncCall("add_five", [new IntLit("26")]))]
+    new Program([
+      new Assignment("y", new FuncCall("add_five", [new IntLit("26")]))
+    ])
   ],
   list: [
     String.raw`x = {1, 2, 3, 4};`,
-    [
+    new Program([
       new Assignment(
         "x",
         new List([
@@ -182,11 +187,11 @@ const fixture = {
           new IntLit("4")
         ])
       )
-    ]
+    ])
   ],
   dict: [
     String.raw`y = {a: 1, b: 2};`,
-    [
+    new Program([
       new Assignment(
         "y",
         new Dict([
@@ -194,7 +199,7 @@ const fixture = {
           new KeyValue("b", new IntLit(2))
         ])
       )
-    ]
+    ])
   ]
 };
 

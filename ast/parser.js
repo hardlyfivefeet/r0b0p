@@ -2,6 +2,7 @@
 const fs = require("fs");
 const ohm = require("ohm-js");
 const {
+  Program,
   Block,
   Assignment,
   Return,
@@ -37,6 +38,9 @@ function arrayToNullable(a) {
 
 /* eslint-disable no-unused-vars */
 const astGenerator = grammar.createSemantics().addOperation("ast", {
+  Program(statements) {
+    return new Program(statements.ast());
+  },
   Block(_lp, statements, _rp) {
     return new Block(statements.ast());
   },
