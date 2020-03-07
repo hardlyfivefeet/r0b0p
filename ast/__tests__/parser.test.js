@@ -10,6 +10,7 @@
 const parse = require("../parser");
 
 const {
+  Program,
   Block,
   Assignment,
   Return,
@@ -37,33 +38,33 @@ const {
 const fixture = {
   hello: [
     String.raw`SP3AK["Hello, world"];`,
-    [new Print(new Text("Hello, world"))]
+    new Program([new Print(new Text("Hello, world"))])
   ],
   conditional: [
     String.raw`PR3SUM1NG[x < 5] < >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([]),
         [],
         null
       )
-    ]
+    ])
   ],
   conditionalWithContent: [
     String.raw`PR3SUM1NG[x < 5] < x = 62; >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([new Assignment("x", new IntLit("62"))]),
         [],
         null
       )
-    ]
+    ])
   ],
   conditionalWithElseIf: [
     String.raw`PR3SUM1NG[x < 5] < x = 62; > 3LS3 1F[x < 20] < x = 96; >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([new Assignment("x", new IntLit("62"))]),
@@ -75,11 +76,11 @@ const fixture = {
         ],
         null
       )
-    ]
+    ])
   ],
   conditionalWithElseIfAndElse: [
     String.raw`PR3SUM1NG[x < 5] < x = 62; > 3LS3 1F[x < 20] < x = 96; > 3LS3 < x = 100; >`,
-    [
+    new Program([
       new Conditional(
         new BinaryExp("<", "x", new IntLit(5)),
         new Block([new Assignment("x", new IntLit("62"))]),
@@ -91,15 +92,17 @@ const fixture = {
         ],
         new ElseBlock(new Block([new Assignment("x", new IntLit("100"))]))
       )
-    ]
+    ])
   ],
   while: [
     String.raw`WH1L3[y > 20] < >`,
-    [new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))]
+    new Program([
+      new WhileLoop(new BinaryExp(">", "y", new IntLit(20)), new Block([]))
+    ])
   ],
   forLoop: [
     String.raw`x_is_even = b0p; C0UNT[x:0->5] < x_is_even = N0T x_is_even; >`,
-    [
+    new Program([
       new Assignment("x_is_even", new BoolLit("b0p")),
       new ForLoop(
         ["x"],
@@ -107,20 +110,20 @@ const fixture = {
         new IntLit("5"),
         new Block([new Assignment("x_is_even", new NotExp("x_is_even"))])
       )
-    ]
+    ])
   ],
   whileWithContent: [
     String.raw`WH1L3[y > 20] < y = y - 1; >`,
-    [
+    new Program([
       new WhileLoop(
         new BinaryExp(">", "y", new IntLit(20)),
         new Block([new Assignment("y", new BinaryExp("-", "y", new IntLit(1)))])
       )
-    ]
+    ])
   ],
   binaryExpWithAndOrOp: [
     String.raw`b = y == 3 && (x == 5 || z == 6);`,
-    [
+    new Program([
       new Assignment(
         "b",
         new BinaryExp(
@@ -135,11 +138,11 @@ const fixture = {
           )
         )
       )
-    ]
+    ])
   ],
   mathExp: [
     String.raw`z = (-16.4 * 32) ** 8;`,
-    [
+    new Program([
       new Assignment(
         "z",
         new BinaryExp(
@@ -154,25 +157,27 @@ const fixture = {
           )
         )
       )
-    ]
+    ])
   ],
   funcDecl: [
     String.raw`PR0GRAM add_five[value] < G1V3 value + 5; >`,
-    [
+    new Program([
       new FuncDecl(
         "add_five",
         ["value"],
         new Block([new Return(new BinaryExp("+", "value", new IntLit("5")))])
       )
-    ]
+    ])
   ],
   funcCall: [
     String.raw`y = add_five[26];`,
-    [new Assignment("y", new FuncCall("add_five", [new IntLit("26")]))]
+    new Program([
+      new Assignment("y", new FuncCall("add_five", [new IntLit("26")]))
+    ])
   ],
   list: [
     String.raw`x = {1, 2, 3, 4};`,
-    [
+    new Program([
       new Assignment(
         "x",
         new List([
@@ -182,11 +187,11 @@ const fixture = {
           new IntLit("4")
         ])
       )
-    ]
+    ])
   ],
   dict: [
     String.raw`y = {a: 1, b: 2};`,
-    [
+    new Program([
       new Assignment(
         "y",
         new Dict([
@@ -194,11 +199,11 @@ const fixture = {
           new KeyValue("b", new IntLit(2))
         ])
       )
-    ]
+    ])
   ],
   listSubstitute: [
     String.raw`SUBST1TUT3[{1, 2, 3, 4}, 0, 50];`,
-    [
+    new Program([
       new FuncCall(
         "SUBST1TUT3",
         [
@@ -212,11 +217,11 @@ const fixture = {
           new IntLit(50)
        ]
       )
-    ]
+    ])
   ],
   listSize: [
     String.raw`S1Z3[{3, 4, 5, 6}];`,
-    [
+    new Program([
       new FuncCall(
         "S1Z3",
         [
@@ -228,11 +233,11 @@ const fixture = {
           ])
         ]
       )
-    ]
+    ])
   ],
   listRetrieve: [
     String.raw`R3TR13V3_AT[{7, 7, 7, 7}, 0];`,
-    [
+    new Program([
       new FuncCall(
       "R3TR13V3_AT",
         [
@@ -245,11 +250,11 @@ const fixture = {
           new IntLit(0)
         ]
       )
-    ]
+    ])
   ],
   listDiscard: [
     String.raw`D1SCARD_AT[{7, 7, 7, 7}, 3];`,
-    [
+    new Program([
       new FuncCall(
       "D1SCARD_AT",
         [
@@ -262,11 +267,11 @@ const fixture = {
           new IntLit(3)
         ]
       )
-    ]
+    ])
   ],
   listPlace: [
     String.raw`PLAC3_AT[{7, 7, 7, 7}, 3, 2];`,
-    [
+    new Program([
       new FuncCall(
       "PLAC3_AT",
         [
@@ -280,11 +285,11 @@ const fixture = {
           new IntLit(2)
         ]
       )
-    ]
+    ])
   ],
   dictSubstitute: [
     String.raw`SUBST1TUT3[{a: 1, b: 2}, a, 50];`,
-    [
+    new Program([
       new FuncCall(
         "SUBST1TUT3",
         [
@@ -296,11 +301,11 @@ const fixture = {
           new IntLit(50)
        ]
       )
-    ]
+    ])
   ],
   dictCodes: [
     String.raw`C0D3S[{a: 1, b: 2}];`,
-    [
+    new Program([
       new FuncCall(
         "C0D3S",
         [
@@ -310,11 +315,11 @@ const fixture = {
           ])
        ]
       )
-    ]
+    ])
   ],
   dictRetrieve: [
     String.raw`R3TR13V3[{hi: a, hello: b}, "hello"];`,
-    [
+    new Program([
       new FuncCall(
       "R3TR13V3",
         [
@@ -325,11 +330,11 @@ const fixture = {
           new Text("hello")
         ]
       )
-    ]
+    ])
   ],
   dictDiscard: [
     String.raw`D1SCARD[{a: b, c: d, e: f}, a];`,
-    [
+    new Program([
       new FuncCall(
       "D1SCARD",
         [
@@ -341,11 +346,11 @@ const fixture = {
           "a"
         ]
       )
-    ]
+    ])
   ],
   dictPlace: [
     String.raw`PLAC3[{a: 1, b: 2}, a, 3];`,
-    [
+    new Program([
       new FuncCall(
       "PLAC3",
         [
@@ -357,7 +362,7 @@ const fixture = {
           new IntLit(3)
         ]
       )
-    ]
+    ])
   ]
 };
 

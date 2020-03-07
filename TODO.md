@@ -2,8 +2,9 @@
 
 number of stars means NUMBER OF DIFFICULTY LEVELS
 
-- change < > for blocks to something else like << >> or other unicode characters (ask toal)
-- add string interpolation tests (straight from readme)
+- add string interpolation tests (straight from readme) (adriana)
+- "make params into its own thingy" adriana
+- check if the things that can precede Exp1 and the things that can precede a block are disjoint
 
 optional future additions:
 

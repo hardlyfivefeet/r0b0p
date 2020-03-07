@@ -1,3 +1,9 @@
+class Program {
+  constructor(statements) {
+    Object.assign(this, { statements });
+  }
+}
+
 class Block {
   constructor(statements) {
     Object.assign(this, { statements });
@@ -136,6 +142,7 @@ class Text {
 }
 
 module.exports = {
+  Program,
   Block,
   Assignment,
   Return,

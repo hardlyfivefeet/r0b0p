@@ -1,3 +1,5 @@
+/* eslint no-undef: 0 */
+
 let fs = require("fs");
 let ohm = require("ohm-js");
 let assert = require("assert");
