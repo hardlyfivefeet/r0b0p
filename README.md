@@ -89,7 +89,7 @@ let arrayLength = x.length;                   array_length = S1Z3[x];
 
 ```
 let y = {a: 1, b: 2};                         y = {a: 1, b: 2};
-y[a] = 5;                                     SUBST1TUT3[y, a, 5];
+y[a] = 5;                                     PLAC3[y, a, 5];
 y[c] = 3;                                     PLAC3[y, c, 3];
 delete y[a];                                  D1SCARD[y, a];
 let value = y[a];                             value = R3TR13V3[y, a];
@@ -101,7 +101,7 @@ console.log(Object.keys(y));                  SP3AK[C0D3S[y]];
 ```
 let x = 3;                                    x = 3;
 if (x < 6) {                                  PR3SUM1NG[x < 6] <
-  console.log("X is less than 6!");             SP3AK["X is less than 6!"];
+  console.log("X is less than 6!");             SP3AK["x is less than 6!"];
 }                                             >
 ```
 
