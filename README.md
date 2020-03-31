@@ -1,4 +1,4 @@
-![r0b0p logo](images/r0b0p.png)
+![r0b0p logo](docs/images/r0b0p.png)
 
 # 🅁🄌🄱🄌🄿
 
