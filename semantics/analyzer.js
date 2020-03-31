@@ -1,31 +1,29 @@
 // The semantic analyzer
 
 const {
-  ArrayExp,
-  ArrayType,
+  Program,
+  Block,
   Assignment,
+  Return,
+  FuncDecl,
+  WhileLoop,
+  ForLoop,
+  Conditional,
+  ElseBlock,
+  ElseIfBlock,
+  FuncCall,
+  Print,
+  List,
+  Dict,
+  KeyValue,
   BinaryExp,
-  Binding,
-  Break,
-  Call,
-  ExpSeq,
-  Field,
-  ForExp,
-  Func,
-  IdExp,
-  IfExp,
-  LetExp,
-  Literal,
-  MemberExp,
   NegationExp,
-  Nil,
-  Param,
-  RecordExp,
-  RecordType,
-  SubscriptedExp,
-  TypeDec,
-  Variable,
-  WhileExp
+  ParensExp,
+  NotExp,
+  IntLit,
+  FloatLit,
+  BoolLit,
+  Text
 } = require("../ast");
 const { IntType, StringType, NilType } = require("./builtins");
 const check = require("./check");
@@ -35,18 +33,18 @@ module.exports = function(exp) {
   exp.analyze(Context.INITIAL);
 };
 
-ArrayExp.prototype.analyze = function(context) {
-  this.type = context.lookup(this.type);
-  check.isArrayType(this.type);
-  this.size.analyze(context);
-  check.isInteger(this.size);
-  this.fill.analyze(context);
-  check.isAssignableTo(this.fill, this.type.memberType);
-};
+// ArrayExp.prototype.analyze = function(context) {
+//   this.type = context.lookup(this.type);
+//   check.isArrayType(this.type);
+//   this.size.analyze(context);
+//   check.isInteger(this.size);
+//   this.fill.analyze(context);
+//   check.isAssignableTo(this.fill, this.type.memberType);
+// };
 
-ArrayType.prototype.analyze = function(context) {
-  this.memberType = context.lookup(this.memberType);
-};
+// ArrayType.prototype.analyze = function(context) {
+//   this.memberType = context.lookup(this.memberType);
+// };
 
 Assignment.prototype.analyze = function(context) {
   this.source.analyze(context);
@@ -55,9 +53,9 @@ Assignment.prototype.analyze = function(context) {
   check.isNotReadOnly(this.target);
 };
 
-Break.prototype.analyze = function(context) {
-  check.inLoop(context, "break");
-};
+// Break.prototype.analyze = function(context) {
+//   check.inLoop(context, "break");
+// };
 
 BinaryExp.prototype.analyze = function(context) {
   this.left.analyze(context);
@@ -75,11 +73,11 @@ BinaryExp.prototype.analyze = function(context) {
   this.type = IntType;
 };
 
-Binding.prototype.analyze = function(context) {
-  this.value.analyze(context);
-};
+// Binding.prototype.analyze = function(context) {
+//   this.value.analyze(context);
+// };
 
-Call.prototype.analyze = function(context) {
+FuncCall.prototype.analyze = function(context) {
   this.callee = context.lookup(this.callee);
   check.isFunction(this.callee, "Attempt to call a non-function");
   this.args.forEach(arg => arg.analyze(context));
@@ -87,18 +85,18 @@ Call.prototype.analyze = function(context) {
   this.type = this.callee.returnType;
 };
 
-ExpSeq.prototype.analyze = function(context) {
+Block.prototype.analyze = function(context) {
   this.exps.forEach(e => e.analyze(context));
   if (this.exps.length > 0) {
     this.type = this.exps[this.exps.length - 1].type;
   }
 };
 
-Field.prototype.analyze = function(context) {
-  this.type = context.lookup(this.type);
-};
+// Field.prototype.analyze = function(context) {
+//   this.type = context.lookup(this.type);
+// };
 
-ForExp.prototype.analyze = function(context) {
+ForLoop.prototype.analyze = function(context) {
   this.low.analyze(context);
   check.isInteger(this.low, "Low bound in for");
   this.high.analyze(context);
@@ -114,7 +112,7 @@ ForExp.prototype.analyze = function(context) {
 // recursion. First we have to do semantic analysis just on the signature
 // (including the return type). This is so other functions that may be declared
 // before this one have calls to this one checked.
-Func.prototype.analyzeSignature = function(context) {
+FuncDecl.prototype.analyzeSignature = function(context) {
   this.bodyContext = context.createChildContextForFunctionBody();
   this.params.forEach(p => p.analyze(this.bodyContext));
   this.returnType = !this.returnType
@@ -122,7 +120,7 @@ Func.prototype.analyzeSignature = function(context) {
     : context.lookup(this.returnType);
 };
 
-Func.prototype.analyze = function() {
+FuncDecl.prototype.analyze = function() {
   this.body.analyze(this.bodyContext);
   check.isAssignableTo(
     this.body,
@@ -132,12 +130,12 @@ Func.prototype.analyze = function() {
   delete this.bodyContext; // This was only temporary, delete to keep output clean.
 };
 
-IdExp.prototype.analyze = function(context) {
-  this.ref = context.lookup(this.ref);
-  this.type = this.ref.type;
-};
+// IdExp.prototype.analyze = function(context) {
+//   this.ref = context.lookup(this.ref);
+//   this.type = this.ref.type;
+// };
 
-IfExp.prototype.analyze = function(context) {
+Conditional.prototype.analyze = function(context) {
   this.test.analyze(context);
   check.isInteger(this.test, "Test in if");
   this.consequent.analyze(context);
@@ -152,35 +150,35 @@ IfExp.prototype.analyze = function(context) {
   this.type = this.consequent.type;
 };
 
-LetExp.prototype.analyze = function(context) {
-  const newContext = context.createChildContextForBlock();
-  this.decs.filter(d => d.constructor === TypeDec).map(d => newContext.add(d));
-  this.decs
-    .filter(d => d.constructor === Func)
-    .map(d => d.analyzeSignature(newContext));
-  this.decs.filter(d => d.constructor === Func).map(d => newContext.add(d));
-  this.decs.map(d => d.analyze(newContext));
-  check.noRecursiveTypeCyclesWithoutRecordTypes(this.decs);
-  this.body.map(e => e.analyze(newContext));
-  if (this.body.length > 0) {
-    this.type = this.body[this.body.length - 1].type;
-  }
-};
+// LetExp.prototype.analyze = function(context) {
+//   const newContext = context.createChildContextForBlock();
+//   this.decs.filter(d => d.constructor === TypeDec).map(d => newContext.add(d));
+//   this.decs
+//     .filter(d => d.constructor === Func)
+//     .map(d => d.analyzeSignature(newContext));
+//   this.decs.filter(d => d.constructor === Func).map(d => newContext.add(d));
+//   this.decs.map(d => d.analyze(newContext));
+//   check.noRecursiveTypeCyclesWithoutRecordTypes(this.decs);
+//   this.body.map(e => e.analyze(newContext));
+//   if (this.body.length > 0) {
+//     this.type = this.body[this.body.length - 1].type;
+//   }
+// };
 
-Literal.prototype.analyze = function() {
-  if (typeof this.value === "number") {
-    this.type = IntType;
-  } else {
-    this.type = StringType;
-  }
-};
+// Literal.prototype.analyze = function() {
+//   if (typeof this.value === "number") {
+//     this.type = IntType;
+//   } else {
+//     this.type = StringType;
+//   }
+// };
 
-MemberExp.prototype.analyze = function(context) {
-  this.record.analyze(context);
-  check.isRecord(this.record);
-  const field = this.record.type.getFieldForId(this.id);
-  this.type = field.type;
-};
+// MemberExp.prototype.analyze = function(context) {
+//   this.record.analyze(context);
+//   check.isRecord(this.record);
+//   const field = this.record.type.getFieldForId(this.id);
+//   this.type = field.type;
+// };
 
 NegationExp.prototype.analyze = function(context) {
   this.operand.analyze(context);
@@ -188,14 +186,14 @@ NegationExp.prototype.analyze = function(context) {
   this.type = IntType;
 };
 
-Nil.prototype.analyze = function() {
-  this.type = NilType;
-};
+// Nil.prototype.analyze = function() {
+//   this.type = NilType;
+// };
 
-Param.prototype.analyze = function(context) {
-  this.type = context.lookup(this.type);
-  context.add(this);
-};
+// Param.prototype.analyze = function(context) {
+//   this.type = context.lookup(this.type);
+//   context.add(this);
+// };
 
 RecordExp.prototype.analyze = function(context) {
   this.type = context.lookup(this.type);
@@ -224,31 +222,31 @@ RecordType.prototype.getFieldForId = function(id) {
   return field;
 };
 
-SubscriptedExp.prototype.analyze = function(context) {
-  this.array.analyze(context);
-  check.isArray(this.array);
-  this.subscript.analyze(context);
-  check.isInteger(this.subscript);
-  this.type = this.array.type.memberType;
-};
+// SubscriptedExp.prototype.analyze = function(context) {
+//   this.array.analyze(context);
+//   check.isArray(this.array);
+//   this.subscript.analyze(context);
+//   check.isInteger(this.subscript);
+//   this.type = this.array.type.memberType;
+// };
 
-TypeDec.prototype.analyze = function(context) {
-  this.type.analyze(context);
-};
+// TypeDec.prototype.analyze = function(context) {
+//   this.type.analyze(context);
+// };
 
-Variable.prototype.analyze = function(context) {
-  this.init.analyze(context);
-  if (this.type) {
-    this.type = context.lookup(this.type);
-    check.isAssignableTo(this.init, this.type);
-  } else {
-    // Yay! type inference!
-    this.type = this.init.type;
-  }
-  context.add(this);
-};
+// Variable.prototype.analyze = function(context) {
+//   this.init.analyze(context);
+//   if (this.type) {
+//     this.type = context.lookup(this.type);
+//     check.isAssignableTo(this.init, this.type);
+//   } else {
+//     // Yay! type inference!
+//     this.type = this.init.type;
+//   }
+//   context.add(this);
+// };
 
-WhileExp.prototype.analyze = function(context) {
+WhileLoop.prototype.analyze = function(context) {
   this.test.analyze(context);
   check.isInteger(this.test, "Test in while");
   this.body.analyze(context.createChildContextForLoop());

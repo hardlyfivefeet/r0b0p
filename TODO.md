@@ -4,6 +4,7 @@ number of stars means NUMBER OF DIFFICULTY LEVELS
 
 - add string interpolation tests (straight from readme) (adriana)
 - check if the things that can precede Exp1 and the things that can precede a block are disjoint
+- add break lol
 - talk with toal about our scope
   - index out of bounds error? is this runtime or semantic?
 
