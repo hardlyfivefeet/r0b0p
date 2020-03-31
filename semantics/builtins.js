@@ -1,30 +1,19 @@
-const { Func, Param, PrimitiveType } = require("../ast");
-
-const IntType = new PrimitiveType("int");
-const StringType = new PrimitiveType("string");
-const NilType = new PrimitiveType("nil");
+const { FuncDecl } = require("../ast");
 
 const standardFunctions = [
-  new Func("print", [new Param("s", StringType)]),
-  new Func("ord", [new Param("s", StringType)], IntType),
-  new Func("chr", [new Param("x", IntType)], StringType),
-  new Func("size", [new Param("s", StringType)], IntType),
-  new Func(
-    "substring",
-    [
-      new Param("s", StringType),
-      new Param("first", IntType),
-      new Param("n", IntType)
-    ],
-    StringType
-  ),
-  new Func(
-    "concat",
-    [new Param("s", StringType), new Param("t", StringType)],
-    StringType
-  ),
-  new Func("not", [new Param("x", IntType)], IntType),
-  new Func("exit", [new Param("code", IntType)])
+  new FuncDecl("SQRT", ["n"]),
+  new FuncDecl("ABS", ["n"]),
+  new FuncDecl("FLOOR", ["n"]),
+  new FuncDecl("PLAC3_AT", ["list", "index", "value"]),
+  new FuncDecl("D1SCARD_AT", ["list", "index"]),
+  new FuncDecl("R3TR13V3_AT", ["list", "index"]),
+  new FuncDecl("SUBST1TUT3", ["list", "index", "value"]),
+  new FuncDecl("S1Z3", ["list"]),
+
+  new FuncDecl("PLAC3", ["dict", "key", "value"]),
+  new FuncDecl("D1SCARD", ["dict", "key"]),
+  new FuncDecl("R3TR13V3", ["dict", "key"]),
+  new FuncDecl("C0D3S", ["dict"])
 ];
 
 /* eslint-disable no-param-reassign */
@@ -33,4 +22,4 @@ standardFunctions.forEach(f => {
 });
 /* eslint-enable no-param-reassign */
 
-module.exports = { IntType, StringType, NilType, standardFunctions };
+module.exports = { standardFunctions };

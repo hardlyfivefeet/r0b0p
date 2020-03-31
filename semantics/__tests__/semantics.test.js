@@ -71,8 +71,6 @@ PR0GRAM powers[base, limit, callback] <
   >
 >
 
-
-
 `;
 
 describe("The semantic analyzer", () => {
