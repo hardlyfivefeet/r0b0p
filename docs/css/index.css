@@ -207,7 +207,8 @@ h1, h2, h3, h4, h5, h6 {
 .features-icon {
   height: 7rem;
   width: 7rem;
-  font-size: 2.25rem;
+  font-size: 2.75rem;
+  line-height: 8rem;
 }
 
 a {
