@@ -14,8 +14,12 @@ body, html {
   height: 100%;
 }
 
-body {
+body, code {
   font-family: "Disposable Droid BB";
+}
+
+code  {
+  font-size: large !important
 }
 
 .btn-xl {
@@ -23,8 +27,8 @@ body {
 }
 
 .content-section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
 }
 
 .content-section-heading h2 {
