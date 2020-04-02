@@ -59,18 +59,20 @@
           <p class="lead mb-5">
             Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
             Have you ever felt like Elon Musk, and you're trapped in a simulation?
-            Then r0b0p is the language for you. r0b0p is inspired by JavaScript, and is a fun
-            scripting language in which you can write complex programs while having a good time doing so.
+            Then r0b0p is the language for you! r0b0p is inspired by JavaScript, and is a fun,
+            dynamically typed scripting language in which you can write complex programs
+            while having a good time doing so.<br><br>
+            Notable features in r0b0p include:
           </p>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
           <span class="features-icon rounded-circle mx-auto mb-3">
-            <i class="icon-note"></i>
+            <i class="icon-list"></i>
           </span>
           <h4>
-            <strong>Scripting Language</strong>
+            <strong>Lists and Dictionaries</strong>
           </h4>
         </div>
         <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
@@ -78,15 +80,15 @@
             <i class="icon-star"></i>
           </span>
           <h4>
-            <strong>Dynamically Typed</strong>
+            <strong>String Interpolation</strong>
           </h4>
         </div>
         <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
           <span class="features-icon rounded-circle mx-auto mb-3">
-            <i class="icon-like"></i>
+            <i class="icon-bubble"></i>
           </span>
           <h4>
-            <strong>FUN!</strong>
+            <strong>Robotic-sounding Commands</strong>
           </h4>
         </div>
       </div>
@@ -96,15 +98,116 @@
 
   <!-- Example Programs -->
   <section class=" content-section bg-light" id="examples">
-    <div class="container text-center">
-      <div class="content-section-heading">
+    <div class="container">
+      <div class="content-section-heading text-center">
         <h2 class="mb-5">Example Programs</h2>
       </div>
-    </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3 class="text-center">GCD</h3>
+          <div class="offset-sm-2 col-sm-10">
+            <pre><code>
+PR0GRAM gcd[a, b] &lt;
+  PR3SUM1NG[b == 0] &lt;
+    G1V3 a; 
+  &gt;
+  G1V3 gcd[b, (a % b)];
+&gt;
+            </code></pre>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <h3 class="text-center">Fibonacci</h3>
+          <div class="offset-sm-2 col-sm-10">
+            <pre><code>
+PR0GRAM fibb[n] &lt; 
+  PR3SUM1NG[n &lt; = 2] &lt; 
+    G1V3 1;
+  &gt; 
+  3LS3 &lt; 
+    G1V3 fibb[n - 1] + fibb[n - 2];
+  &gt;
+&gt;                               
+           </code></pre>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <h3 class="text-center">FizzBuzz</h3>
+          <div class="offset-sm-2 col-sm-10">
+            <pre><code>
+C0UNT[i:1->21] &lt; 
+  PR3SUM1NG[i % 15 == 0] &lt; 
+    SP3AK["FizzBuzz"];
+  &gt; 3LS3 1F[i % 3 == 0] &lt; 
+    SP3AK["Fizz"];
+  &gt; 3LS3 1F[i % 5 == 0] &lt; 
+    SP3AK["Buzz"];
+  &gt; 3LS3 &lt; 
+    SP3AK[i];
+  &gt;
+&gt;
+            </code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <h3 class="text-center">Collatz</h3>
+          <div class="offset-sm-2 col-sm-10">
+            <pre><code>
+PR0GRAM collatzSteps[n] &lt; 
+  steps = 0; 
+  WH1L3[N0T (n == 1)] &lt; 
+    PR3SUM1NG[n % 2 == 0] &lt; 
+      n = n / 2;
+    &gt; 3LS3 &lt; 
+      n = (3 * n) + 1; 
+    &gt;
+    steps = steps + 1;
+  &gt;
+  G1V3 steps;
+&gt;
+            </code></pre>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <h3 class="text-center">Powers</h3>
+          <div class="col-sm-12">
+            <pre><code>
+PR0GRAM powers[base, limit, callback] &lt; 
+  current = 1;
+  i = 1; 
+  WH1L3[current &lt; = limit] &lt; 
+    callback[current]; 
+    current = base ** i; 
+    i = i + 1;
+  &gt;
+&gt;
+            </code></pre>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <h3 class="text-center">Average of Triples</h3>
+          <div class="col-sm-12">
+            <pre><code>
+PR0GRAM triple_averages[arr] &lt; 
+  averages = {}; 
+  arr_length = S1Z3[arr];
+  C0UNT[i:0->arr_length] &lt; 
+    ave = (R3TR13V3_AT[arr, i] + 
+          R3TR13V3_AT[arr, i + 1] + 
+          R3TR13V3_AT[arr, i + 2]) / 3; 
+    PLAC3_AT[averages, i, ave];
+  &gt;
+&gt;
+            </code></pre>
+          </div>
+        </div>
+      </div>
   </section>
 
   <!-- Developers -->
-  <section class="content-section bg-primary text-white text-center" id="developers">
+  <section class=" content-section bg-primary text-white text-center" id="developers">
     <div class="container">
       <div class="content-section-heading">
         <h3 class="text-secondary mb-0">r0b0p is brought to you by</h3>
@@ -112,21 +215,27 @@
       </div>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-          <img src="images/adriana.jpeg" class="developer-icon rounded-circle mx-auto mb-3"></img>
+          <a href="https://github.com/AdrianaDonkers">
+            <img src="images/adriana.jpeg" class="developer-icon rounded-circle mx-auto mb-3"></img>
+          </a>
           <h4>
             <strong>Adriana Donkers</strong>
           </h4>
           <p class="text-faded mb-0">AdrianaDonkers</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
-          <img src="images/maddie.jpeg" class="developer-icon rounded-circle mx-auto mb-3"></img>
+          <a href="https://github.com/mlouis2">
+            <img src="images/maddie.jpeg" class="developer-icon rounded-circle mx-auto mb-3"></img>
+          </a>
           <h4>
             <strong>Maddie Louis</strong>
           </h4>
           <p class="text-faded mb-0">mlouis2</p>
         </div>
         <div class="col-lg-4 col-md-6 mb-5 mb-md-0">
-          <img src="images/merissa.jpg" class="developer-icon rounded-circle mx-auto mb-3"></img>
+          <a href="https://github.com/hardlyfivefeet">
+            <img src="images/merissa.jpg" class="developer-icon rounded-circle mx-auto mb-3"></img>
+          </a>
           <h4>
             <strong>Merissa Tan</strong>
           </h4>
@@ -146,14 +255,9 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for this template -->
   <script src="js/index.js"></script>
 </body>
 
