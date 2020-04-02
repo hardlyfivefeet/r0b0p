@@ -249,7 +249,7 @@ function collatzSteps(n) {
 ```
 
 ```r0b0p
-PR0GRAM collatzSteps[n] <
+PR0GRAM collatz_steps[n] <
   steps = 0;
   WH1L3[N0T (n == 1)] <
     PR3SUM1NG[n % 2 == 0] <
@@ -328,7 +328,7 @@ PR0GRAM calculate_pi[num_darts] <
   G1V3 (4 * (num_darts_in_circle / num_darts));
 >
 
-PR0GRAM throwDarts[num_darts] <
+PR0GRAM throw_darts[num_darts] <
   circle_count = 0;
   C0UNT[darts_thrown:0->num_darts] <
     PR3SUM1NG[throw_dart[] < RADIUS] <
