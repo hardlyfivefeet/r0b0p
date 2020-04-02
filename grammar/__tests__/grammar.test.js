@@ -165,7 +165,7 @@ describe("some example programs", () => {
       G1V3 (4 * (num_darts_in_circle / num_darts));
     >
     
-    PR0GRAM throwDarts[num_darts] <
+    PR0GRAM throw_darts[num_darts] <
       circle_count = 0;
       C0UNT[darts_thrown:0->num_darts] <
         PR3SUM1NG[throw_dart[] < RADIUS] <
@@ -187,7 +187,7 @@ describe("some example programs", () => {
     assert(results.succeeded());
   });
   it("lets you do the collatz sequence", () => {
-    results = r0b0p.match(`PR0GRAM collatzSteps[n] <
+    results = r0b0p.match(`PR0GRAM collatz_steps[n] <
     steps = 0;
     WH1L3[N0T (n == 1)] <
       PR3SUM1NG[n % 2 == 0] <
