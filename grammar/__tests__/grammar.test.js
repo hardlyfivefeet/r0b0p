@@ -108,6 +108,14 @@ describe("strings", () => {
     results = r0b0p.match('x = "hello," + " world!";');
     assert(results.succeeded());
   });
+  it("lets us perform string interpolation", () => {
+    results = r0b0p.match("bananas = 3; SP3AK[\"I have 'bananas' bananas\"];");
+    assert(results.succeeded());
+    results = r0b0p.match(
+      "quote = \"Hello, world!\"; SP3AK[\"She said ''quote''\"];"
+    );
+    assert(results.succeeded());
+  });
 });
 
 describe("lists and dictionaries", () => {
