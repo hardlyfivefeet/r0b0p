@@ -43,7 +43,9 @@ console.log("Hello, world!");                 SP3AK["Hello, world!"];
 3 + 5                                         3 + 5
 10 - 3                                        10 - 3
 3 * 8                                         3 * 8
+3 ** 8                                        3 ** 8
 21 / 7                                        21 / 7
+21 % 7                                        21 % 7
 
 x && y                                        x && y
 x || y                                        x || y
