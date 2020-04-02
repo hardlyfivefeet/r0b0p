@@ -1,5 +1,13 @@
 const util = require("util");
-const { List, Dict, IntLit, FloatLit, Text, FuncDecl } = require("../ast");
+const {
+  List,
+  Dict,
+  IntLit,
+  FloatLit,
+  Text,
+  FuncDecl,
+  BoolLit
+} = require("../ast");
 
 function doCheck(condition, message) {
   if (!condition) {
@@ -17,13 +25,23 @@ module.exports = {
     doCheck(type.constructor === Dict, "Not a dict type");
   },
 
-  // Is the type of this expression an list type?
   isList(expression) {
     doCheck(expression.type.constructor === List, "Not a list");
   },
 
   isDict(expression) {
     doCheck(expression.type.constructor === Dict, "Not a dict");
+  },
+
+  isPrimitiveOrString(expression) {
+    doCheck(
+      expression.type === (IntLit || FloatLit || BoolLit || Text),
+      "not a primitive or string"
+    );
+  },
+
+  isNumber(expression) {
+    doCheck(expression.type === (IntLit || FloatLit), "Not a number");
   },
 
   isInteger(expression) {
@@ -34,14 +52,14 @@ module.exports = {
     doCheck(expression.type === FloatLit, "Not a float");
   },
 
-  // mustNotHaveAType(expression) {
-  //   doCheck(!expression.type, "Expression must not have a type");
-  // },
+  isText(expression) {
+    doCheck(expression.type === Text, "Not text!");
+  },
 
-  isIntegerOrString(expression) {
+  isNumberOrBool(expression) {
     doCheck(
-      expression.type === IntLit || expression.type === Text,
-      "Not an integer or string"
+      expression.type === (IntLit || FloatLit || BoolLit),
+      "Not a number or boolean"
     );
   },
 
@@ -54,12 +72,9 @@ module.exports = {
     doCheck(e1.type === e2.type, "Types must match exactly");
   },
 
-  // isNotReadOnly(lvalue) {
-  //   doCheck(
-  //     !(lvalue.constructor === IdExp && lvalue.ref.readOnly),
-  //     "Assignment to read-only variable"
-  //   );
-  // },
+  isNotReadOnly(lvalue) {
+    doCheck(!lvalue.ref.readOnly, "Assignment to read-only variable");
+  },
 
   fieldHasNotBeenUsed(field, usedFields) {
     doCheck(!usedFields.has(field), `Field ${field} already declared`);

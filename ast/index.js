@@ -52,8 +52,8 @@ class Conditional {
 }
 
 class ElseIfBlock {
-  constructor(exp, block) {
-    Object.assign(this, { exp, block });
+  constructor(condition, block) {
+    Object.assign(this, { condition, block });
   }
 }
 

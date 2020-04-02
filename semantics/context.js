@@ -61,10 +61,10 @@ class Context {
 
   // Adds a declaration to this context.
   add(declaration) {
-    if (this.locals.has(declaration.id)) {
-      throw new Error(`${declaration.id} already declared in this scope`);
+    if (this.locals.has(declaration.name)) {
+      throw new Error(`${declaration.name} already declared in this scope`);
     }
-    this.locals.set(declaration.id);
+    this.locals.set(declaration.name);
   }
 
   // Returns the entity bound to the given identifier, starting from this
