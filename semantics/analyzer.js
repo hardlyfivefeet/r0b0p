@@ -20,7 +20,8 @@ const {
   NegationExp,
   ParensExp,
   NotExp,
-  IntLit
+  IntLit,
+  Text
 } = require("../ast");
 const check = require("./check");
 const Context = require("./context");
@@ -30,7 +31,9 @@ module.exports = function(exp) {
 };
 
 Assignment.prototype.analyze = function(context) {
+  console.log("getting here in assignment analyze??1");
   this.id.analyze(context);
+  console.log("getting here in assignment analyze??2");
   this.exp.analyze(context);
   check.isNotReadOnly(this.exp);
 };
@@ -54,7 +57,6 @@ BinaryExp.prototype.analyze = function(context) {
 };
 
 FuncCall.prototype.analyze = function(context) {
-  //TODO! This is where we left off :)
   this.name = context.lookup(this.name);
   check.isFunction(this.name, "Attempt to call a non-function");
   this.params.forEach(param => param.analyze(context));
@@ -170,4 +172,9 @@ Return.prototype.analyze = function(context) {
 
 Print.prototype.analyze = function(context) {
   this.str.analyze(context);
+};
+
+Text.prototype.analyze = function(context) {
+  console.log("analyzing text! the text is " + this.value);
+  check.isText(this.value);
 };

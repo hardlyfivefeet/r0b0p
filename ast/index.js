@@ -117,6 +117,12 @@ class NotExp {
   }
 }
 
+// class Variable {
+//   constructor(id, value) {
+//     Object.assign(this, { id, value });
+//   }
+// }
+
 class IntLit {
   constructor(value) {
     this.value = +value;
