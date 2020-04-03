@@ -23,8 +23,8 @@ class Return {
 }
 
 class FuncDecl {
-  constructor(name, params, block) {
-    Object.assign(this, { name, params, block });
+  constructor(id, params, block) {
+    Object.assign(this, { id, params, block });
   }
 }
 
@@ -64,8 +64,8 @@ class ElseBlock {
 }
 
 class FuncCall {
-  constructor(name, params) {
-    Object.assign(this, { name, params });
+  constructor(id, params) {
+    Object.assign(this, { id, params });
   }
 }
 
@@ -116,12 +116,6 @@ class NotExp {
     Object.assign(this, { operand });
   }
 }
-
-// class Variable {
-//   constructor(id, value) {
-//     Object.assign(this, { id, value });
-//   }
-// }
 
 class IntLit {
   constructor(value) {

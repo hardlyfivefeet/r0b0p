@@ -20,8 +20,8 @@ const errors = [
   // ],
   // ["same key repeated", "y = {a: 1, a: 2};"],
   // ["no such key", "y = {a: 1, b: 2}; value = R3TR13V3[y, c];"],
-  // ["call of nonfunction", "x = 1; x[5];"],
-  ["editing a const variable", "a = 6; a = 92;"]
+  ["call of nonfunction", "x = 1; x[5];"],
+  ["editing a const variable", "A = 6; A = 92;"]
 ];
 
 describe("The semantic analyzer", () => {

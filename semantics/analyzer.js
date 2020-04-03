@@ -21,6 +21,7 @@ const {
   ParensExp,
   NotExp,
   IntLit,
+  FloatLit,
   Text
 } = require("../ast");
 const check = require("./check");
@@ -31,11 +32,19 @@ module.exports = function(exp) {
 };
 
 Assignment.prototype.analyze = function(context) {
-  console.log("getting here in assignment analyze??1");
-  this.id.analyze(context);
-  console.log("getting here in assignment analyze??2");
   this.exp.analyze(context);
-  check.isNotReadOnly(this.exp);
+  let initialized = true;
+  try {
+    context.lookup(this.id);
+  } catch (err) {
+    initialized = false;
+  }
+  if (initialized) {
+    check.isNotReadOnly(this.id);
+  }
+  console.log("check3");
+  context.add(this);
+  console.log("added to context!!!" + this.id);
 };
 
 BinaryExp.prototype.analyze = function(context) {
@@ -174,7 +183,8 @@ Print.prototype.analyze = function(context) {
   this.str.analyze(context);
 };
 
-Text.prototype.analyze = function(context) {
-  console.log("analyzing text! the text is " + this.value);
-  check.isText(this.value);
-};
+IntLit.prototype.analyze = function(context) {};
+
+FloatLit.prototype.analyze = function(context) {};
+
+Text.prototype.analyze = function(context) {};

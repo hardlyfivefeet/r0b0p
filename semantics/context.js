@@ -61,15 +61,15 @@ class Context {
 
   // Adds a declaration to this context.
   add(declaration) {
-    if (this.locals.has(declaration.name)) {
-      throw new Error(`${declaration.name} already declared in this scope`);
-    }
-    this.locals.set(declaration.name);
+    console.log("adding this to the context:");
+    console.log(declaration.id);
+    this.locals.set(declaration.id);
   }
 
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
   lookup(id) {
+    console.log("id that we are LOOKING UP is  " + id);
     for (let context = this; context !== null; context = context.parent) {
       if (context.locals.has(id)) {
         return context.locals.get(id);

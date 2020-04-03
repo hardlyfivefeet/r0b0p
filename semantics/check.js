@@ -72,8 +72,8 @@ module.exports = {
     doCheck(e1.type === e2.type, "Types must match exactly");
   },
 
-  isNotReadOnly(lvalue) {
-    doCheck(!lvalue.ref.readOnly, "Assignment to read-only variable");
+  isNotReadOnly(id) {
+    doCheck(id !== id.toUpperCase(), `Assignment to read-only variable`);
   },
 
   fieldHasNotBeenUsed(field, usedFields) {
