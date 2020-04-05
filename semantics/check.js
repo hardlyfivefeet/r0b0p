@@ -6,7 +6,8 @@ const {
   FloatLit,
   Text,
   FuncDecl,
-  BoolLit
+  BoolLit,
+  Id,
 } = require("../ast");
 
 function doCheck(condition, message) {
@@ -16,15 +17,7 @@ function doCheck(condition, message) {
 }
 
 module.exports = {
-  // Is this type an list type?
-  isListType(type) {
-    doCheck(type.constructor === List, "Not a list type");
-  },
-
-  isDictType(type) {
-    doCheck(type.constructor === Dict, "Not a dict type");
-  },
-
+  //need to work on our checks !
   isList(expression) {
     doCheck(expression.type.constructor === List, "Not a list");
   },
@@ -34,6 +27,7 @@ module.exports = {
   },
 
   isPrimitiveOrString(expression) {
+    console.log("the type is ", expression.type);
     doCheck(
       expression.type === (IntLit || FloatLit || BoolLit || Text),
       "not a primitive or string"
@@ -67,11 +61,6 @@ module.exports = {
     doCheck(value.constructor === FuncDecl, "Not a function");
   },
 
-  // Are two types exactly the same?
-  expressionsHaveTheSameType(e1, e2) {
-    doCheck(e1.type === e2.type, "Types must match exactly");
-  },
-
   isNotReadOnly(id) {
     doCheck(id !== id.toUpperCase(), `Assignment to read-only variable`);
   },
@@ -80,10 +69,6 @@ module.exports = {
     doCheck(!usedFields.has(field), `Field ${field} already declared`);
   },
 
-  // inLoop(context, keyword) {
-  //   doCheck(context.inLoop, `${keyword} can only be used in a loop`);
-  // },
-
   // Same number of args and params; all types compatible
   legalArguments(args, params) {
     doCheck(
@@ -91,5 +76,5 @@ module.exports = {
       `Expected ${params.length} args in call, got ${args.length}`
     );
     args.forEach((arg, i) => this.isAssignableTo(arg, params[i].type));
-  }
+  },
 };

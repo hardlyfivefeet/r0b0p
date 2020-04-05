@@ -46,7 +46,7 @@ class Conditional {
       condition,
       block,
       elseIfBlocks,
-      elseBlock
+      elseBlock,
     });
   }
 }
@@ -90,6 +90,12 @@ class Dict {
 class KeyValue {
   constructor(key, value) {
     Object.assign(this, { key, value });
+  }
+}
+
+class Key {
+  constructor(name) {
+    Object.assign(this, { name });
   }
 }
 
@@ -141,6 +147,12 @@ class Text {
   }
 }
 
+class Id {
+  constructor(ref) {
+    Object.assign(this, { ref });
+  }
+}
+
 module.exports = {
   Program,
   Block,
@@ -157,6 +169,7 @@ module.exports = {
   List,
   Dict,
   KeyValue,
+  Key,
   BinaryExp,
   NegationExp,
   ParensExp,
@@ -164,5 +177,6 @@ module.exports = {
   IntLit,
   FloatLit,
   BoolLit,
-  Text
+  Text,
+  Id,
 };

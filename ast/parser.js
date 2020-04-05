@@ -17,6 +17,7 @@ const {
   List,
   Dict,
   KeyValue,
+  Key,
   Text,
   BinaryExp,
   NegationExp,
@@ -24,7 +25,8 @@ const {
   NotExp,
   IntLit,
   FloatLit,
-  BoolLit
+  BoolLit,
+  Id,
 } = require("../ast");
 
 const grammar = ohm.grammar(
@@ -88,6 +90,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   KeyValue(id, _colon, exp) {
     return new KeyValue(id.ast(), exp.ast());
   },
+  Key(name) {
+    return new Key(name.ast());
+  },
   text(_lq, chars, _rq) {
     return new Text(chars.ast().join(""));
   },
@@ -118,6 +123,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Statement_simple(statement, _semicolon) {
     return statement.ast();
   },
+  Id(value) {
+    return new Id(value.ast());
+  },
   id(_firstChar, _restChars) {
     return this.sourceString;
   },
@@ -135,11 +143,11 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   NonemptyListOf(first, _separator, rest) {
     return [first.ast(), ...rest.ast()];
-  }
+  },
 });
 /* eslint-enable no-unused-vars */
 
-module.exports = text => {
+module.exports = (text) => {
   const match = grammar.match(text);
   if (!match.succeeded()) {
     throw new Error(`Syntax Error: ${match.message}`);

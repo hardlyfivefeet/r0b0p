@@ -28,7 +28,7 @@ r0b0p {
               | Exp7
   Exp7        = "(" Exp ")" --parens
               | FuncCall
-              | id
+              | Id
               | random
               | number
               | text
@@ -38,13 +38,13 @@ r0b0p {
               | undefined
               
   Return      = "G1V3" Exp
-  Assignment  = id "=" Exp
+  Assignment  = Id "=" Exp
 
   WhileLoop   = "WH1L3" "[" Exp "]" Block
-  ForLoop     = "C0UNT" "[" (id ":")? (number | id) "->" (number | id) "]" Block
+  ForLoop     = "C0UNT" "[" (Id ":")? (number | Id) "->" (number | Id) "]" Block
 
-  FuncDecl    = "PR0GRAM" id "[" (ListOf<id, ",">)? "]" Block
-  FuncCall    = (id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
+  FuncDecl    = "PR0GRAM" Id "[" (ListOf<Id, ",">)? "]" Block
+  FuncCall    = (Id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ElseIfBlock* ElseBlock?
   ElseIfBlock = "3LS3 1F" "[" Exp "]" Block
   ElseBlock   = "3LS3" Block
@@ -52,8 +52,10 @@ r0b0p {
 
   List        = "{" (ListOf<Exp, ",">)? "}"
   Dict        = "{" ListOf<KeyValue, ",">? "}"
-  KeyValue    = (id | text) ":" Exp
+  KeyValue    = (Key | text) ":" Exp
   
+  Id          = id
+  Key         = id
   id          = ~keyword letter (alnum | "_")*
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"

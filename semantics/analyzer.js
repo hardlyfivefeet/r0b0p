@@ -22,65 +22,76 @@ const {
   NotExp,
   IntLit,
   FloatLit,
-  Text
+  Text,
+  Id,
 } = require("../ast");
 const check = require("./check");
 const Context = require("./context");
 
-module.exports = function(exp) {
+module.exports = function (exp) {
   exp.analyze(Context.INITIAL);
 };
 
-Assignment.prototype.analyze = function(context) {
+Assignment.prototype.analyze = function (context) {
+  check.isPrimitiveOrString(3);
+  console.log("test1");
   this.exp.analyze(context);
+  console.log("test2");
   let initialized = true;
   try {
-    context.lookup(this.id);
+    context.lookup(this.id.ref);
   } catch (err) {
     initialized = false;
   }
   if (initialized) {
-    check.isNotReadOnly(this.id);
+    check.isNotReadOnly(this.id.ref);
   }
-  console.log("check3");
-  context.add(this);
-  console.log("added to context!!!" + this.id);
+  console.log("test3");
+  context.add(this.id.ref);
+  console.log("test4");
 };
 
-BinaryExp.prototype.analyze = function(context) {
+BinaryExp.prototype.analyze = function (context) {
+  console.log("test5");
+  console.log("this left is ");
+  console.log(this.left);
   this.left.analyze(context);
+  console.log("test5.5");
   this.right.analyze(context);
+  console.log("test6");
 
-  if (/\/|*|**|%/.test(this.op)) {
+  if (/\/|\*|\*\*|%/.test(this.op)) {
     check.isNumber(this.left);
     check.isNumber(this.right);
   } else if (/-|&&|\|\|/.test(this.op)) {
     check.isNumberOrBool(this.left);
     check.isNumberOrBool(this.right);
-  } else if (/+/.test(this.op)) {
+  } else if (/[+]/.test(this.op)) {
+    console.log("plus guy woot");
     check.isPrimitiveOrString(this.left);
     check.isPrimitiveOrString(this.right);
   } else if (/==|>=?|<=?/.test(this.op)) {
     check.expressionsHaveTheSameType(this.left, this.right);
   }
+  console.log("test7");
 };
 
-FuncCall.prototype.analyze = function(context) {
+FuncCall.prototype.analyze = function (context) {
   this.name = context.lookup(this.name);
   check.isFunction(this.name, "Attempt to call a non-function");
-  this.params.forEach(param => param.analyze(context));
+  this.params.forEach((param) => param.analyze(context));
   check.legalArguments(this.params, this.name.params);
 };
 
-Program.prototype.analyze = function(context) {
-  this.statements.forEach(statement => statement.analyze(context));
+Program.prototype.analyze = function (context) {
+  this.statements.forEach((statement) => statement.analyze(context));
 };
 
-Block.prototype.analyze = function(context) {
-  this.statements.forEach(statement => statement.analyze(context));
+Block.prototype.analyze = function (context) {
+  this.statements.forEach((statement) => statement.analyze(context));
 };
 
-ForLoop.prototype.analyze = function(context) {
+ForLoop.prototype.analyze = function (context) {
   this.start.analyze(context);
   check.isInteger(this.start, "Start bound in for");
   this.end.analyze(context);
@@ -94,97 +105,102 @@ ForLoop.prototype.analyze = function(context) {
 // recursion. First we have to do semantic analysis just on the signature
 // (including the return type). This is so other functions that may be declared
 // before this one have calls to this one checked.
-FuncDecl.prototype.analyzeSignature = function(context) {
+FuncDecl.prototype.analyzeSignature = function (context) {
   this.bodyContext = context.createChildContextForFunctionBody();
-  this.params.forEach(p => p.analyze(this.bodyContext));
+  this.params.forEach((p) => p.analyze(this.bodyContext));
 };
 
-FuncDecl.prototype.analyze = function() {
+FuncDecl.prototype.analyze = function () {
   this.block.analyze(this.bodyContext);
   delete this.bodyContext; // This was only temporary, delete to keep output clean.
 };
 
 // condition, block, elseIfBlocks, elseBlock
-Conditional.prototype.analyze = function(context) {
+Conditional.prototype.analyze = function (context) {
   this.condition.analyze(context);
   check.isPrimitiveOrString(this.condition, "Test in if");
   this.consequent.analyze(context);
   if (this.elseIfBlocks) {
-    this.elseIfBlocks.forEach(block => block.analyze(context));
+    this.elseIfBlocks.forEach((block) => block.analyze(context));
   }
   if (this.elseBlock) {
     this.elseBlock.analyze(context);
   }
 };
 
-ElseIfBlock.prototype.analyze = function(context) {
+ElseIfBlock.prototype.analyze = function (context) {
   this.condition.analyze(context);
   check.isPrimitiveOrString(this.condition, "Test condition");
   this.block.analyze(context);
 };
 
-ElseBlock.prototype.analyze = function(context) {
+ElseBlock.prototype.analyze = function (context) {
   this.block.analyze(context);
 };
 
-NegationExp.prototype.analyze = function(context) {
+NegationExp.prototype.analyze = function (context) {
   this.operand.analyze(context);
   check.isNumber(this.operand, "Operand of negation");
 };
 
-ParensExp.prototype.analyze = function(context) {
+ParensExp.prototype.analyze = function (context) {
   this.exp.analyze(context);
 };
 
-NotExp.prototype.analyze = function(context) {
+NotExp.prototype.analyze = function (context) {
   this.operand.analyze(context);
   check.isNumberOrBool(this.operand, "Operand of not");
 };
 
-Dict.prototype.analyze = function(context) {
+Dict.prototype.analyze = function (context) {
   const usedFields = new Set();
-  this.pairs.forEach(pair => {
+  this.pairs.forEach((pair) => {
     check.fieldHasNotBeenUsed(pair.key, usedFields);
     usedFields.add(pair.key);
     pair.analyze(context);
   });
 };
 
-Dict.prototype.getFieldForId = function(id) {
-  const pair = this.pairs.find(f => f.key === id);
+Dict.prototype.getFieldForId = function (id) {
+  const pair = this.pairs.find((f) => f.key === id);
   if (!pair) {
     throw new Error("No such pair");
   }
   return pair;
 };
 
-KeyValue.prototype.analyze = function(context) {
+KeyValue.prototype.analyze = function (context) {
   this.key.analyze(context);
   this.value.analyze(context);
 };
 
-List.prototype.analyze = function(context) {
-  this.items.forEach(item => {
+List.prototype.analyze = function (context) {
+  this.items.forEach((item) => {
     item.analyze(context);
   });
 };
 
-WhileLoop.prototype.analyze = function(context) {
+WhileLoop.prototype.analyze = function (context) {
   this.condition.analyze(context);
   check.isPrimitiveOrString(this.condition, "Test in while");
   this.block.analyze(context.createChildContextForLoop());
 };
 
-Return.prototype.analyze = function(context) {
+Return.prototype.analyze = function (context) {
   this.exp.analyze(context);
 };
 
-Print.prototype.analyze = function(context) {
+Print.prototype.analyze = function (context) {
   this.str.analyze(context);
 };
 
-IntLit.prototype.analyze = function(context) {};
+IntLit.prototype.analyze = function (context) {};
 
-FloatLit.prototype.analyze = function(context) {};
+FloatLit.prototype.analyze = function (context) {};
 
-Text.prototype.analyze = function(context) {};
+Text.prototype.analyze = function (context) {};
+
+Id.prototype.analyze = function (context) {
+  console.log("analyzing id!");
+  this.ref = context.lookup(this.ref);
+};

@@ -1,1 +1,1 @@
-SP3AK["Hello, world"];
+x = 3; y = x + 6;
