@@ -7,12 +7,11 @@ const {
   Text,
   FuncDecl,
   BoolLit,
-  Id,
 } = require("../ast");
 
 function doCheck(condition, message) {
   if (!condition) {
-    // console.log("uh oh error ", message);
+    console.log("uh oh error ", message);
     throw new Error(message);
   }
 }
@@ -20,11 +19,11 @@ function doCheck(condition, message) {
 module.exports = {
   //need to work on our checks !
   isList(expression) {
-    doCheck(expression.type.constructor === List, "Not a list");
+    doCheck(expression.constructor === List, "Not a list");
   },
 
   isDict(expression) {
-    doCheck(expression.type.constructor === Dict, "Not a dict");
+    doCheck(expression.constructor === Dict, "Not a dict");
   },
 
   isPrimitiveOrString(expression) {
@@ -37,30 +36,30 @@ module.exports = {
   },
 
   isNumber(expression) {
-    doCheck(expression.type === (IntLit || FloatLit), "Not a number");
+    doCheck(expression.constructor === (IntLit || FloatLit), "Not a number");
   },
 
   isInteger(expression) {
-    doCheck(expression.type === IntLit, "Not an integer");
+    doCheck(expression.constructor === IntLit, "Not an integer");
   },
 
   isFloat(expression) {
-    doCheck(expression.type === FloatLit, "Not a float");
+    doCheck(expression.constructor === FloatLit, "Not a float");
   },
 
   isText(expression) {
-    doCheck(expression.type === Text, "Not text!");
+    doCheck(expression.constructor === Text, "Not text!");
   },
 
   isNumberOrBool(expression) {
     doCheck(
-      expression.type === (IntLit || FloatLit || BoolLit),
+      expression.constructor === (IntLit || FloatLit || BoolLit),
       "Not a number or boolean"
     );
   },
 
-  isFunction(value) {
-    doCheck(value.constructor === FuncDecl, "Not a function");
+  isFunction(id) {
+    doCheck(id.constructor === FuncDecl, "Not a function");
   },
 
   isNotReadOnly(id) {
@@ -71,12 +70,13 @@ module.exports = {
     doCheck(!usedFields.has(field), `Field ${field} already declared`);
   },
 
-  // Same number of args and params; all types compatible
+  // Same number of args and params
   legalArguments(args, params) {
+    // console.log("args is ", args);
+    // console.log("params is ", params);
     doCheck(
       args.length === params.length,
       `Expected ${params.length} args in call, got ${args.length}`
     );
-    args.forEach((arg, i) => this.isAssignableTo(arg, params[i].type));
   },
 };

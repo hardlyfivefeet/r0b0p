@@ -63,11 +63,19 @@ BinaryExp.prototype.analyze = function (context) {
   }
 };
 
+FuncDecl.prototype.analyze = function (context) {
+  this.bodyContext = context.createChildContextForFunctionBody();
+  // this.params.forEach((p) => p.analyze(this.bodyContext));   // DO WE NEED THIS??
+  this.block.analyze(this.bodyContext);
+  delete this.bodyContext; // This was only temporary, delete to keep output clean.
+  context.add(this.id.ref, this);
+};
+
 FuncCall.prototype.analyze = function (context) {
-  this.name = context.lookup(this.name);
-  check.isFunction(this.name, "Attempt to call a non-function");
+  this.id = context.lookup(this.id.ref);
+  check.isFunction(this.id, "Attempt to call a non-function");
   this.params.forEach((param) => param.analyze(context));
-  check.legalArguments(this.params, this.name.params);
+  check.legalArguments(this.params, this.id.params);
 };
 
 Program.prototype.analyze = function (context) {
@@ -86,20 +94,6 @@ ForLoop.prototype.analyze = function (context) {
   const bodyContext = context.createChildContextForLoop();
   bodyContext.add(new IntLit(this.start));
   this.block.analyze(bodyContext);
-};
-
-// Function analysis is broken up into two parts in order to support (nutual)
-// recursion. First we have to do semantic analysis just on the signature
-// (including the return type). This is so other functions that may be declared
-// before this one have calls to this one checked.
-FuncDecl.prototype.analyzeSignature = function (context) {
-  this.bodyContext = context.createChildContextForFunctionBody();
-  this.params.forEach((p) => p.analyze(this.bodyContext));
-};
-
-FuncDecl.prototype.analyze = function () {
-  this.block.analyze(this.bodyContext);
-  delete this.bodyContext; // This was only temporary, delete to keep output clean.
 };
 
 // condition, block, elseIfBlocks, elseBlock

@@ -75,8 +75,8 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   ElseBlock(_else, block) {
     return new ElseBlock(block.ast());
   },
-  FuncCall(name, _lb, params, _rb) {
-    return new FuncCall(name.ast(), arrayToNullable(params.ast()));
+  FuncCall(id, _lb, params, _rb) {
+    return new FuncCall(id.ast(), arrayToNullable(params.ast()));
   },
   Print(_speak, _lb, exp, _rb) {
     return new Print(exp.ast());
@@ -143,6 +143,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   NonemptyListOf(first, _separator, rest) {
     return [first.ast(), ...rest.ast()];
+  },
+  EmptyListOf() {
+    return [];
   },
 });
 /* eslint-enable no-unused-vars */
