@@ -12,6 +12,7 @@ const {
 
 function doCheck(condition, message) {
   if (!condition) {
+    // console.log("uh oh error ", message);
     throw new Error(message);
   }
 }
@@ -27,9 +28,10 @@ module.exports = {
   },
 
   isPrimitiveOrString(expression) {
-    console.log("the type is ", expression.type);
     doCheck(
-      expression.type === (IntLit || FloatLit || BoolLit || Text),
+      expression.constructor === (IntLit || FloatLit || BoolLit || Text) ||
+        expression.value.constructor ===
+          (IntLit || FloatLit || BoolLit || Text),
       "not a primitive or string"
     );
   },

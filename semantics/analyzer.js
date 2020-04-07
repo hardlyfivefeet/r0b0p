@@ -33,10 +33,7 @@ module.exports = function (exp) {
 };
 
 Assignment.prototype.analyze = function (context) {
-  check.isPrimitiveOrString(3);
-  console.log("test1");
   this.exp.analyze(context);
-  console.log("test2");
   let initialized = true;
   try {
     context.lookup(this.id.ref);
@@ -46,20 +43,12 @@ Assignment.prototype.analyze = function (context) {
   if (initialized) {
     check.isNotReadOnly(this.id.ref);
   }
-  console.log("test3");
-  context.add(this.id.ref);
-  console.log("test4");
+  context.add(this.id.ref, this.exp);
 };
 
 BinaryExp.prototype.analyze = function (context) {
-  console.log("test5");
-  console.log("this left is ");
-  console.log(this.left);
   this.left.analyze(context);
-  console.log("test5.5");
   this.right.analyze(context);
-  console.log("test6");
-
   if (/\/|\*|\*\*|%/.test(this.op)) {
     check.isNumber(this.left);
     check.isNumber(this.right);
@@ -67,13 +56,11 @@ BinaryExp.prototype.analyze = function (context) {
     check.isNumberOrBool(this.left);
     check.isNumberOrBool(this.right);
   } else if (/[+]/.test(this.op)) {
-    console.log("plus guy woot");
     check.isPrimitiveOrString(this.left);
     check.isPrimitiveOrString(this.right);
   } else if (/==|>=?|<=?/.test(this.op)) {
     check.expressionsHaveTheSameType(this.left, this.right);
   }
-  console.log("test7");
 };
 
 FuncCall.prototype.analyze = function (context) {
@@ -201,6 +188,6 @@ FloatLit.prototype.analyze = function (context) {};
 Text.prototype.analyze = function (context) {};
 
 Id.prototype.analyze = function (context) {
-  console.log("analyzing id!");
-  this.ref = context.lookup(this.ref);
+  // Kind of a hack...
+  this.value = context.lookup(this.ref);
 };

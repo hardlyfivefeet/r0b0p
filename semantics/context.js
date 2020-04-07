@@ -60,17 +60,16 @@ class Context {
   }
 
   // Adds a id to this context.
-  add(id) {
-    console.log("adding this id:");
-    console.log(id);
-    this.locals.set(id);
+  add(id, entity) {
+    // console.log("adding this id: ", id);
+    // console.log("the entity is: ", entity);
+    this.locals.set(id, entity);
   }
 
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
   lookup(id) {
-    console.log("looking up this id:");
-    console.log(id);
+    // console.log("looking up this id: ", id);
     for (let context = this; context !== null; context = context.parent) {
       if (context.locals.has(id)) {
         return context.locals.get(id);
