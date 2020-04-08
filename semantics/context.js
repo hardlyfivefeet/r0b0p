@@ -32,7 +32,8 @@ class Context {
       parent,
       currentFunction,
       inLoop,
-      locals: new Map(),
+      locals: new Set(),
+      functions: new Map(), //maps each function name to the num of params, or the entity itself
     });
   }
 
@@ -60,28 +61,40 @@ class Context {
   }
 
   // Adds a id to this context.
-  add(id, entity) {
-    // console.log("adding this id: ", id);
-    // console.log("the entity is: ", entity);
-    this.locals.set(id, entity);
+  add(id) {
+    this.locals.add(id);
+  }
+
+  addFunction(id, func) {
+    this.functions.set(id, func);
   }
 
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
   lookup(id) {
-    // console.log("looking up this id: ", id);
     for (let context = this; context !== null; context = context.parent) {
       if (context.locals.has(id)) {
-        return context.locals.get(id);
+        return id;
       }
     }
+    console.log("throwing error for undeclared id");
+    throw new Error(`Identifier ${id} has not been declared`);
+  }
+
+  lookupFunction(id) {
+    for (let context = this; context !== null; context = context.parent) {
+      if (context.functions.has(id)) {
+        return context.functions.get(id);
+      }
+    }
+    console.log("throwing error for undeclared function");
     throw new Error(`Identifier ${id} has not been declared`);
   }
 }
 
 Context.INITIAL = new Context();
 [...standardFunctions].forEach((entity) => {
-  // Context.INITIAL.add(entity.id);
+  Context.INITIAL.add(entity.id);
 });
 
 module.exports = Context;

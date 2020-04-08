@@ -43,39 +43,26 @@ Assignment.prototype.analyze = function (context) {
   if (initialized) {
     check.isNotReadOnly(this.id.ref);
   }
-  context.add(this.id.ref, this.exp);
+  context.add(this.id.ref);
 };
 
 BinaryExp.prototype.analyze = function (context) {
   this.left.analyze(context);
   this.right.analyze(context);
-  if (/\/|\*|\*\*|%/.test(this.op)) {
-    check.isNumber(this.left);
-    check.isNumber(this.right);
-  } else if (/-|&&|\|\|/.test(this.op)) {
-    check.isNumberOrBool(this.left);
-    check.isNumberOrBool(this.right);
-  } else if (/[+]/.test(this.op)) {
-    check.isPrimitiveOrString(this.left);
-    check.isPrimitiveOrString(this.right);
-  } else if (/==|>=?|<=?/.test(this.op)) {
-    check.expressionsHaveTheSameType(this.left, this.right);
-  }
 };
 
 FuncDecl.prototype.analyze = function (context) {
   this.bodyContext = context.createChildContextForFunctionBody();
-  // this.params.forEach((p) => p.analyze(this.bodyContext));   // DO WE NEED THIS??
+  this.params.forEach((p) => this.bodyContext.add(p.ref));
   this.block.analyze(this.bodyContext);
   delete this.bodyContext; // This was only temporary, delete to keep output clean.
-  context.add(this.id.ref, this);
+  context.addFunction(this.id.ref, this);
 };
 
 FuncCall.prototype.analyze = function (context) {
-  this.id = context.lookup(this.id.ref);
-  check.isFunction(this.id, "Attempt to call a non-function");
+  this.id = context.lookupFunction(this.id.ref);
   this.params.forEach((param) => param.analyze(context));
-  check.legalArguments(this.params, this.id.params);
+  check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
 };
 
 Program.prototype.analyze = function (context) {
@@ -88,18 +75,17 @@ Block.prototype.analyze = function (context) {
 
 ForLoop.prototype.analyze = function (context) {
   this.start.analyze(context);
-  check.isInteger(this.start, "Start bound in for");
   this.end.analyze(context);
-  check.isInteger(this.end, "High bound in for");
   const bodyContext = context.createChildContextForLoop();
-  bodyContext.add(new IntLit(this.start));
+  if (this.id) {
+    //If there is an id assigned to the iterator variable (aka i:1->50)
+    bodyContext.add(this.id.ref);
+  }
   this.block.analyze(bodyContext);
 };
 
-// condition, block, elseIfBlocks, elseBlock
 Conditional.prototype.analyze = function (context) {
   this.condition.analyze(context);
-  check.isPrimitiveOrString(this.condition, "Test in if");
   this.consequent.analyze(context);
   if (this.elseIfBlocks) {
     this.elseIfBlocks.forEach((block) => block.analyze(context));
@@ -111,7 +97,6 @@ Conditional.prototype.analyze = function (context) {
 
 ElseIfBlock.prototype.analyze = function (context) {
   this.condition.analyze(context);
-  check.isPrimitiveOrString(this.condition, "Test condition");
   this.block.analyze(context);
 };
 
@@ -121,7 +106,6 @@ ElseBlock.prototype.analyze = function (context) {
 
 NegationExp.prototype.analyze = function (context) {
   this.operand.analyze(context);
-  check.isNumber(this.operand, "Operand of negation");
 };
 
 ParensExp.prototype.analyze = function (context) {
@@ -130,7 +114,6 @@ ParensExp.prototype.analyze = function (context) {
 
 NotExp.prototype.analyze = function (context) {
   this.operand.analyze(context);
-  check.isNumberOrBool(this.operand, "Operand of not");
 };
 
 Dict.prototype.analyze = function (context) {
@@ -163,7 +146,6 @@ List.prototype.analyze = function (context) {
 
 WhileLoop.prototype.analyze = function (context) {
   this.condition.analyze(context);
-  check.isPrimitiveOrString(this.condition, "Test in while");
   this.block.analyze(context.createChildContextForLoop());
 };
 
@@ -182,6 +164,6 @@ FloatLit.prototype.analyze = function (context) {};
 Text.prototype.analyze = function (context) {};
 
 Id.prototype.analyze = function (context) {
-  // Kind of a hack...
+  // Kind of a hack... ¯\_(ツ)_/¯
   this.value = context.lookup(this.ref);
 };

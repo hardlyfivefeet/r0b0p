@@ -17,3 +17,7 @@ List of semantic checks to keep in mind:
 - number of arguments = number of parameters
 - scope rules
 - public/private rules
+
+LIST OF QUESTIONS/problems:
+
+1. Do we need to add an IntLit to the for loop context if there is no ID assigned to it?
