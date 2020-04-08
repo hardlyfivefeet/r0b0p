@@ -20,6 +20,7 @@ const {
   NegationExp,
   ParensExp,
   NotExp,
+  BoolLit,
   IntLit,
   FloatLit,
   Text,
@@ -52,6 +53,7 @@ BinaryExp.prototype.analyze = function (context) {
 };
 
 FuncDecl.prototype.analyze = function (context) {
+  console.log("analyzing func decl! this is ", this);
   this.bodyContext = context.createChildContextForFunctionBody();
   this.params.forEach((p) => this.bodyContext.add(p.ref));
   this.block.analyze(this.bodyContext);
@@ -60,7 +62,8 @@ FuncDecl.prototype.analyze = function (context) {
 };
 
 FuncCall.prototype.analyze = function (context) {
-  this.id = context.lookupFunction(this.id.ref);
+  console.log("analyzing func call! this is", this);
+  this.id = context.lookupFunction(this.id.ref || this.id); //Hacky lol whoops
   this.params.forEach((param) => param.analyze(context));
   check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
 };
@@ -77,6 +80,7 @@ ForLoop.prototype.analyze = function (context) {
   this.start.analyze(context);
   this.end.analyze(context);
   const bodyContext = context.createChildContextForLoop();
+  console.log("this is ", this);
   if (this.id) {
     //If there is an id assigned to the iterator variable (aka i:1->50)
     bodyContext.add(this.id.ref);
@@ -86,7 +90,8 @@ ForLoop.prototype.analyze = function (context) {
 
 Conditional.prototype.analyze = function (context) {
   this.condition.analyze(context);
-  this.consequent.analyze(context);
+  this.block.analyze(context);
+
   if (this.elseIfBlocks) {
     this.elseIfBlocks.forEach((block) => block.analyze(context));
   }
@@ -156,6 +161,8 @@ Return.prototype.analyze = function (context) {
 Print.prototype.analyze = function (context) {
   this.str.analyze(context);
 };
+
+BoolLit.prototype.analyze = function (context) {};
 
 IntLit.prototype.analyze = function (context) {};
 

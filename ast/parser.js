@@ -59,7 +59,12 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new WhileLoop(condition.ast(), block.ast());
   },
   ForLoop(_count, _lb, id, _colon, start, _arrow, end, _rb, block) {
-    return new ForLoop(id.ast(), start.ast(), end.ast(), block.ast());
+    return new ForLoop(
+      arrayToNullable(id.ast()),
+      start.ast(),
+      end.ast(),
+      block.ast()
+    );
   },
   Conditional(_if, _lb, condition, _rb, block, elseIfBlock, elseBlock) {
     return new Conditional(
@@ -95,6 +100,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   text(_lq, chars, _rq) {
     return new Text(chars.ast().join(""));
+  },
+  escape(_escape, _value) {
+    return this.sourceString;
   },
   Exp_binary(left, op, right) {
     return new BinaryExp(op.ast(), left.ast(), right.ast());

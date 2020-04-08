@@ -66,6 +66,7 @@ class Context {
   }
 
   addFunction(id, func) {
+    // console.log("the id that we are adding is ", id);
     this.functions.set(id, func);
   }
 
@@ -77,24 +78,25 @@ class Context {
         return id;
       }
     }
-    console.log("throwing error for undeclared id");
+    // console.log("throwing error for undeclared id");
     throw new Error(`Identifier ${id} has not been declared`);
   }
 
   lookupFunction(id) {
+    // console.log("the id that we are looking up is ", id);
     for (let context = this; context !== null; context = context.parent) {
       if (context.functions.has(id)) {
         return context.functions.get(id);
       }
     }
-    console.log("throwing error for undeclared function");
-    throw new Error(`Identifier ${id} has not been declared`);
+    // console.log("throwing error for undeclared function");
+    throw new Error(`Function ${id} has not been declared`);
   }
 }
 
 Context.INITIAL = new Context();
 [...standardFunctions].forEach((entity) => {
-  Context.INITIAL.add(entity.id);
+  Context.INITIAL.addFunction(entity.id.ref, entity);
 });
 
 module.exports = Context;

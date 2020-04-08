@@ -1,4 +1,4 @@
-const { FuncDecl } = require("../ast");
+const { FuncDecl, Id } = require("../ast");
 
 const standardFunctions = [
   new FuncDecl("SQRT", ["n"]),
@@ -13,11 +13,11 @@ const standardFunctions = [
   new FuncDecl("PLAC3", ["dict", "key", "value"]),
   new FuncDecl("D1SCARD", ["dict", "key"]),
   new FuncDecl("R3TR13V3", ["dict", "key"]),
-  new FuncDecl("C0D3S", ["dict"])
+  new FuncDecl("C0D3S", ["dict"]),
 ];
 
 /* eslint-disable no-param-reassign */
-standardFunctions.forEach(f => {
+standardFunctions.forEach((f) => {
   f.builtin = true;
 });
 /* eslint-enable no-param-reassign */

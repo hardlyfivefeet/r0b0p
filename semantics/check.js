@@ -2,7 +2,7 @@ const util = require("util");
 const {} = require("../ast");
 
 function doCheck(condition, message) {
-  console.log("the message from the error is " + message);
+  // console.log("the message from the error is " + message);
   if (!condition) {
     throw new Error(message);
   }

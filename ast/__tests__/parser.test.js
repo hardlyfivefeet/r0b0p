@@ -112,7 +112,7 @@ const fixture = {
     new Program([
       new Assignment(new Id("x_is_even"), new BoolLit("b0p")),
       new ForLoop(
-        [new Id("x")],
+        new Id("x"),
         new IntLit(0),
         new IntLit("5"),
         new Block([

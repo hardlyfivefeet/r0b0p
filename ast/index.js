@@ -24,7 +24,21 @@ class Return {
 
 class FuncDecl {
   constructor(id, params, block) {
+    //For built in functions, since their names are keywords
+    if (id.constructor !== Id) {
+      id = new Id(id);
+    }
     Object.assign(this, { id, params, block });
+  }
+}
+
+class FuncCall {
+  //For built in functions, since their names are keywords
+  constructor(id, params) {
+    if (id.constructor !== Id) {
+      id = new Id(id);
+    }
+    Object.assign(this, { id, params });
   }
 }
 
@@ -60,12 +74,6 @@ class ElseIfBlock {
 class ElseBlock {
   constructor(block) {
     Object.assign(this, { block });
-  }
-}
-
-class FuncCall {
-  constructor(id, params) {
-    Object.assign(this, { id, params });
   }
 }
 

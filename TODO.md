@@ -21,3 +21,5 @@ List of semantic checks to keep in mind:
 LIST OF QUESTIONS/problems:
 
 1. Do we need to add an IntLit to the for loop context if there is no ID assigned to it?
+2. think about scope
+3. change id 'ref' to 'name' cause that is nicer
