@@ -51,6 +51,13 @@ PR0GRAM area_of_circle[r] <
 >
 
 area = area_of_circle[10];
+
+PR0GRAM gcd[a, b] <
+  PR3SUM1NG[b == 0] <
+    G1V3 a;
+  >
+  G1V3 gcd[b, (a % b)];
+>
 `;
 
 describe("The semantic analyzer", () => {
@@ -62,13 +69,6 @@ describe("The semantic analyzer", () => {
     done();
   });
 });
-
-// PR0GRAM gcd[a, b] <
-//   PR3SUM1NG[b == 0] <
-//     G1V3 a;
-//   >
-//   G1V3 gcd[b, (a % b)];
-// >
 
 // PR0GRAM powers[base, limit, callback] <
 //   current = 1;

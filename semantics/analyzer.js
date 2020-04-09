@@ -55,13 +55,12 @@ BinaryExp.prototype.analyze = function (context) {
 FuncDecl.prototype.analyze = function (context) {
   this.bodyContext = context.createChildContextForFunctionBody();
   this.params.forEach((p) => this.bodyContext.add(p.ref));
+  context.addFunction(this.id.ref, this); // allows for recursive functions
   this.block.analyze(this.bodyContext);
   delete this.bodyContext; // This was only temporary, delete to keep output clean.
-  context.addFunction(this.id.ref, this);
 };
 
 FuncCall.prototype.analyze = function (context) {
-  console.log("analyzing func call! this is", this);
   this.id = context.lookupFunction(this.id.ref || this.id); //Hacky lol whoops
   this.params.forEach((param) => param.analyze(context));
   check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
@@ -79,7 +78,6 @@ ForLoop.prototype.analyze = function (context) {
   this.start.analyze(context);
   this.end.analyze(context);
   const bodyContext = context.createChildContextForLoop();
-  console.log("this is ", this);
   if (this.id) {
     //If there is an id assigned to the iterator variable (aka i:1->50)
     bodyContext.add(this.id.ref);
