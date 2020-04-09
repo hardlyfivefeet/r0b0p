@@ -16,6 +16,7 @@ const {
   List,
   Dict,
   KeyValue,
+  Key,
   BinaryExp,
   NegationExp,
   ParensExp,
@@ -61,7 +62,7 @@ FuncDecl.prototype.analyze = function (context) {
 };
 
 FuncCall.prototype.analyze = function (context) {
-  this.id = context.lookupFunction(this.id.ref || this.id); //Hacky lol whoops
+  this.id = context.lookupFunction(this.id.ref);
   this.params.forEach((param) => param.analyze(context));
   check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
 };
@@ -71,7 +72,8 @@ Program.prototype.analyze = function (context) {
 };
 
 Block.prototype.analyze = function (context) {
-  this.statements.forEach((statement) => statement.analyze(context));
+  const newContext = context.createChildContextForBlock();
+  this.statements.forEach((statement) => statement.analyze(newContext));
 };
 
 ForLoop.prototype.analyze = function (context) {
@@ -88,8 +90,7 @@ ForLoop.prototype.analyze = function (context) {
 Conditional.prototype.analyze = function (context) {
   this.condition.analyze(context);
   this.block.analyze(context);
-
-  if (this.elseIfBlocks) {
+  if (this.elseIfBlocks.length !== 0) {
     this.elseIfBlocks.forEach((block) => block.analyze(context));
   }
   if (this.elseBlock) {
@@ -121,24 +122,27 @@ NotExp.prototype.analyze = function (context) {
 Dict.prototype.analyze = function (context) {
   const usedFields = new Set();
   this.pairs.forEach((pair) => {
-    check.fieldHasNotBeenUsed(pair.key, usedFields);
-    usedFields.add(pair.key);
+    check.fieldHasNotBeenUsed(pair.key.name, usedFields);
+    usedFields.add(pair.key.name);
     pair.analyze(context);
   });
 };
 
-Dict.prototype.getFieldForId = function (id) {
-  const pair = this.pairs.find((f) => f.key === id);
-  if (!pair) {
-    throw new Error("No such pair");
-  }
-  return pair;
-};
+// We don't really need this bc our member access function is a builtin function?
+// Dict.prototype.getFieldForId = function (id) {
+//   const pair = this.pairs.find((f) => f.key === id);
+//   if (!pair) {
+//     throw new Error("No such pair");
+//   }
+//   return pair;
+// };
 
 KeyValue.prototype.analyze = function (context) {
   this.key.analyze(context);
   this.value.analyze(context);
 };
+
+Key.prototype.analyze = function (context) {};
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {

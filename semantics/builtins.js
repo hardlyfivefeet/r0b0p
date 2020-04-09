@@ -1,15 +1,19 @@
 const { FuncDecl, Id } = require("../ast");
 
 const standardFunctions = [
+  // Math functions
   new FuncDecl("SQRT", ["n"]),
   new FuncDecl("ABS", ["n"]),
   new FuncDecl("FLOOR", ["n"]),
+
+  // List functions
   new FuncDecl("PLAC3_AT", ["list", "index", "value"]),
   new FuncDecl("D1SCARD_AT", ["list", "index"]),
   new FuncDecl("R3TR13V3_AT", ["list", "index"]),
   new FuncDecl("SUBST1TUT3", ["list", "index", "value"]),
   new FuncDecl("S1Z3", ["list"]),
 
+  // Dict functions
   new FuncDecl("PLAC3", ["dict", "key", "value"]),
   new FuncDecl("D1SCARD", ["dict", "key"]),
   new FuncDecl("R3TR13V3", ["dict", "key"]),
