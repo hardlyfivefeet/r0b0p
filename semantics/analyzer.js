@@ -53,7 +53,6 @@ BinaryExp.prototype.analyze = function (context) {
 };
 
 FuncDecl.prototype.analyze = function (context) {
-  console.log("analyzing func decl! this is ", this);
   this.bodyContext = context.createChildContextForFunctionBody();
   this.params.forEach((p) => this.bodyContext.add(p.ref));
   this.block.analyze(this.bodyContext);

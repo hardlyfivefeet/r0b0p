@@ -34,6 +34,23 @@ PR3SUM1NG[x < 6] <
 C0UNT[i:0->10] <
     SP3AK["this will print 10 times, this is the " + i + "th time"];
 >
+
+x = 0;
+WH1L3[x < 6] <
+    x = x + 1; ...Adding 1 to x!
+>
+
+bananas = 3;
+SP3AK["I have 'bananas' bananas"];
+
+quote = "Hello, world!";
+SP3AK["She said \''quote'\'"];
+
+PR0GRAM area_of_circle[r] <
+  G1V3 3.14159265 * r * r;
+>
+
+area = area_of_circle[10];
 `;
 
 describe("The semantic analyzer", () => {
@@ -45,26 +62,6 @@ describe("The semantic analyzer", () => {
     done();
   });
 });
-
-// C0UNT[i:0->10] <
-// >
-
-// x = 0;
-// WH1L3[x < 6] <
-//     x = x + 1; ...Adding 1 to x!
-// >
-
-// bananas = 3;
-// SP3AK["I have 'bananas' bananas"];
-
-// quote = "Hello, world!";
-// SP3AK["She said \''quote'\'"];
-
-// PR0GRAM area_of_circle[r] <
-//   G1V3 3.14159265 * r * r;
-// >
-
-// area = area_of_circle[10];
 
 // PR0GRAM gcd[a, b] <
 //   PR3SUM1NG[b == 0] <

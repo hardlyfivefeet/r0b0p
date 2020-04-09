@@ -185,6 +185,16 @@ const fixture = {
       ),
     ]),
   ],
+  funcDeclNoParams: [
+    String.raw`PR0GRAM give_five[] < G1V3 5; >`,
+    new Program([
+      new FuncDecl(
+        new Id("give_five"),
+        [],
+        new Block([new Return(new IntLit("5"))])
+      ),
+    ]),
+  ],
   funcCall: [
     String.raw`y = add_five[26];`,
     new Program([
