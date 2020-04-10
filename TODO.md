@@ -2,10 +2,10 @@
 
 number of stars means NUMBER OF DIFFICULTY LEVELS
 
-- check if the things that can precede Exp1 and the things that can precede a block are disjoint
-- add break lol
+- add break/continue lol
 - talk with toal about our scope
   - index out of bounds error? is this runtime or semantic?
+- change id 'ref' to 'name' cause that is nicer
 
 optional future additions:
 
@@ -22,5 +22,4 @@ LIST OF QUESTIONS/problems:
 
 1. Do we need to add an IntLit to the for loop context if there is no ID assigned to it?
 2. think about scope
-3. change id 'ref' to 'name' cause that is nicer
-4. should we be defining string interpolation NOWWWW at this moment in time right now????
+3. should we be defining string interpolation NOWWWW at this moment in time right now????
