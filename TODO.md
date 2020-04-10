@@ -7,6 +7,9 @@ stars for difficulty
 - go through and check spacing issues (idrest)\*\* Merissa
 - change str to exp in index for print\* Adriana
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
+- come up with a static semantic check \*\*\* maddie
+- come up with a static semantic check \*\*\* adriana
+- come up with a static semantic check \*\*\* merissa
 - string interpolation -together-
 - unreachable code -together-
 - id is declared but never used -together-
