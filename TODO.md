@@ -1,9 +1,9 @@
 ## TODO for r0b0p
 
-number of stars means NUMBER OF DIFFICULTY LEVELS
-
 - add break/continue lol
 - change id 'ref' to 'name' cause that is nicer
+- control flow analysis
+- id is declared but never used
 
 optional future additions:
 
@@ -22,3 +22,4 @@ LIST OF QUESTIONS/problems for toal:
 2. think about scope
 3. should we be defining string interpolation NOWWWW at this moment in time right now????
 4. what other semantic checks should we add?
+5. how do we make something a warning but not an error? i.e. id is declared but never used
