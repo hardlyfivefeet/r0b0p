@@ -1,13 +1,16 @@
 ## TODO for r0b0p
 
-- add break/continue lol
-- change id 'ref' to 'name' cause that is nicer
-- control flow analysis
-- id is declared but never used
-- unreachable code
-- go through and check spacing issues (idrest)
-- change str to exp in index for print
-- clean up try catch in assignment in analyzer change function to return bool
+stars for difficulty
+
+- add break/continue lol\*\* Maddie
+- change id 'ref' to 'name' cause that is nicer\* Merissa
+- go through and check spacing issues (idrest)\*\* Merissa
+- change str to exp in index for print\* Adriana
+- clean up try catch in assignment in analyzer change function to return bool\* Adriana
+- string interpolation -together-
+- unreachable code -together-
+- id is declared but never used -together-
+- control flow analysis -together-
 
 optional future additions:
 
@@ -17,8 +20,8 @@ optional future additions:
 
 List of semantic checks to keep in mind:
 
-- number of arguments = number of parameters
-- scope rules
+- number of arguments = number of parameters DONE
+- scope rules DONE
 - public/private rules
 
 LIST OF QUESTIONS/problems for toal:

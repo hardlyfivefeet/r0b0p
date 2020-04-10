@@ -1,1 +1,2 @@
-x = 3; y = x + 6;
+bananas = 3;
+SP3AK["I have 'bananas' bananas"];
