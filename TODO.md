@@ -4,11 +4,16 @@
 - change id 'ref' to 'name' cause that is nicer
 - control flow analysis
 - id is declared but never used
+- unreachable code
+- go through and check spacing issues (idrest)
+- change str to exp in index for print
+- clean up try catch in assignment in analyzer change function to return bool
 
 optional future additions:
 
 - add classes
 - add kwargs
+- make functions starting w capital letter also readonly
 
 List of semantic checks to keep in mind:
 
@@ -18,8 +23,10 @@ List of semantic checks to keep in mind:
 
 LIST OF QUESTIONS/problems for toal:
 
-1. Do we need to add an IntLit to the for loop context if there is no ID assigned to it?
-2. think about scope
 3. should we be defining string interpolation NOWWWW at this moment in time right now????
+   Yes
+   AST
+   need to make Text more complicated
+   Needs to work into the Ohm grammar
 4. what other semantic checks should we add?
-5. how do we make something a warning but not an error? i.e. id is declared but never used
+5. how do we make something a warning but not an error? i.e. id is declared but never used, unreachable code
