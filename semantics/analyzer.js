@@ -38,14 +38,14 @@ Assignment.prototype.analyze = function (context) {
   this.exp.analyze(context);
   let initialized = true;
   try {
-    context.lookup(this.id.ref);
+    context.lookup(this.id.name);
   } catch (err) {
     initialized = false;
   }
   if (initialized) {
-    check.isNotReadOnly(this.id.ref);
+    check.isNotReadOnly(this.id.name);
   }
-  context.add(this.id.ref);
+  context.add(this.id.name);
 };
 
 BinaryExp.prototype.analyze = function (context) {
@@ -55,14 +55,14 @@ BinaryExp.prototype.analyze = function (context) {
 
 FuncDecl.prototype.analyze = function (context) {
   this.bodyContext = context.createChildContextForFunctionBody();
-  this.params.forEach((p) => this.bodyContext.add(p.ref));
-  context.addFunction(this.id.ref, this); // allows for recursive functions
+  this.params.forEach((p) => this.bodyContext.add(p.name));
+  context.addFunction(this.id.name, this); // allows for recursive functions
   this.block.analyze(this.bodyContext);
   delete this.bodyContext; // This was only temporary, delete to keep output clean.
 };
 
 FuncCall.prototype.analyze = function (context) {
-  this.id = context.lookupFunction(this.id.ref);
+  this.id = context.lookupFunction(this.id.name);
   this.params.forEach((param) => param.analyze(context));
   check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
 };
@@ -82,7 +82,7 @@ ForLoop.prototype.analyze = function (context) {
   const bodyContext = context.createChildContextForLoop();
   if (this.id) {
     //If there is an id assigned to the iterator variable (aka i:1->50)
-    bodyContext.add(this.id.ref);
+    bodyContext.add(this.id.name);
   }
   this.block.analyze(bodyContext);
 };
@@ -173,5 +173,5 @@ Text.prototype.analyze = function (context) {};
 
 Id.prototype.analyze = function (context) {
   // Kind of a hack... ¯\_(ツ)_/¯
-  this.value = context.lookup(this.ref);
+  this.value = context.lookup(this.name);
 };

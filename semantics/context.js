@@ -96,7 +96,7 @@ class Context {
 
 Context.INITIAL = new Context();
 [...standardFunctions].forEach((entity) => {
-  Context.INITIAL.addFunction(entity.id.ref, entity);
+  Context.INITIAL.addFunction(entity.id.name, entity);
 });
 
 module.exports = Context;

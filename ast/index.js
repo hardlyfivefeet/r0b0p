@@ -156,8 +156,8 @@ class Text {
 }
 
 class Id {
-  constructor(ref) {
-    Object.assign(this, { ref });
+  constructor(name) {
+    Object.assign(this, { name });
   }
 }
 
