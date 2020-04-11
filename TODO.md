@@ -14,8 +14,8 @@ static semantic checks to do:
 
 - make sure you can't use return outside of a function
 - once break is added, make sure you can't use break outside of a loop
+- variable declared inside function, can't be used outside
 - come up with a static semantic check \*\*\* adriana
-- come up with a static semantic check \*\*\* merissa
 
 optional future additions:
 
