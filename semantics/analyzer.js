@@ -142,7 +142,7 @@ KeyValue.prototype.analyze = function (context) {
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) {};
+Key.prototype.analyze = function (context) { };
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -160,16 +160,16 @@ Return.prototype.analyze = function (context) {
 };
 
 Print.prototype.analyze = function (context) {
-  this.str.analyze(context);
+  this.exp.analyze(context);
 };
 
-BoolLit.prototype.analyze = function (context) {};
+BoolLit.prototype.analyze = function (context) { };
 
-IntLit.prototype.analyze = function (context) {};
+IntLit.prototype.analyze = function (context) { };
 
-FloatLit.prototype.analyze = function (context) {};
+FloatLit.prototype.analyze = function (context) { };
 
-Text.prototype.analyze = function (context) {};
+Text.prototype.analyze = function (context) { };
 
 Id.prototype.analyze = function (context) {
   // Kind of a hack... ¯\_(ツ)_/¯

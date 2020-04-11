@@ -78,8 +78,8 @@ class ElseBlock {
 }
 
 class Print {
-  constructor(str) {
-    Object.assign(this, { str });
+  constructor(exp) {
+    Object.assign(this, { exp });
   }
 }
 
