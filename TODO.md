@@ -5,13 +5,17 @@ stars for difficulty
 - add break/continue lol\*\* Maddie
 - change str to exp in index for print\* Adriana
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
-- come up with a static semantic check \*\*\* maddie
-- come up with a static semantic check \*\*\* adriana
-- come up with a static semantic check \*\*\* merissa
 - string interpolation -together-
 - unreachable code -together-
 - id is declared but never used -together-
 - control flow analysis -together-
+
+static semantic checks to do:
+
+- make sure you can't use return outside of a function
+- once break is added, make sure you can't use break outside of a loop
+- come up with a static semantic check \*\*\* adriana
+- come up with a static semantic check \*\*\* merissa
 
 optional future additions:
 
@@ -19,18 +23,7 @@ optional future additions:
 - add kwargs
 - make functions starting w capital letter also readonly
 
-List of semantic checks to keep in mind:
-
-- number of arguments = number of parameters DONE
-- scope rules DONE
-- public/private rules
-
 LIST OF QUESTIONS/problems for toal:
 
-3. should we be defining string interpolation NOWWWW at this moment in time right now????
-   Yes
-   AST
-   need to make Text more complicated
-   Needs to work into the Ohm grammar
 4. what other semantic checks should we add?
 5. how do we make something a warning but not an error? i.e. id is declared but never used, unreachable code
