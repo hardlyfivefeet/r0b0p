@@ -3,8 +3,6 @@
 stars for difficulty
 
 - add break/continue lol\*\* Maddie
-- change id 'ref' to 'name' cause that is nicer\* Merissa
-- go through and check spacing issues (idrest)\*\* Merissa
 - change str to exp in index for print\* Adriana
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
 - come up with a static semantic check \*\*\* maddie
