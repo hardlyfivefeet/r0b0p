@@ -31,6 +31,7 @@ const {
   ParensExp,
   NotExp,
   Text,
+  Interpol,
   IntLit,
   FloatLit,
   BoolLit,
@@ -309,7 +310,7 @@ const fixture = {
           new KeyValue(new Key("a"), new IntLit(1)),
           new KeyValue(new Key("b"), new IntLit(2)),
         ]),
-        new Text("a"),
+        new Text("a", []),
         new IntLit(50),
       ]),
     ]),
@@ -362,6 +363,28 @@ const fixture = {
         new IntLit(3),
       ]),
     ]),
+  ],
+  stringInterpolation: [
+    String.raw`bananas = 3; SP3AK["She has 'bananas' bananas."];`,
+    new Program([
+      new Assignment(new Id("bananas"), new IntLit("3")),
+      new Print(
+        new Text("She has  bananas.", [new Interpol(new Id("bananas"), 8)])
+      ),
+    ]),
+  ],
+  stringInterpolationWithEscapes: [
+    String.raw`quote = "Hi there"; SP3AK["She said \''quote'\'."];`,
+    new Program([
+      new Assignment(new Id("quote"), new Text("Hi there")),
+      new Print(
+        new Text(`She said \\'\\'.`, [new Interpol(new Id("quote"), 10)])
+      ),
+    ]),
+  ],
+  escapeSequences: [
+    String.raw`quote = "\\";`,
+    new Program([new Assignment(new Id("quote"), new Text("\\\\"))]),
   ],
 };
 

@@ -19,6 +19,7 @@ const {
   KeyValue,
   Key,
   Text,
+  Interpol,
   BinaryExp,
   NegationExp,
   ParensExp,
@@ -98,10 +99,24 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Key(name) {
     return new Key(name.ast());
   },
-  text(_lq, chars, _rq) {
-    return new Text(chars.ast().join(""));
+  Text(_lq, chars, _rq) {
+    let quasi = "";
+    let interpolGuys = [];
+    for (let i = 0; i < chars.ast().length; i++) {
+      const value = chars.ast()[i];
+      if (value.constructor === Interpol) {
+        value.index = i;
+        interpolGuys.push(value);
+      } else {
+        quasi += value;
+      }
+    }
+    return new Text(quasi, interpolGuys);
   },
-  escape(_escape, _value) {
+  Interpol(_lApos, exp, _rApos) {
+    return new Interpol(exp.ast());
+  },
+  charNoApos(_value) {
     return this.sourceString;
   },
   Exp_binary(left, op, right) {
@@ -147,6 +162,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new BoolLit(this.sourceString);
   },
   _terminal() {
+    // console.log("this source string is ", this.sourceString);
     return this.sourceString;
   },
   NonemptyListOf(first, _separator, rest) {

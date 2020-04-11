@@ -150,8 +150,14 @@ class BoolLit {
 }
 
 class Text {
-  constructor(value) {
-    this.value = value;
+  constructor(quasi, interpolGuys = []) {
+    Object.assign(this, { quasi, interpolGuys });
+  }
+}
+
+class Interpol {
+  constructor(exp, index = null) {
+    Object.assign(this, { exp, index });
   }
 }
 
@@ -186,5 +192,6 @@ module.exports = {
   FloatLit,
   BoolLit,
   Text,
+  Interpol,
   Id,
 };

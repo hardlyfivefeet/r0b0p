@@ -3,12 +3,12 @@
 stars for difficulty
 
 - add break/continue lol\*\* Maddie
-- change str to exp in index for print\* Adriana
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
 - string interpolation -together-
 - unreachable code -together-
 - id is declared but never used -together-
 - control flow analysis -together-
+- rename string interpolation stuff to quasis and whatever the other mysterious word is
 
 static semantic checks to do:
 
@@ -16,6 +16,10 @@ static semantic checks to do:
 - once break is added, make sure you can't use break outside of a loop
 - variable declared inside function, can't be used outside
 - come up with a static semantic check \*\*\* adriana
+
+things to remember:
+
+- for string interpolation, the indices will be thrown off when the first thing is interpolated. be sure to figure that out, future selves
 
 optional future additions:
 

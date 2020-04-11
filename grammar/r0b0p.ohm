@@ -1,5 +1,4 @@
 r0b0p {
-
   Program     = Statement*
   Statement   = CompStmt
               | SimpStmt ";" --simple
@@ -31,7 +30,7 @@ r0b0p {
               | Id
               | random
               | number
-              | text
+              | Text
               | boolean
               | List
               | Dict
@@ -52,7 +51,7 @@ r0b0p {
 
   List        = "{" (ListOf<Exp, ",">)? "}"
   Dict        = "{" ListOf<KeyValue, ",">? "}"
-  KeyValue    = (Key | text) ":" Exp
+  KeyValue    = (Key | Text) ":" Exp
   
   kwProgram   = "PR0GRAM" ~idchar
   kwReturn    = "G1V3" ~idchar
@@ -73,9 +72,15 @@ r0b0p {
   number      = decimal 
               | digit+                       -- integer
   decimal     = digit* "." digit+
+
   char        = ~"\"" ~"\n" ~"\\" any
               | escape
-  text        = "\"" char* "\""
+
+  Text        = "\"" (# charNoApos | Interpol)* "\""
+  Interpol    = ~"\\'" apos Exp apos
+  apos        = "'"
+  charNoApos  = ~apos char
+
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
 
