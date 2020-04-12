@@ -4,16 +4,16 @@ stars for difficulty
 
 - add break/continue lol\*\* Maddie
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
-- string interpolation -together-
+- string interpolation SEMANTICS -together-
 - unreachable code -together-
 - id is declared but never used -together-
 - control flow analysis -together-
 - rename string interpolation stuff to quasis and whatever the other mysterious word is
 
-static semantic checks to do:
+static semantic checks/tests to do:
 
 - make sure you can't use return outside of a function
-- once break is added, make sure you can't use break outside of a loop
+- once break is added, make sure you can't use break outside of a loop \*\*Maddie
 - variable declared inside function, can't be used outside
 - come up with a static semantic check \*\*\* adriana
 
