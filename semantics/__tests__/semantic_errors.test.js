@@ -24,6 +24,10 @@ const errors = [
   ["using break outside of a loop", "D1SC0NT1NU3;"],
   ["using continue outside of a loop", "C0NT1NU3;"],
   ["using return outside of a function", "x = 3; G1V3 x;"],
+  [
+    "calling a nonfunction and nonparameter as a function",
+    "PR0GRAM powers[base, limit, callback] < x[]; >",
+  ],
 ];
 
 describe("The semantic analyzer", () => {

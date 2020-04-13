@@ -78,7 +78,6 @@ class Context {
         return id;
       }
     }
-    // console.log("throwing error for undeclared id");
     throw new Error(`Identifier ${id} has not been declared`);
   }
 
@@ -88,8 +87,8 @@ class Context {
         return context.functions.get(id);
       }
     }
-    // console.log("throwing error for undeclared function");
-    throw new Error(`Function ${id} has not been declared`);
+    return null;
+    // throw new Error(`Function ${id} has not been declared`);
   }
 }
 

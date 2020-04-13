@@ -96,6 +96,16 @@ C0UNT[i:0->10] <
       SP3AK[varInParent];
   >
 >
+
+PR0GRAM powers[base, limit, callback] <
+  current = 1;
+  i = 1;
+  WH1L3[current <= limit] <
+    callback[current];
+    current = base ** i;
+    i = i + 1;
+  >
+>
 `;
 
 describe("The semantic analyzer", () => {

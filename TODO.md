@@ -8,6 +8,7 @@ stars for difficulty
 - id is declared but never used -together-
 - control flow analysis -together-
 - rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar
+- make it so that variables and functions are mutually exclusive sets BOOM
 
 static semantic checks/tests to do:
 

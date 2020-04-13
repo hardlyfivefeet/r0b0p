@@ -24,10 +24,23 @@ module.exports = {
     );
   },
 
-  returnInFunction(context) {
+  inFunction(context) {
     doCheck(
       context.currentFunction,
-      `Trying to use a return statement outside of a function`
+      `Trying to use a function-only statement outside of a function (i.e. return)`
+    );
+  },
+
+  isParam(id, params) {
+    let isParam = false;
+    params.forEach((param) => {
+      if (id === param.name) {
+        isParam = true;
+      }
+    });
+    doCheck(
+      isParam,
+      `Trying to call a function, but it doesn't exist and is not a parameter.`
     );
   },
 

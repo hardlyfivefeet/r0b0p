@@ -64,9 +64,16 @@ FuncDecl.prototype.analyze = function (context) {
 };
 
 FuncCall.prototype.analyze = function (context) {
-  this.id = context.lookupFunction(this.id.name);
-  this.params.forEach((param) => param.analyze(context));
-  check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
+  const lookupResult = context.lookupFunction(this.id.name);
+  //If the function can't be found, it might be a parameter to the parent function.
+  if (!lookupResult) {
+    check.inFunction(context);
+    check.isParam(this.id.name, context.currentFunction.params);
+  } else {
+    this.id = lookupResult;
+    this.params.forEach((param) => param.analyze(context));
+    check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
+  }
 };
 
 Program.prototype.analyze = function (context) {
@@ -157,7 +164,7 @@ Continue.prototype.analyze = function (context) {
 };
 
 Return.prototype.analyze = function (context) {
-  check.returnInFunction(context);
+  check.inFunction(context);
   this.exp.analyze(context);
 };
 
