@@ -83,7 +83,6 @@ class Context {
   }
 
   lookupFunction(id) {
-    // console.log("the id that we are looking up is ", id);
     for (let context = this; context !== null; context = context.parent) {
       if (context.functions.has(id)) {
         return context.functions.get(id);

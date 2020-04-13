@@ -11,7 +11,6 @@ stars for difficulty
 
 static semantic checks/tests to do:
 
-- variable declared inside function, can't be used outside
 - come up with a static semantic check \*\*\* adriana
 
 things to remember:
