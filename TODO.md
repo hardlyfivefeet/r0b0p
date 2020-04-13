@@ -13,7 +13,6 @@ stars for difficulty
 static semantic checks/tests to do:
 
 - variable declared inside function, can't be used outside
-  - also check that if variable can't be found in child context, check if declared in parent context
 - come up with a static semantic check \*\*\* adriana
 
 things to remember:

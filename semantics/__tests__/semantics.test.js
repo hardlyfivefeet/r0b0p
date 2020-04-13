@@ -89,6 +89,13 @@ x = N0T y;
 
 z = 3;
 x = 3 + 6 - z * (6 ** (-1)); 
+
+C0UNT[i:0->10] <
+  varInParent = 3;
+  PR3SUM1NG[i % 2 == 0] <
+      SP3AK[varInParent];
+  >
+>
 `;
 
 describe("The semantic analyzer", () => {
