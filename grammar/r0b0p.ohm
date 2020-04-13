@@ -6,6 +6,8 @@ r0b0p {
               | Return
               | FuncCall
               | Print
+              | break
+              | continue
   CompStmt    = FuncDecl
               | WhileLoop
               | ForLoop
@@ -41,6 +43,8 @@ r0b0p {
 
   WhileLoop   = "WH1L3" "[" Exp "]" Block
   ForLoop     = "C0UNT" "[" (Id ":")? (number | Id) "->" (number | Id) "]" Block
+  break       = "D1SC0NT1NU3"
+  continue    = "C0NT1NU3"
 
   FuncDecl    = kwProgram Id "[" (ListOf<Id, ",">)? "]" Block
   FuncCall    = (Id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
@@ -63,7 +67,7 @@ r0b0p {
   idchar      = alnum | "_"
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
-              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3"
+              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "C0NT1NU3" | "D1SC0NT1NU3"
               | mathFunc | listFunc | dictFunc)
   mathFunc    = "SQRT" | "ABS" | "FLOOR"
   listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "SUBST1TUT3" | "S1Z3"

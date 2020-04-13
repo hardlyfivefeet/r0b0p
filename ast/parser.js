@@ -9,6 +9,8 @@ const {
   FuncDecl,
   WhileLoop,
   ForLoop,
+  Break,
+  Continue,
   Conditional,
   ElseBlock,
   ElseIfBlock,
@@ -66,6 +68,12 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
       end.ast(),
       block.ast()
     );
+  },
+  break(_break) {
+    return new Break();
+  },
+  continue(_continue) {
+    return new Continue();
   },
   Conditional(_if, _lb, condition, _rb, block, elseIfBlock, elseBlock) {
     return new Conditional(

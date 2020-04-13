@@ -17,6 +17,8 @@ const {
   FuncDecl,
   WhileLoop,
   ForLoop,
+  Break,
+  Continue,
   Conditional,
   ElseIfBlock,
   ElseBlock,
@@ -132,6 +134,42 @@ const fixture = {
             new Id("y"),
             new BinaryExp("-", new Id("y"), new IntLit(1))
           ),
+        ])
+      ),
+    ]),
+  ],
+  whileWithBreak: [
+    String.raw`WH1L3[y > 20] < PR3SUM1NG[y == 13] < D1SC0NT1NU3; > >`,
+    new Program([
+      new WhileLoop(
+        new BinaryExp(">", new Id("y"), new IntLit(20)),
+        new Block([
+          new Conditional(
+            new BinaryExp("==", new Id("y"), new IntLit(13)),
+            new Block([new Break()]),
+            [],
+            null
+          ),
+        ])
+      ),
+    ]),
+  ],
+  forWithContinue: [
+    String.raw`x_is_even = b0p; C0UNT[x:0->5] < PR3SUM1NG[x == 3] < C0NT1NU3; > x_is_even = N0T x_is_even; >`,
+    new Program([
+      new Assignment(new Id("x_is_even"), new BoolLit("b0p")),
+      new ForLoop(
+        new Id("x"),
+        new IntLit(0),
+        new IntLit("5"),
+        new Block([
+          new Conditional(
+            new BinaryExp("==", new Id("x"), new IntLit(3)),
+            new Block([new Continue()]),
+            [],
+            null
+          ),
+          new Assignment(new Id("x_is_even"), new NotExp(new Id("x_is_even"))),
         ])
       ),
     ]),

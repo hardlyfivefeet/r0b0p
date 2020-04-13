@@ -54,6 +54,14 @@ class ForLoop {
   }
 }
 
+class Break {
+  constructor() {}
+}
+
+class Continue {
+  constructor() {}
+}
+
 class Conditional {
   constructor(condition, block, elseIfBlocks, elseBlock) {
     Object.assign(this, {
@@ -175,6 +183,8 @@ module.exports = {
   FuncDecl,
   WhileLoop,
   ForLoop,
+  Break,
+  Continue,
   Conditional,
   ElseBlock,
   ElseIfBlock,
