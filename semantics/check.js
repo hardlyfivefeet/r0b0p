@@ -2,6 +2,7 @@ const util = require("util");
 const {} = require("../ast");
 
 function doCheck(condition, message) {
+  console.log("error message is ", message);
   if (!condition) {
     // console.log("the message from the error is " + message);
     throw new Error(message);
@@ -15,6 +16,13 @@ module.exports = {
 
   fieldHasNotBeenUsed(field, usedFields) {
     doCheck(!usedFields.has(field), `Field ${field} already declared`);
+  },
+
+  inLoop(context) {
+    doCheck(
+      context.inLoop,
+      `Trying to use a loop-only statement outside of a loop (i.e. C0NT1NU3 or D1SC0NT1NU3)`
+    );
   },
 
   // Same number of args and params

@@ -66,7 +66,6 @@ class Context {
   }
 
   addFunction(id, func) {
-    // console.log("the id that we are adding is ", id);
     this.functions.set(id, func);
   }
 

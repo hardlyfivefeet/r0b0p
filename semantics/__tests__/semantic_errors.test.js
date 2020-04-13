@@ -17,6 +17,8 @@ const errors = [
   ],
   ["call of nonfunction", "x = 3; x[5];"],
   ["editing a const variable", "A = 6; A = 92;"],
+  ["using break outside of a loop", "D1SC0NT1NU3;"],
+  ["using continue outside of a loop", "C0NT1NU3;"],
 ];
 
 describe("The semantic analyzer", () => {

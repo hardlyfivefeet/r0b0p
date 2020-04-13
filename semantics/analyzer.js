@@ -8,6 +8,8 @@ const {
   FuncDecl,
   WhileLoop,
   ForLoop,
+  Break,
+  Continue,
   Conditional,
   ElseBlock,
   ElseIfBlock,
@@ -128,21 +130,12 @@ Dict.prototype.analyze = function (context) {
   });
 };
 
-// We don't really need this bc our member access function is a builtin function?
-// Dict.prototype.getFieldForId = function (id) {
-//   const pair = this.pairs.find((f) => f.key === id);
-//   if (!pair) {
-//     throw new Error("No such pair");
-//   }
-//   return pair;
-// };
-
 KeyValue.prototype.analyze = function (context) {
   this.key.analyze(context);
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) { };
+Key.prototype.analyze = function (context) {};
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -155,6 +148,14 @@ WhileLoop.prototype.analyze = function (context) {
   this.block.analyze(context.createChildContextForLoop());
 };
 
+Break.prototype.analyze = function (context) {
+  check.inLoop(context);
+};
+
+Continue.prototype.analyze = function (context) {
+  check.inLoop(context);
+};
+
 Return.prototype.analyze = function (context) {
   this.exp.analyze(context);
 };
@@ -163,13 +164,13 @@ Print.prototype.analyze = function (context) {
   this.exp.analyze(context);
 };
 
-BoolLit.prototype.analyze = function (context) { };
+BoolLit.prototype.analyze = function (context) {};
 
-IntLit.prototype.analyze = function (context) { };
+IntLit.prototype.analyze = function (context) {};
 
-FloatLit.prototype.analyze = function (context) { };
+FloatLit.prototype.analyze = function (context) {};
 
-Text.prototype.analyze = function (context) { };
+Text.prototype.analyze = function (context) {};
 
 Id.prototype.analyze = function (context) {
   // Kind of a hack... ¯\_(ツ)_/¯
