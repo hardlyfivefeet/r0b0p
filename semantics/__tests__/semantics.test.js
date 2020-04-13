@@ -47,6 +47,10 @@ PR3SUM1NG[y == 1] <
 
 C0UNT[i:0->10] <
     SP3AK["this will print 10 times, this is the " + i + "th time"];
+    PR3SUM1NG[x == 8] <
+      SP3AK["Or not! Hah!"];
+      D1SC0NT1NU3;
+    >
 >
 
 C0UNT[0->10] <
@@ -55,6 +59,10 @@ C0UNT[0->10] <
 
 x = 0;
 WH1L3[x < 6] <
+    PR3SUM1NG[x == 3] <
+      SP3AK["Not this time..."];
+      C0NT1NU3;
+    >
     x = x + 1; ...Adding 1 to x!
 >
 
