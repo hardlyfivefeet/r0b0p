@@ -64,6 +64,14 @@ describe("functions", () => {
     results = r0b0p.match("SP3AK[add_two[5, 6]];");
     assert(results.succeeded());
   });
+  it("does not let us declare a function without a space", () => {
+    results = r0b0p.match("PR0GRAMadd_two[x, y] < G1V3 x + y; >");
+    assert(results.succeeded() === false);
+  });
+  it("does not let us use a return statement without a space", () => {
+    results = r0b0p.match("PR0GRAM add_two[x, y] < G1V3x + y; >");
+    assert(results.succeeded() === false);
+  });
 });
 
 describe("conditionals and loops", () => {
@@ -152,6 +160,10 @@ describe("general things you can't do", () => {
   });
   it("does not let us have mismatched < >", () => {
     results = r0b0p.match("PR0GRAM return_three[] < G1V3 3; ");
+    assert(results.succeeded() === false);
+  });
+  it("does not let us use a N0T operator without a space", () => {
+    results = r0b0p.match("x = 3; y = N0Tx;");
     assert(results.succeeded() === false);
   });
 });

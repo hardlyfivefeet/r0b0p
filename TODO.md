@@ -2,7 +2,6 @@
 
 stars for difficulty
 
-- add tests for if you have no space after a keyword i.e. PR0GRAMhello
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
 - string interpolation SEMANTICS -together-
 - unreachable code -together-

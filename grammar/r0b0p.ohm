@@ -43,8 +43,8 @@ r0b0p {
 
   WhileLoop   = "WH1L3" "[" Exp "]" Block
   ForLoop     = "C0UNT" "[" (Id ":")? (number | Id) "->" (number | Id) "]" Block
-  break       = "D1SC0NT1NU3"
-  continue    = "C0NT1NU3"
+  break       = "D1SC0NT1NU3" ~idchar
+  continue    = "C0NT1NU3" ~idchar
 
   FuncDecl    = kwProgram Id "[" (ListOf<Id, ",">)? "]" Block
   FuncCall    = (Id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
