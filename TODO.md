@@ -12,9 +12,9 @@ stars for difficulty
 
 static semantic checks/tests to do:
 
-- make sure you can't use return outside of a function
 - once break is added, make sure you can't use break outside of a loop \*\*Maddie
 - variable declared inside function, can't be used outside
+  - also check that if variable can't be found in child context, check if declared in parent context
 - come up with a static semantic check \*\*\* adriana
 
 things to remember:

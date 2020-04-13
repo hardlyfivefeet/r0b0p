@@ -24,6 +24,13 @@ module.exports = {
     );
   },
 
+  returnInFunction(context) {
+    doCheck(
+      context.currentFunction,
+      `Trying to use a return statement outside of a function`
+    );
+  },
+
   // Same number of args and params
   legalArguments(args, params) {
     doCheck(

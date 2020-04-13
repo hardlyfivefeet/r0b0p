@@ -19,12 +19,13 @@ require("./analyzer");
 //      This allows to search for declarations from the current context outward.
 //
 //   2. A reference to the current function we are analyzing, if any. If we are
-//      inside a function, then return expressions are legal, and we will be
-//      able to type check them.
+//      inside a function, then return expressions are legal.
 //
-//   3. Whether we are in a loop (to know that a `break` is okay).
+//   3. Whether we are in a loop (to know that a `D1SC0NT1NU3` or `C0NT1NU3` is okay).
 //
-//   4. A map for looking up all identifiers declared in this context.
+//   4. A set for looking up all variable identifiers declared in this context.
+//
+//   5. A map for looking up all functions declared in this context.
 
 class Context {
   constructor({ parent = null, currentFunction = null, inLoop = false } = {}) {
@@ -33,7 +34,7 @@ class Context {
       currentFunction,
       inLoop,
       locals: new Set(),
-      functions: new Map(), //maps each function name to the num of params, or the entity itself
+      functions: new Map(), // maps each function name to the function entity
     });
   }
 

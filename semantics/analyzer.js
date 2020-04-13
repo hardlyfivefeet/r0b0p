@@ -56,7 +56,7 @@ BinaryExp.prototype.analyze = function (context) {
 };
 
 FuncDecl.prototype.analyze = function (context) {
-  this.bodyContext = context.createChildContextForFunctionBody();
+  this.bodyContext = context.createChildContextForFunctionBody(this);
   this.params.forEach((p) => this.bodyContext.add(p.name));
   context.addFunction(this.id.name, this); // allows for recursive functions
   this.block.analyze(this.bodyContext);
@@ -157,6 +157,7 @@ Continue.prototype.analyze = function (context) {
 };
 
 Return.prototype.analyze = function (context) {
+  check.returnInFunction(context);
   this.exp.analyze(context);
 };
 
