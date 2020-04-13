@@ -9,6 +9,7 @@ stars for difficulty
 - control flow analysis -together-
 - rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar
 - make it so that variables and functions are mutually exclusive sets BOOM
+- add ceiling to math functions because why don't we have that. also maybe others look it up
 
 static semantic checks/tests to do:
 

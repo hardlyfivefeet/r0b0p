@@ -27,6 +27,7 @@ const {
   IntLit,
   FloatLit,
   Text,
+  Interpol,
   Id,
 } = require("../ast");
 const check = require("./check");
@@ -172,15 +173,20 @@ Print.prototype.analyze = function (context) {
   this.exp.analyze(context);
 };
 
+Text.prototype.analyze = function (context) {
+  this.interpolGuys.forEach((interpol) => interpol.analyze(context));
+};
+
+Interpol.prototype.analyze = function (context) {
+  this.exp.analyze(context);
+};
+
+Id.prototype.analyze = function (context) {
+  this.value = context.lookup(this.name);
+};
+
 BoolLit.prototype.analyze = function (context) {};
 
 IntLit.prototype.analyze = function (context) {};
 
 FloatLit.prototype.analyze = function (context) {};
-
-Text.prototype.analyze = function (context) {};
-
-Id.prototype.analyze = function (context) {
-  // Kind of a hack... ¯\_(ツ)_/¯
-  this.value = context.lookup(this.name);
-};
