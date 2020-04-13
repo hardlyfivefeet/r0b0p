@@ -29,6 +29,17 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - `l1st` (list)
 - `d1ct` (dictionary)
 
+## Static Semantic Errors
+
+- Use of undeclared variable
+- Repeating a d1ct key
+- Wrong number of arguments passed into function
+- Calling a nonfunction
+- Editing a const variable
+- Using D1SC0NT1NU3 (break) outside of a loop
+- Using C0NT1NU3 outside of a loop
+- Using G1V3 (return) outside of a function
+
 ## JavaScript vs. r0b0p
 
 #### Printing to the console
