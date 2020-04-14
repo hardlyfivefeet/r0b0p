@@ -62,6 +62,13 @@ BinaryExp.prototype.analyze = function (context) {
 FuncDecl.prototype.analyze = function (context) {
   // checks that func id hasn't already been declared as a var
   check.assigningFuncToVar(context, this.id.name);
+
+  //If the function has been initalized before, aka the id has already been used,
+  //check to see if it's readonly.
+  if (context.lookupFunction(this.id.name)) {
+    check.isNotReadOnly(this.id.name);
+  }
+
   this.bodyContext = context.createChildContextForFunctionBody(this);
   this.params.forEach((p) => this.bodyContext.add(p.name));
   context.addFunction(this.id.name, this); // allows for recursive functions
