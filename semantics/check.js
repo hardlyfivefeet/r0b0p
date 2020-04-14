@@ -5,7 +5,6 @@ const R0B0P_FALSE = "b0p";
 
 function doCheck(condition, message) {
   if (!condition) {
-    // console.log("the message from the error is " + message);
     throw new Error(message);
   }
 }
@@ -18,24 +17,30 @@ function doWarn(condition, message) {
 
 module.exports = {
   isNotReadOnly(id) {
-    doCheck(id !== id.toUpperCase(), `Assignment to read-only variable`);
+    doCheck(
+      id !== id.toUpperCase(),
+      `Beep! That variable is read-only. Cannot be assigned.`
+    );
   },
 
   fieldHasNotBeenUsed(field, usedFields) {
-    doCheck(!usedFields.has(field), `Field ${field} already declared`);
+    doCheck(
+      !usedFields.has(field),
+      `Bop! The field ${field} has already been declared. Please reconsider, human.`
+    );
   },
 
   inLoop(context) {
     doCheck(
       context.inLoop,
-      `Trying to use a loop-only statement outside of a loop (i.e. C0NT1NU3 or D1SC0NT1NU3)`
+      `Bop beep... Human is trying to use a loop-only statement outside of a loop (such as C0NT1NU3 or D1SC0NT1NU3).`
     );
   },
 
   inFunction(context) {
     doCheck(
       context.currentFunction,
-      `Trying to use a function-only statement outside of a function (i.e. return)`
+      `Boooop! Human is trying to use a function-only statement outside of a function (i.e. G1V3).`
     );
   },
 
@@ -46,23 +51,20 @@ module.exports = {
         isParam = true;
       }
     });
-    doCheck(
-      isParam,
-      `Trying to call a function, but it doesn't exist and is not a parameter.`
-    );
+    doCheck(isParam, `Beep bop. That function doesn't exist as a parameter.`);
   },
 
   // potentialInfiniteLoop(condition) {
   //   doWarn(
   //     !(condition.constructor === BoolLit && condition.value === R0B0P_TRUE),
-  //     `Potential infinite loop.`
+  //     `Bip bop. Detecting a potential infinite loop. Be cautious.`
   //   );
   // },
 
   unreachableCodeWithCondition(condition) {
     doWarn(
       !(condition.constructor === BoolLit && condition.value === R0B0P_FALSE),
-      `Unreachable code.`
+      `Boop. This code is unreachable, human. Please remove it.`
     );
   },
 
@@ -70,7 +72,7 @@ module.exports = {
   legalArguments(args, params) {
     doCheck(
       args.length === params.length,
-      `Expected ${params.length} args in call, got ${args.length}`
+      `Bip beep. Expected ${params.length} arguments in call, but got ${args.length}.`
     );
   },
 };
