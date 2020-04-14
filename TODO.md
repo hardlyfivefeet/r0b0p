@@ -2,27 +2,16 @@
 
 stars for difficulty
 
-- clean up try catch in assignment in analyzer change function to return bool\* Adriana
-- string interpolation SEMANTICS -together-
 - unreachable code -together-
+  - after break
+  - after return
 - id is declared but never used -together-
-- control flow analysis -together-
-- rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar
-- make it so that variables and functions are mutually exclusive sets BOOM
-- add ceiling to math functions because why don't we have that. also maybe others look it up
 
-static semantic checks/tests to do:
-
-- come up with a static semantic check \*\*\* adriana
-
-things to remember:
-
-- for string interpolation, the indices will be thrown off when the first thing is interpolated. be sure to figure that out, future selves
-
-LIST OF QUESTIONS/problems for toal:
-
-4. what other semantic checks should we add?
-5. how do we make something a warning but not an error? i.e. id is declared but never used, unreachable code
+- clean up try catch in assignment in analyzer change function to return bool\* Adriana
+- rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar \* Adriana
+- make it so that variables and functions are mutually exclusive sets BOOM \*\* Merissa
+- add ceiling to math functions because why don't we have that. also maybe others look it up \* Maddie
+- change all warnings and errors to sound more robotic **\*\*\*\*** maddie
 
 optional future additions:
 

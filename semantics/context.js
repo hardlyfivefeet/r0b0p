@@ -88,7 +88,6 @@ class Context {
       }
     }
     return null;
-    // throw new Error(`Function ${id} has not been declared`);
   }
 }
 

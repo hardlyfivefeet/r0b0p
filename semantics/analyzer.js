@@ -79,6 +79,7 @@ FuncCall.prototype.analyze = function (context) {
 
 Program.prototype.analyze = function (context) {
   this.statements.forEach((statement) => statement.analyze(context));
+  //the end, check for unused variables
 };
 
 Block.prototype.analyze = function (context) {
@@ -98,10 +99,11 @@ ForLoop.prototype.analyze = function (context) {
 };
 
 Conditional.prototype.analyze = function (context) {
+  check.unreachableCodeWithCondition(this.condition);
   this.condition.analyze(context);
   this.block.analyze(context);
   if (this.elseIfBlocks.length !== 0) {
-    this.elseIfBlocks.forEach((block) => block.analyze(context));
+    this.elseIfBlocks.forEach((elseIf) => elseIf.analyze(context));
   }
   if (this.elseBlock) {
     this.elseBlock.analyze(context);
@@ -109,6 +111,7 @@ Conditional.prototype.analyze = function (context) {
 };
 
 ElseIfBlock.prototype.analyze = function (context) {
+  check.unreachableCodeWithCondition(this.condition);
   this.condition.analyze(context);
   this.block.analyze(context);
 };
@@ -153,7 +156,11 @@ List.prototype.analyze = function (context) {
 
 WhileLoop.prototype.analyze = function (context) {
   this.condition.analyze(context);
-  this.block.analyze(context.createChildContextForLoop());
+  const childContext = context.createChildContextForLoop();
+  this.block.analyze(childContext);
+  check.unreachableCodeWithCondition(this.condition);
+  // only want to do the following, if we can figure out that there's a break:
+  // check.potentialInfiniteLoop(this.condition);
 };
 
 Break.prototype.analyze = function (context) {

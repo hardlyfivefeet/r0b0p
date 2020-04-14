@@ -1,10 +1,19 @@
 const util = require("util");
-const {} = require("../ast");
+const { BoolLit } = require("../ast");
+
+const R0B0P_TRUE = "b1p";
+const R0B0P_FALSE = "b0p";
 
 function doCheck(condition, message) {
   if (!condition) {
     // console.log("the message from the error is " + message);
     throw new Error(message);
+  }
+}
+
+function doWarn(condition, message) {
+  if (!condition) {
+    console.warn(message);
   }
 }
 
@@ -41,6 +50,20 @@ module.exports = {
     doCheck(
       isParam,
       `Trying to call a function, but it doesn't exist and is not a parameter.`
+    );
+  },
+
+  // potentialInfiniteLoop(condition) {
+  //   doWarn(
+  //     !(condition.constructor === BoolLit && condition.value === R0B0P_TRUE),
+  //     `Potential infinite loop.`
+  //   );
+  // },
+
+  unreachableCodeWithCondition(condition) {
+    doWarn(
+      !(condition.constructor === BoolLit && condition.value === R0B0P_FALSE),
+      `Unreachable code.`
     );
   },
 

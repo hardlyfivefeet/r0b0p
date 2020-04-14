@@ -117,13 +117,3 @@ describe("The semantic analyzer", () => {
     done();
   });
 });
-
-// PR0GRAM powers[base, limit, callback] <
-//   current = 1;
-//   i = 1;
-//   WH1L3[current <= limit] <
-//     callback[current];
-//     current = base ** i;
-//     i = i + 1;
-//   >
-// >
