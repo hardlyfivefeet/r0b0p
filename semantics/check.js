@@ -1,7 +1,6 @@
-const util = require("util");
 const { BoolLit } = require("../ast");
 
-const R0B0P_TRUE = "b1p";
+// const R0B0P_TRUE = "b1p";
 const R0B0P_FALSE = "b0p";
 
 function doCheck(condition, message) {

@@ -1,4 +1,4 @@
-const { FuncDecl, Id } = require("../ast");
+const { FuncDecl } = require("../ast");
 
 const standardFunctions = [
   // Math functions
