@@ -23,7 +23,7 @@ module.exports = {
     );
   },
 
-  fieldHasNotBeenUsed(field, usedFields) {
+  fieldAlreadyDeclared(field, usedFields) {
     doCheck(
       !usedFields.has(field),
       `Bop! The field ${field} has already been declared. Please reconsider, human.`

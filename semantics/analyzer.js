@@ -136,7 +136,7 @@ NotExp.prototype.analyze = function (context) {
 Dict.prototype.analyze = function (context) {
   const usedFields = new Set();
   this.pairs.forEach((pair) => {
-    check.fieldHasNotBeenUsed(pair.key.name, usedFields);
+    check.fieldAlreadyDeclared(pair.key.name, usedFields);
     usedFields.add(pair.key.name);
     pair.analyze(context);
   });
