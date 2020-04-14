@@ -40,6 +40,15 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Using C0NT1NU3 outside of a loop
 - Using G1V3 (return) outside of a function
 
+## Static Semantic Warnings
+
+- Unreachable code in an PR3SUM1NG\[b0p\]
+- Unreachable code in a WH1L3\[b0p\]
+- COMING SOON: Unreachable code after a G1V3
+- COMING SOON: Unreachable code after a D1SC0NT1NU3
+- COMING SOON: Potential infinite loop in a WH1L3\[b1p\]
+- COMING SOON: Unused variable
+
 ## JavaScript vs. r0b0p
 
 #### Printing to the console
