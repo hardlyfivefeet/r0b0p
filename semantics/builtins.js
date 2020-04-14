@@ -5,6 +5,10 @@ const standardFunctions = [
   new FuncDecl("SQRT", ["n"]),
   new FuncDecl("ABS", ["n"]),
   new FuncDecl("FLOOR", ["n"]),
+  new FuncDecl("CE1L", ["n"]),
+  new FuncDecl("R0UND", ["n"]),
+  new FuncDecl("MAX1MUM", ["list"]),
+  new FuncDecl("M1N1MUM", ["list"]),
 
   // List functions
   new FuncDecl("PLAC3_AT", ["list", "index", "value"]),
