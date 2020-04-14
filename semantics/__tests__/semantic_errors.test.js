@@ -28,6 +28,14 @@ const errors = [
     "calling a nonfunction and nonparameter as a function",
     "PR0GRAM powers[base, limit, callback] < x[]; >",
   ],
+  [
+    "assigning a function to a declared variable",
+    "z = 3; PR0GRAM z[] < G1V3 20; >",
+  ],
+  [
+    "assigning a variable to a declared function",
+    "PR0GRAM z[] < G1V3 20; > z = 3;",
+  ],
 ];
 
 describe("The semantic analyzer", () => {

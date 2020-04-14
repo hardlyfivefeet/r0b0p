@@ -44,6 +44,8 @@ Assignment.prototype.analyze = function (context) {
   try {
     context.lookup(this.id.name);
   } catch (err) {
+    // check that id hasn't already been declared as a function
+    check.assigningVarToFunc(context, this.id.name);
     initialized = false;
   }
   if (initialized) {
@@ -58,6 +60,8 @@ BinaryExp.prototype.analyze = function (context) {
 };
 
 FuncDecl.prototype.analyze = function (context) {
+  // checks that func id hasn't already been declared as a var
+  check.assigningFuncToVar(context, this.id.name);
   this.bodyContext = context.createChildContextForFunctionBody(this);
   this.params.forEach((p) => this.bodyContext.add(p.name));
   context.addFunction(this.id.name, this); // allows for recursive functions
@@ -67,14 +71,14 @@ FuncDecl.prototype.analyze = function (context) {
 
 FuncCall.prototype.analyze = function (context) {
   const lookupResult = context.lookupFunction(this.id.name);
-  //If the function can't be found, it might be a parameter to the parent function.
+  // If the function can't be found, it might be a parameter to the parent function.
   if (!lookupResult) {
     check.inFunction(context);
     check.isParam(this.id.name, context.currentFunction.params);
   } else {
     this.id = lookupResult;
-    this.params.forEach((param) => param.analyze(context));
     check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
+    this.params.forEach((param) => param.analyze(context));
   }
 };
 
@@ -93,7 +97,7 @@ ForLoop.prototype.analyze = function (context) {
   this.end.analyze(context);
   const bodyContext = context.createChildContextForLoop();
   if (this.id) {
-    //If there is an id assigned to the iterator variable (aka i:1->50)
+    // If there is an id assigned to the iterator variable (aka i:1->50)
     bodyContext.add(this.id.name);
   }
   this.block.analyze(bodyContext);

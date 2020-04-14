@@ -10,7 +10,6 @@ stars for difficulty
 
 - clean up try catch in assignment in analyzer change function to return bool\* Adriana
 - rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar \* Adriana
-- make it so that variables and functions are mutually exclusive sets BOOM \*\* Merissa
 
 optional future additions:
 

@@ -75,4 +75,23 @@ module.exports = {
       `Bip beep. Expected ${params.length} arguments in call, but got ${args.length}.`
     );
   },
+
+  assigningVarToFunc(context, id) {
+    const lookupFuncResult = context.lookupFunction(id);
+    doCheck(
+      !lookupFuncResult,
+      `Beeep! Human is trying to override a function with a variable. That is not allowed.`
+    );
+  },
+
+  assigningFuncToVar(context, id) {
+    try {
+      context.lookup(id);
+    } catch (err) {
+      return;
+    }
+    throw new Error(
+      `Bip beeep! Human is trying to override a variable with a function. That is not allowed.`
+    );
+  },
 };
