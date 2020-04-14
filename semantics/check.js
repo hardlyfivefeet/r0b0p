@@ -4,7 +4,6 @@ const { BoolLit } = require("../ast");
 const R0B0P_FALSE = "b0p";
 
 function doCheck(condition, message) {
-  console.log("message is ", message);
   if (!condition) {
     throw new Error(message);
   }
