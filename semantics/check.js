@@ -85,9 +85,7 @@ module.exports = {
   },
 
   assigningFuncToVar(context, id) {
-    try {
-      context.lookup(id);
-    } catch (err) {
+    if (!context.lookup(id)) {
       return;
     }
     throw new Error(

@@ -74,10 +74,11 @@ class Context {
   lookup(id) {
     for (let context = this; context !== null; context = context.parent) {
       if (context.locals.has(id)) {
-        return id;
+        return true;
       }
     }
-    throw new Error(`Identifier ${id} has not been declared`);
+    return false;
+    // throw new Error(`Identifier ${id} has not been declared`);
   }
 
   lookupFunction(id) {

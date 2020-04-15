@@ -38,17 +38,27 @@ module.exports = function (exp) {
   exp.analyze(Context.INITIAL);
 };
 
+// Assignment.prototype.analyze = function (context) {
+//   this.exp.analyze(context);
+//   let initialized = true;
+//   try {
+//     context.lookup(this.id.name);
+//   } catch (err) {
+//     // check that id hasn't already been declared as a function
+//     check.assigningVarToFunc(context, this.id.name);
+//     initialized = false;
+//   }
+//   if (initialized) {
+//     check.isNotReadOnly(this.id.name);
+//   }
+//   context.add(this.id.name);
+// };
+
 Assignment.prototype.analyze = function (context) {
   this.exp.analyze(context);
-  let initialized = true;
-  try {
-    context.lookup(this.id.name);
-  } catch (err) {
-    // check that id hasn't already been declared as a function
+  if (!context.lookup(this.id.name)) {
     check.assigningVarToFunc(context, this.id.name);
-    initialized = false;
-  }
-  if (initialized) {
+  } else {
     check.isNotReadOnly(this.id.name);
   }
   context.add(this.id.name);
@@ -151,7 +161,7 @@ KeyValue.prototype.analyze = function (context) {
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) {};
+Key.prototype.analyze = function (context) { };
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -194,11 +204,16 @@ Interpol.prototype.analyze = function (context) {
 };
 
 Id.prototype.analyze = function (context) {
-  this.value = context.lookup(this.name);
+  if (!context.lookup(this.name)) {
+    throw new Error(
+      `Bip beeep! Human has undeclared variable ${this.name}. That is not allowed.`
+    );
+  }
+  this.value = this.name;
 };
 
-BoolLit.prototype.analyze = function (context) {};
+BoolLit.prototype.analyze = function (context) { };
 
-IntLit.prototype.analyze = function (context) {};
+IntLit.prototype.analyze = function (context) { };
 
-FloatLit.prototype.analyze = function (context) {};
+FloatLit.prototype.analyze = function (context) { };
