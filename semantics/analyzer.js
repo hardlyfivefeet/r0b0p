@@ -38,22 +38,6 @@ module.exports = function (exp) {
   exp.analyze(Context.INITIAL);
 };
 
-// Assignment.prototype.analyze = function (context) {
-//   this.exp.analyze(context);
-//   let initialized = true;
-//   try {
-//     context.lookup(this.id.name);
-//   } catch (err) {
-//     // check that id hasn't already been declared as a function
-//     check.assigningVarToFunc(context, this.id.name);
-//     initialized = false;
-//   }
-//   if (initialized) {
-//     check.isNotReadOnly(this.id.name);
-//   }
-//   context.add(this.id.name);
-// };
-
 Assignment.prototype.analyze = function (context) {
   this.exp.analyze(context);
   if (!context.lookup(this.id.name)) {
