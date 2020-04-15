@@ -21,7 +21,7 @@ const {
   KeyValue,
   Key,
   Text,
-  Interpol,
+  Placeholder,
   BinaryExp,
   NegationExp,
   ParensExp,
@@ -109,22 +109,22 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   Text(_lq, chars, _rq) {
     let quasi = "";
-    let interpolGuys = [];
+    let placeholders = [];
     for (let i = 0; i < chars.ast().length; i++) {
       const value = chars.ast()[i];
-      if (value.constructor === Interpol) {
+      if (value.constructor === Placeholder) {
         value.index = i;
-        interpolGuys.push(value);
+        placeholders.push(value);
       } else {
         quasi += value;
       }
     }
-    return new Text(quasi, interpolGuys);
+    return new Text(quasi, placeholders);
   },
-  Interpol(_lApos, exp, _rApos) {
-    return new Interpol(exp.ast());
+  Placeholder(_lApos, exp, _rApos) {
+    return new Placeholder(exp.ast());
   },
-  charNoApos(_value) {
+  quasi(_value) {
     return this.sourceString;
   },
   Exp_binary(left, op, right) {

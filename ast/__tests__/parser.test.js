@@ -33,7 +33,7 @@ const {
   ParensExp,
   NotExp,
   Text,
-  Interpol,
+  Placeholder,
   IntLit,
   FloatLit,
   BoolLit,
@@ -407,7 +407,7 @@ const fixture = {
     new Program([
       new Assignment(new Id("bananas"), new IntLit("3")),
       new Print(
-        new Text("She has  bananas.", [new Interpol(new Id("bananas"), 8)])
+        new Text("She has  bananas.", [new Placeholder(new Id("bananas"), 8)])
       ),
     ]),
   ],
@@ -416,7 +416,7 @@ const fixture = {
     new Program([
       new Assignment(new Id("quote"), new Text("Hi there")),
       new Print(
-        new Text(`She said \\'\\'.`, [new Interpol(new Id("quote"), 10)])
+        new Text(`She said \\'\\'.`, [new Placeholder(new Id("quote"), 10)])
       ),
     ]),
   ],
