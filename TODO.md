@@ -9,6 +9,7 @@ stars for difficulty
 - potential infinite loop (started, but not finished)
 - add string methods!
 - check if we have semantic analysis for UNPR3D1CTABL3
+- check if we have semantic analysis for uncl3ar
 
 optional future additions:
 
