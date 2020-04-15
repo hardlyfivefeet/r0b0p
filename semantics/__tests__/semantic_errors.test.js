@@ -21,6 +21,10 @@ const errors = [
   ],
   ["call of nonfunction", "x = 3; x[5];"],
   ["editing a const variable", "A = 6; A = 92;"],
+  [
+    "reassigning a const function",
+    `PR0GRAM H3LL0[] < SP3AK["Hello"]; > PR0GRAM H3LL0[] < SP3AK["Hi"]; >`,
+  ],
   ["using break outside of a loop", "D1SC0NT1NU3;"],
   ["using continue outside of a loop", "C0NT1NU3;"],
   ["using return outside of a function", "x = 3; G1V3 x;"],

@@ -14,4 +14,3 @@ optional future additions:
 
 - add classes
 - add kwargs
-- make functions starting w capital letter also readonly
