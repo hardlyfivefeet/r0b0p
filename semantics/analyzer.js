@@ -1,6 +1,8 @@
 /* eslint no-unused-vars: 0 */ // --> OFF
 // The semantic analyzer
 
+const R0B0P_TRUE = "b1p";
+
 const {
   Program,
   Block,
@@ -90,7 +92,15 @@ Program.prototype.analyze = function (context) {
 
 Block.prototype.analyze = function (context) {
   const newContext = context.createChildContextForBlock();
-  this.statements.forEach((statement) => statement.analyze(newContext));
+  this.statements.forEach((statement) => {
+    //If we've seen a return or break, then the following statements are unreachable.
+    check.unreachableCodeAfterBreakOrReturn(
+      newContext.seenReturn || newContext.seenBreak
+    );
+    statement.analyze(newContext);
+  });
+  //If we're in a potential infinite loop and we haven't seen a break then we have a problem.
+  check.potentialInfiniteLoop(newContext);
 };
 
 ForLoop.prototype.analyze = function (context) {
@@ -152,7 +162,7 @@ KeyValue.prototype.analyze = function (context) {
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) { };
+Key.prototype.analyze = function (context) {};
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -163,14 +173,21 @@ List.prototype.analyze = function (context) {
 WhileLoop.prototype.analyze = function (context) {
   this.condition.analyze(context);
   const childContext = context.createChildContextForLoop();
+  //If there's a "While true" loop, we trigger that as a potential infinite loop.
+  if (
+    this.condition.constructor === BoolLit &&
+    this.condition.value === R0B0P_TRUE
+  ) {
+    childContext.potentialInfiniteLoop = true;
+  }
   this.block.analyze(childContext);
+  //If there's a "While false" loop, we trigger that as unreachable code.
   check.unreachableCodeWithCondition(this.condition);
-  // only want to do the following, if we can figure out that there's a break:
-  // check.potentialInfiniteLoop(this.condition);
 };
 
 Break.prototype.analyze = function (context) {
   check.inLoop(context);
+  context.seenBreak = true;
 };
 
 Continue.prototype.analyze = function (context) {
@@ -180,6 +197,7 @@ Continue.prototype.analyze = function (context) {
 Return.prototype.analyze = function (context) {
   check.inFunction(context);
   this.exp.analyze(context);
+  context.seenReturn = true;
 };
 
 Print.prototype.analyze = function (context) {
@@ -203,8 +221,8 @@ Id.prototype.analyze = function (context) {
   this.value = this.name;
 };
 
-BoolLit.prototype.analyze = function (context) { };
+BoolLit.prototype.analyze = function (context) {};
 
-IntLit.prototype.analyze = function (context) { };
+IntLit.prototype.analyze = function (context) {};
 
-FloatLit.prototype.analyze = function (context) { };
+FloatLit.prototype.analyze = function (context) {};

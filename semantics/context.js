@@ -27,13 +27,19 @@ require("./analyzer");
 //   5. A map for looking up all functions declared in this context.
 
 class Context {
-  constructor({ parent = null, currentFunction = null, inLoop = false } = {}) {
+  constructor({
+    parent = null,
+    currentFunction = null,
+    inLoop = false,
+    potentialInfiniteLoop = false,
+  } = {}) {
     Object.assign(this, {
       parent,
       currentFunction,
       inLoop,
       locals: new Set(),
       functions: new Map(), // maps each function name to the function entity
+      potentialInfiniteLoop,
     });
   }
 
@@ -57,6 +63,7 @@ class Context {
       parent: this,
       currentFunction: this.currentFunction,
       inLoop: this.inLoop,
+      potentialInfiniteLoop: this.potentialInfiniteLoop,
     });
   }
 

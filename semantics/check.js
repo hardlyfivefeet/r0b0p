@@ -1,6 +1,5 @@
 const { BoolLit } = require("../ast");
 
-// const R0B0P_TRUE = "b1p";
 const R0B0P_FALSE = "b0p";
 
 function doCheck(condition, message) {
@@ -54,16 +53,23 @@ module.exports = {
     doCheck(isParam, `Beep bop. That function doesn't exist as a parameter.`);
   },
 
-  // potentialInfiniteLoop(condition) {
-  //   doWarn(
-  //     !(condition.constructor === BoolLit && condition.value === R0B0P_TRUE),
-  //     `Bip bop. Detecting a potential infinite loop. Be cautious.`
-  //   );
-  // },
+  potentialInfiniteLoop(context) {
+    doWarn(
+      !(context.inLoop && context.potentialInfiniteLoop && !context.seenBreak),
+      `Bip bop. Detecting a potential infinite loop. Be cautious.`
+    );
+  },
 
   unreachableCodeWithCondition(condition) {
     doWarn(
       !(condition.constructor === BoolLit && condition.value === R0B0P_FALSE),
+      `Boop. This code is unreachable, human. Please remove it.`
+    );
+  },
+
+  unreachableCodeAfterBreakOrReturn(condition) {
+    doWarn(
+      !condition,
       `Boop. This code is unreachable, human. Please remove it.`
     );
   },
