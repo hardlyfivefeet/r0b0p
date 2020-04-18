@@ -30,7 +30,7 @@ const {
   IntLit,
   FloatLit,
   Text,
-  Interpol,
+  Placeholder,
   Id,
 } = require("../ast");
 const check = require("./check");
@@ -205,10 +205,10 @@ Print.prototype.analyze = function (context) {
 };
 
 Text.prototype.analyze = function (context) {
-  this.interpolGuys.forEach((interpol) => interpol.analyze(context));
+  this.placeholders.forEach((placeholder) => placeholder.analyze(context));
 };
 
-Interpol.prototype.analyze = function (context) {
+Placeholder.prototype.analyze = function (context) {
   this.exp.analyze(context);
 };
 

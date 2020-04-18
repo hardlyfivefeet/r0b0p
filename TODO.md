@@ -3,10 +3,10 @@
 stars for difficulty
 
 - id is declared but never used -together-
-
   - add field 'isReferenced' to the Variable class (do we have a variable class, maybe id instead)
-
-- rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar \* Adriana
+- add string methods!
+- check if we have semantic analysis for UNPR3D1CTABL3
+- check if we have semantic analysis for uncl3ar
 
 optional future additions:
 

@@ -55,11 +55,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() {}
+  constructor() { }
 }
 
 class Continue {
-  constructor() {}
+  constructor() { }
 }
 
 class Conditional {
@@ -158,12 +158,12 @@ class BoolLit {
 }
 
 class Text {
-  constructor(quasi, interpolGuys = []) {
-    Object.assign(this, { quasi, interpolGuys });
+  constructor(quasi, placeholders = []) {
+    Object.assign(this, { quasi, placeholders });
   }
 }
 
-class Interpol {
+class Placeholder {
   constructor(exp, index = null) {
     Object.assign(this, { exp, index });
   }
@@ -202,6 +202,6 @@ module.exports = {
   FloatLit,
   BoolLit,
   Text,
-  Interpol,
+  Placeholder,
   Id,
 };

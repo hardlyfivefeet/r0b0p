@@ -86,7 +86,6 @@ class Context {
       }
     }
     return false;
-    // throw new Error(`Identifier ${id} has not been declared`);
   }
 
   lookupFunction(id) {

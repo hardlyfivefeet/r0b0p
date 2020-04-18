@@ -80,10 +80,10 @@ r0b0p {
   char        = ~"\"" ~"\n" ~"\\" any
               | escape
 
-  Text        = "\"" (# charNoApos | Interpol)* "\""
-  Interpol    = ~"\\'" apos Exp apos
+  Text        = "\"" (# quasi | Placeholder)* "\""
+  Placeholder = ~"\\'" apos Exp apos
   apos        = "'"
-  charNoApos  = ~apos char
+  quasi       = ~apos char
 
   boolean     = "b0p" | "b1p"
   undefined   = "uncl3ar"
