@@ -3,8 +3,8 @@
 stars for difficulty
 
 - id is declared but never used -together-
+
   - add field 'isReferenced' to the Variable class (do we have a variable class, maybe id instead)
-- potential infinite loop (started, but not finished)
 
 - rename string interpolation stuff to quasis and whatever the other mysterious word is in grammar \* Adriana
 

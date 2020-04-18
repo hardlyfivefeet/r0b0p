@@ -79,6 +79,7 @@ class Context {
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
   lookup(id) {
+    console.log("id is ", id);
     for (let context = this; context !== null; context = context.parent) {
       if (context.locals.has(id)) {
         return true;

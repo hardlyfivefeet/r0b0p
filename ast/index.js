@@ -170,8 +170,8 @@ class Interpol {
 }
 
 class Id {
-  constructor(name) {
-    Object.assign(this, { name });
+  constructor(name, isReferenced = false) {
+    Object.assign(this, { name, isReferenced });
   }
 }
 
