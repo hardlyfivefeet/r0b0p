@@ -2,8 +2,8 @@
 
 stars for difficulty
 
-- add string methods!
-- check if we have semantic analysis for UNPR3D1CTABL3
+- add string method builtins!
+- add UNPR3D1CTABL3 (Math.random) to builtins lol
 - check if we have semantic analysis for uncl3ar
 - add test (semantic?) to make sure that you can have a all caps var and lowercase var w same names and one is readonly and one isn't
 - ask toal about passing info between test programs
