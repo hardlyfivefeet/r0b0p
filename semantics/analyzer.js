@@ -37,8 +37,8 @@ const {
 const check = require("./check");
 const Context = require("./context");
 
-module.exports = function (exp) {
-  exp.analyze(Context.INITIAL);
+module.exports = function (program) {
+  program.analyze(Context.INITIAL);
 };
 
 Assignment.prototype.analyze = function (context) {
@@ -87,8 +87,9 @@ FuncCall.prototype.analyze = function (context) {
 };
 
 Program.prototype.analyze = function (context) {
-  this.statements.forEach((statement) => statement.analyze(context));
-  check.unusedLocals(context);
+  const programContext = context.createChildContextForBlock();
+  this.statements.forEach((statement) => statement.analyze(programContext));
+  check.unusedLocals(programContext);
 };
 
 Block.prototype.analyze = function (context) {

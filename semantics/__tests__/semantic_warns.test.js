@@ -39,7 +39,7 @@ const warns = [
     `WH1L3[b1p] < SP3AK["Hello nobody"]; >`,
     POTENTIAL_INFINITE_LOOP_MESSAGE,
   ],
-  ["unused var", `z = 6;`, "Beep! Alert! Detecting unused variable z"],
+  ["unused var", `x = 6;`, "Beep! Alert! Detecting unused variable x"],
 ];
 
 describe("The semantic analyzer", () => {
