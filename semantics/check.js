@@ -98,4 +98,13 @@ module.exports = {
       `Bip beeep! Human is trying to override a variable with a function. That is not allowed.`
     );
   },
+
+  unusedLocals(context) {
+    context.locals.forEach((local) => {
+      doWarn(
+        local.referenced,
+        `Beep! Alert! Detecting unused variable ${local.name}`
+      );
+    });
+  },
 };

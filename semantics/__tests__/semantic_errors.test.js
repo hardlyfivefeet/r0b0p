@@ -12,7 +12,7 @@ const errors = [
   ["use of undeclared variable", "y = x + 6;"],
   [
     "use of declared variable outside the inner block",
-    "PR0GRAM declare_x[] < x = 3; > SP3AK[x];",
+    "PR0GRAM declare_x[] < x = 3; SP3AK[x]; > SP3AK[x];",
   ],
   ["same key repeated", "y = {a: 1, a: 2};"],
   [

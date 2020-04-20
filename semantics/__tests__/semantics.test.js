@@ -11,8 +11,11 @@ const analyze = require("../analyzer");
 const program = String.raw`
 SP3AK["Hello, world!"];
 num_of_members = 3;
+SP3AK[num_of_members];
 name = "r0b0p";
+SP3AK[name];
 AGE_TOTAL = 62;
+SP3AK[AGE_TOTAL];
 x = b1p;
 y = b0p;
 
@@ -21,7 +24,9 @@ SUBST1TUT3[list, 0, 100];
 PLAC3_AT[list, 2, 5];
 D1SCARD_AT[list, 3];
 value = R3TR13V3_AT[list, 0];
+SP3AK[value];
 list_length = S1Z3[list];
+SP3AK[list_length];
 
 dict = {a: 2, b: 3};
 PLAC3[dict, "c", 3];
@@ -77,6 +82,7 @@ PR0GRAM area_of_circle[r] <
 >
 
 area = area_of_circle[10];
+SP3AK[area];
 
 PR0GRAM gcd[a, b] <
   PR3SUM1NG[b == 0] <

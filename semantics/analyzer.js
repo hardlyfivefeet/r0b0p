@@ -33,6 +33,7 @@ const {
   Placeholder,
   Id,
 } = require("../ast");
+
 const check = require("./check");
 const Context = require("./context");
 
@@ -42,12 +43,12 @@ module.exports = function (exp) {
 
 Assignment.prototype.analyze = function (context) {
   this.exp.analyze(context);
-  if (!context.lookup(this.id.name)) {
+  if (!context.lookup(this.id)) {
     check.assigningVarToFunc(context, this.id.name);
+    context.add(this.id);
   } else {
     check.isNotReadOnly(this.id.name);
   }
-  context.add(this.id.name);
 };
 
 BinaryExp.prototype.analyze = function (context) {
@@ -57,7 +58,7 @@ BinaryExp.prototype.analyze = function (context) {
 
 FuncDecl.prototype.analyze = function (context) {
   // checks that func id hasn't already been declared as a var
-  check.assigningFuncToVar(context, this.id.name);
+  check.assigningFuncToVar(context, this.id);
 
   //If the function has been initalized before, aka the id has already been used,
   //check to see if it's readonly.
@@ -66,7 +67,7 @@ FuncDecl.prototype.analyze = function (context) {
   }
 
   this.bodyContext = context.createChildContextForFunctionBody(this);
-  this.params.forEach((p) => this.bodyContext.add(p.name));
+  this.params.forEach((p) => this.bodyContext.add(p));
   context.addFunction(this.id.name, this); // allows for recursive functions
   this.block.analyze(this.bodyContext);
   delete this.bodyContext; // This was only temporary, delete to keep output clean.
@@ -87,7 +88,7 @@ FuncCall.prototype.analyze = function (context) {
 
 Program.prototype.analyze = function (context) {
   this.statements.forEach((statement) => statement.analyze(context));
-  //the end, check for unused variables
+  check.unusedLocals(context);
 };
 
 Block.prototype.analyze = function (context) {
@@ -101,6 +102,7 @@ Block.prototype.analyze = function (context) {
   });
   //If we're in a potential infinite loop and we haven't seen a break then we have a problem.
   check.potentialInfiniteLoop(newContext);
+  check.unusedLocals(newContext);
 };
 
 ForLoop.prototype.analyze = function (context) {
@@ -109,7 +111,7 @@ ForLoop.prototype.analyze = function (context) {
   const bodyContext = context.createChildContextForLoop();
   if (this.id) {
     // If there is an id assigned to the iterator variable (aka i:1->50)
-    bodyContext.add(this.id.name);
+    bodyContext.add(this.id);
   }
   this.block.analyze(bodyContext);
 };
@@ -213,11 +215,13 @@ Placeholder.prototype.analyze = function (context) {
 };
 
 Id.prototype.analyze = function (context) {
-  if (!context.lookup(this.name)) {
+  const lookupResult = context.lookup(this);
+  if (!lookupResult) {
     throw new Error(
       `Bip beeep! Human has undeclared variable ${this.name}. That is not allowed.`
     );
   }
+  lookupResult.referenced = true;
   this.value = this.name;
 };
 

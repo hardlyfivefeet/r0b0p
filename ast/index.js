@@ -55,11 +55,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() { }
+  constructor() {}
 }
 
 class Continue {
-  constructor() { }
+  constructor() {}
 }
 
 class Conditional {
@@ -170,8 +170,8 @@ class Placeholder {
 }
 
 class Id {
-  constructor(name, isReferenced = false) {
-    Object.assign(this, { name, isReferenced });
+  constructor(name, referenced = false) {
+    Object.assign(this, { name, referenced });
   }
 }
 

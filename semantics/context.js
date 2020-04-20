@@ -67,7 +67,7 @@ class Context {
     });
   }
 
-  // Adds a id to this context.
+  // Adds an Id to this context.
   add(id) {
     this.locals.add(id);
   }
@@ -79,10 +79,12 @@ class Context {
   // Returns the entity bound to the given identifier, starting from this
   // context and searching "outward" through enclosing contexts if necessary.
   lookup(id) {
-    console.log("id is ", id);
     for (let context = this; context !== null; context = context.parent) {
-      if (context.locals.has(id)) {
-        return true;
+      const localsArr = Array.from(context.locals);
+      for (let i = 0; i < localsArr.length; i++) {
+        if (localsArr[i].name === id.name) {
+          return localsArr[i];
+        }
       }
     }
     return false;

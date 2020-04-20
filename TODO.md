@@ -2,11 +2,12 @@
 
 stars for difficulty
 
-- id is declared but never used -together-
-  - add field 'isReferenced' to the Variable class (do we have a variable class, maybe id instead)
 - add string methods!
 - check if we have semantic analysis for UNPR3D1CTABL3
 - check if we have semantic analysis for uncl3ar
+- add test (semantic?) to make sure that you can have a all caps var and lowercase var w same names and one is readonly and one isn't
+- ask toal about passing info between test programs
+- for lookup functions change to Id object instead of name
 
 optional future additions:
 
