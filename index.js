@@ -1,14 +1,40 @@
+/** Usage:
+ * index.js -a <filename>
+ *     writes out the AST and stops
+ *
+ * index.js -i <filename>
+ *     writes the decorated AST (semantic graph) then stops
+ *
+ * index.js <filename>
+ *     fully compiles and writes the compiled JavaScript.
+ *
+ * index.js -o <filename>
+ *     optimizes the intermediate code before generating JavaScript.
+ */
+
 const fs = require("fs");
 const util = require("util");
 const yargs = require("yargs");
 const parse = require("./ast/parser");
+const analyze = require("./semantics/analyzer");
+const graphView = require("./semantics/viewer");
+const optimize = require("./semantics/optimizer");
+const generate = require("./code_generation/js_generator");
 
-// If compiling from a string, return the AST
-function compile(sourceCode, { astOnly }) {
+// If compiling from a string, return the AST, IR, or compiled code as a string.
+function compile(sourceCode, { astOnly, frontEndOnly, shouldOptimize }) {
   let program = parse(sourceCode);
   if (astOnly) {
     return util.inspect(program, { depth: null });
   }
+  analyze(program);
+  // if (shouldOptimize) {
+  //   optimize(program);
+  // }
+  // if (frontEndOnly) {
+  //   return graphView(program);
+  // }
+  return generate(program);
 }
 
 // If compiling from a file, write to standard output.
@@ -28,11 +54,18 @@ module.exports = { compile, compileFile };
 // Run the compiler as a command line application.
 if (require.main === module) {
   const { argv } = yargs
-    .usage("$0 [-a] filename")
-    .boolean(["a"])
+    .usage("$0 [-a] [-o] [-i] filename")
+    .boolean(["a", "o", "i"])
     .describe("a", "show abstract syntax tree after parsing then stop")
+    .describe("o", "do optimizations")
+    .describe(
+      "i",
+      "generate and show the decorated abstract syntax tree then stop"
+    )
     .demand(1);
   compileFile(argv._[0], {
-    astOnly: argv.a
+    astOnly: argv.a,
+    frontEndOnly: argv.i,
+    shouldOptimize: argv.o,
   });
 }
