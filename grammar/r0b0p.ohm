@@ -47,7 +47,7 @@ r0b0p {
   continue    = "C0NT1NU3" ~idchar
 
   FuncDecl    = kwProgram Id "[" (ListOf<Id, ",">)? "]" Block
-  FuncCall    = (Id | mathFunc | listFunc | dictFunc) "[" (ListOf<Exp, ",">)? "]"
+  FuncCall    = (Id | mathFunc | listFunc | dictFunc | textFunc) "[" (ListOf<Exp, ",">)? "]"
   Conditional = "PR3SUM1NG" "[" Exp "]" Block ElseIfBlock* ElseBlock?
   ElseIfBlock = "3LS3 1F" "[" Exp "]" Block
   ElseBlock   = "3LS3" Block
@@ -67,11 +67,12 @@ r0b0p {
   idchar      = alnum | "_"
   keyword     = ("N0T" | "b00l" | "l3tt3r" | "d1g1ts" | "uncl3ar" | "t3xt" | "l1st"
               | "d1ct" | "SP3AK" | "C0UNT" | "WH1L3" | "G1V3" | "PR0GRAM" | "b0p"
-              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "UNPR3D1CTABL3" | "C0NT1NU3" | "D1SC0NT1NU3"
-              | mathFunc | listFunc | dictFunc)
-  mathFunc    = "SQRT" | "ABS" | "FL00R" | "CE1L" | "R0UND" | "MAX1MUM" | "M1N1MUM"
+              | "b1p" | "..." | "3LS3" | "3LS3 1F" | "C0NT1NU3" | "D1SC0NT1NU3"
+              | mathFunc | listFunc | dictFunc | textFunc)
+  mathFunc    = "SQRT" | "ABS" | "FL00R" | "CE1L" | "R0UND" | "MAX1MUM" | "M1N1MUM" | "UNPR3D1CTABL3"
   listFunc    = "PLAC3_AT" | "D1SCARD_AT" | "R3TR13V3_AT" | "SUBST1TUT3" | "S1Z3"
   dictFunc    = "PLAC3" | "D1SCARD" | "R3TR13V3" | "C0D3S"
+  textFunc    = "S1Z3" | "C0NTA1NS" | "SUBT3XT" | "SPL1T" | "MAK3_UPP3R" | "MAK3_LOW3R"
 
   number      = decimal 
               | digit+                       -- integer

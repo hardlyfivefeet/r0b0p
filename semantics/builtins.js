@@ -9,6 +9,7 @@ const standardFunctions = [
   new FuncDecl("R0UND", ["n"]),
   new FuncDecl("MAX1MUM", ["list"]),
   new FuncDecl("M1N1MUM", ["list"]),
+  new FuncDecl("UNPR3D1CTABL3", []),
 
   // List functions
   new FuncDecl("PLAC3_AT", ["list", "index", "value"]),
@@ -22,6 +23,14 @@ const standardFunctions = [
   new FuncDecl("D1SCARD", ["dict", "key"]),
   new FuncDecl("R3TR13V3", ["dict", "key"]),
   new FuncDecl("C0D3S", ["dict"]),
+
+  // String functions
+  new FuncDecl("S1Z3", ["string"]),
+  new FuncDecl("C0NTA1NS", ["string", "substring"]),
+  new FuncDecl("SUBT3XT", ["string", "start_index", "end_index"]),
+  new FuncDecl("SPL1T", ["string"]),
+  new FuncDecl("MAK3_UPP3R", ["string"]),
+  new FuncDecl("MAK3_LOW3R", ["string"]),
 ];
 
 /* eslint-disable no-param-reassign */

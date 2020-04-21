@@ -34,6 +34,29 @@ D1SCARD[dict, "a"];
 R3TR13V3[dict, "c"];
 C0D3S[dict];
 
+n = -100.25;
+new_num = SQRT[n];
+new_num = ABS[n];
+new_num = CE1L[n];
+new_num = R0UND[n];
+list_num = {1, 2, 3};
+new_num = MAX1MUM[list_num];
+new_num = M1N1MUM[list_num];
+new_num = UNPR3D1CTABL3[];
+SP3AK[new_num];
+
+s = "This is a test string!";
+strlen = S1Z3[s];
+SP3AK[strlen];
+has_substr = C0NTA1NS[s, "test"];
+SP3AK[has_substr];
+new_str = SUBT3XT[s, 0, 10];
+s_array = SPL1T[s];
+SP3AK[S1Z3[s_array]];
+new_str = MAK3_UPP3R[s];
+new_str = MAK3_LOW3R[s];
+SP3AK[new_str];
+
 x = 3;
 PR3SUM1NG[x < 6] <
     SP3AK["x is less than 6!"];
