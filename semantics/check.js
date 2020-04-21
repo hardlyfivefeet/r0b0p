@@ -83,7 +83,7 @@ module.exports = {
   },
 
   assigningVarToFunc(context, id) {
-    const lookupFuncResult = context.lookupFunction(id);
+    const lookupFuncResult = context.lookupFunctionByName(id);
     doCheck(
       !lookupFuncResult,
       `Beeep! Human is trying to override a function with a variable. That is not allowed.`

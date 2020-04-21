@@ -87,13 +87,13 @@ class Context {
         }
       }
     }
-    return false;
+    return null;
   }
 
-  lookupFunction(id) {
+  lookupFunctionByName(name) {
     for (let context = this; context !== null; context = context.parent) {
-      if (context.functions.has(id)) {
-        return context.functions.get(id);
+      if (context.functions.has(name)) {
+        return context.functions.get(name);
       }
     }
     return null;

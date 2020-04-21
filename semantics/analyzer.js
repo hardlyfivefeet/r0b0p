@@ -62,7 +62,7 @@ FuncDecl.prototype.analyze = function (context) {
 
   //If the function has been initalized before, aka the id has already been used,
   //check to see if it's readonly.
-  if (context.lookupFunction(this.id.name)) {
+  if (context.lookupFunctionByName(this.id.name)) {
     check.isNotReadOnly(this.id.name);
   }
 
@@ -74,7 +74,7 @@ FuncDecl.prototype.analyze = function (context) {
 };
 
 FuncCall.prototype.analyze = function (context) {
-  const lookupResult = context.lookupFunction(this.id.name);
+  const lookupResult = context.lookupFunctionByName(this.id.name);
   // If the function can't be found, it might be a parameter to the parent function.
   if (!lookupResult) {
     check.inFunction(context);
