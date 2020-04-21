@@ -118,6 +118,9 @@ module.exports = function (exp) {
 //   }
 //   return `return ${exp.gen()}`;
 // }
+Program.prototype.gen = function () {
+  this.statements.map((statement) => statement.gen()).join(";");
+};
 
 List.prototype.gen = function () {
   return `Array(${this.items.length().gen()}).fill(${this.items.gen()})`;
