@@ -12,10 +12,14 @@ const program = String.raw`
 SP3AK["Hello, world!"];
 num_of_members = 3;
 SP3AK[num_of_members];
+NUM_OF_MEMBERS = 38;
+SP3AK[NUM_OF_MEMBERS];
 name = "r0b0p";
 SP3AK[name];
 AGE_TOTAL = 62;
 SP3AK[AGE_TOTAL];
+age_total = 16;
+SP3AK[age_total];
 x = b1p;
 y = b0p;
 
