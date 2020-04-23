@@ -27,8 +27,12 @@ describe("assignment", () => {
 });
 
 describe("types", () => {
-  it("lets us check if something is unclear/undefined", () => {
+  it("let us check if something is unclear/undefined", () => {
     results = r0b0p.match("PR3SUM1NG[x == uncl3ar] < SP3AK[5]; >");
+    assert(results.succeeded());
+  });
+  it("let us declare something as unclear/undefined", () => {
+    results = r0b0p.match("x = uncl3ar;");
     assert(results.succeeded());
   });
 });

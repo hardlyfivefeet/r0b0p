@@ -55,11 +55,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() {}
+  constructor() { }
 }
 
 class Continue {
-  constructor() {}
+  constructor() { }
 }
 
 class Conditional {

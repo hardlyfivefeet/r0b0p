@@ -16,7 +16,7 @@
 const R0B0P_TRUE = "b1p";
 const R0B0P_FALSE = "b0p";
 
-const beautify = require("js-beautify");
+// const beautify = require("js-beautify");
 const {
   Program,
   Block,
@@ -188,9 +188,9 @@ Conditional.prototype.gen = function () {
           ${this.elseBlock.gen()}`;
 };
 
-ElseIfBlock.prototype.gen = function () {};
+ElseIfBlock.prototype.gen = function () { };
 
-ElseBlock.prototype.gen = function () {};
+ElseBlock.prototype.gen = function () { };
 
 IntLit.prototype.gen = function () {
   return this.value;
