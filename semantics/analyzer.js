@@ -44,7 +44,7 @@ module.exports = function (program) {
 Assignment.prototype.analyze = function (context) {
   this.exp.analyze(context);
   if (!context.lookup(this.id)) {
-    check.assigningVarToFunc(context, this.id.name);
+    check.ifAssigningVarToFunc(context, this.id.name);
     context.add(this.id);
   } else {
     check.isNotReadOnly(this.id.name);
@@ -58,7 +58,7 @@ BinaryExp.prototype.analyze = function (context) {
 
 FuncDecl.prototype.analyze = function (context) {
   // checks that func id hasn't already been declared as a var
-  check.assigningFuncToVar(context, this.id);
+  check.ifAssigningFuncToVar(context, this.id);
 
   //If the function has been initalized before, aka the id has already been used,
   //check to see if it's readonly.
@@ -77,11 +77,11 @@ FuncCall.prototype.analyze = function (context) {
   const lookupResult = context.lookupFunctionByName(this.id.name);
   // If the function can't be found, it might be a parameter to the parent function.
   if (!lookupResult) {
-    check.inFunction(context);
-    check.isParam(this.id.name, context.currentFunction.params);
+    check.ifInFunction(context);
+    check.ifIdIsParam(this.id.name, context.currentFunction.params);
   } else {
     this.id = lookupResult;
-    check.legalArguments(this.params, this.id.params); // Checks whether the lengths match
+    check.ifLegalArguments(this.params, this.id.params); // Checks whether the lengths match
     this.params.forEach((param) => param.analyze(context));
   }
 };
@@ -89,36 +89,39 @@ FuncCall.prototype.analyze = function (context) {
 Program.prototype.analyze = function (context) {
   const programContext = context.createChildContextForBlock();
   this.statements.forEach((statement) => statement.analyze(programContext));
-  check.unusedLocals(programContext);
+  check.localsAreUnused(programContext);
 };
 
 Block.prototype.analyze = function (context) {
   const newContext = context.createChildContextForBlock();
   this.statements.forEach((statement) => {
     //If we've seen a return or break, then the following statements are unreachable.
-    check.unreachableCodeAfterBreakOrReturn(
+    //This only applies to statements at the level of the block, so nested return
+    //statements whose block is followed by more statements will not be affected.
+    check.ifCodeUnreachableAfterBreakOrReturn(
       newContext.seenReturn || newContext.seenBreak
     );
     statement.analyze(newContext);
   });
   //If we're in a potential infinite loop and we haven't seen a break then we have a problem.
-  check.potentialInfiniteLoop(newContext);
-  check.unusedLocals(newContext);
+  check.insidePotentialInfiniteLoop(newContext);
+  check.localsAreUnused(newContext);
 };
 
 ForLoop.prototype.analyze = function (context) {
   this.start.analyze(context);
   this.end.analyze(context);
-  const bodyContext = context.createChildContextForLoop();
+  this.bodyContext = context.createChildContextForLoop();
   if (this.id) {
     // If there is an id assigned to the iterator variable (aka i:1->50)
-    bodyContext.add(this.id);
+    this.bodyContext.add(this.id);
   }
-  this.block.analyze(bodyContext);
+  this.block.analyze(this.bodyContext);
+  delete this.bodyContext;
 };
 
 Conditional.prototype.analyze = function (context) {
-  check.unreachableCodeWithCondition(this.condition);
+  check.ifCodeUnreachableWithCondition(this.condition);
   this.condition.analyze(context);
   this.block.analyze(context);
   if (this.elseIfBlocks.length !== 0) {
@@ -130,7 +133,7 @@ Conditional.prototype.analyze = function (context) {
 };
 
 ElseIfBlock.prototype.analyze = function (context) {
-  check.unreachableCodeWithCondition(this.condition);
+  check.ifCodeUnreachableWithCondition(this.condition);
   this.condition.analyze(context);
   this.block.analyze(context);
 };
@@ -154,7 +157,7 @@ NotExp.prototype.analyze = function (context) {
 Dict.prototype.analyze = function (context) {
   const usedFields = new Set();
   this.pairs.forEach((pair) => {
-    check.fieldAlreadyDeclared(pair.key.name, usedFields);
+    check.fieldNotAlreadyDeclared(pair.key.name, usedFields);
     usedFields.add(pair.key.name);
     pair.analyze(context);
   });
@@ -185,20 +188,20 @@ WhileLoop.prototype.analyze = function (context) {
   }
   this.block.analyze(childContext);
   //If there's a "While false" loop, we trigger that as unreachable code.
-  check.unreachableCodeWithCondition(this.condition);
+  check.ifCodeUnreachableWithCondition(this.condition);
 };
 
 Break.prototype.analyze = function (context) {
-  check.inLoop(context);
+  check.ifInLoop(context);
   context.seenBreak = true;
 };
 
 Continue.prototype.analyze = function (context) {
-  check.inLoop(context);
+  check.ifInLoop(context);
 };
 
 Return.prototype.analyze = function (context) {
-  check.inFunction(context);
+  check.ifInFunction(context);
   this.exp.analyze(context);
   context.seenReturn = true;
 };

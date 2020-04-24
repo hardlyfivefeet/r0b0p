@@ -22,28 +22,28 @@ module.exports = {
     );
   },
 
-  fieldAlreadyDeclared(field, usedFields) {
+  fieldNotAlreadyDeclared(field, usedFields) {
     doCheck(
       !usedFields.has(field),
       `Bop! The field ${field} has already been declared. Please reconsider, human.`
     );
   },
 
-  inLoop(context) {
+  ifInLoop(context) {
     doCheck(
       context.inLoop,
       `Bop beep... Human is trying to use a loop-only statement outside of a loop (such as C0NT1NU3 or D1SC0NT1NU3).`
     );
   },
 
-  inFunction(context) {
+  ifInFunction(context) {
     doCheck(
       context.currentFunction,
       `Boooop! Human is trying to use a function-only statement outside of a function (i.e. G1V3).`
     );
   },
 
-  isParam(id, params) {
+  ifIdIsParam(id, params) {
     let isParam = false;
     params.forEach((param) => {
       if (id === param.name) {
@@ -53,21 +53,21 @@ module.exports = {
     doCheck(isParam, `Beep bop. That function doesn't exist as a parameter.`);
   },
 
-  potentialInfiniteLoop(context) {
+  insidePotentialInfiniteLoop(context) {
     doWarn(
       !(context.inLoop && context.potentialInfiniteLoop && !context.seenBreak),
       `Bip bop. Detecting a potential infinite loop. Be cautious.`
     );
   },
 
-  unreachableCodeWithCondition(condition) {
+  ifCodeUnreachableWithCondition(condition) {
     doWarn(
       !(condition.constructor === BoolLit && condition.value === R0B0P_FALSE),
       `Boop. This code is unreachable, human. Please remove it.`
     );
   },
 
-  unreachableCodeAfterBreakOrReturn(condition) {
+  ifCodeUnreachableAfterBreakOrReturn(condition) {
     doWarn(
       !condition,
       `Boop. This code is unreachable, human. Please remove it.`
@@ -75,14 +75,14 @@ module.exports = {
   },
 
   // Same number of args and params
-  legalArguments(args, params) {
+  ifLegalArguments(args, params) {
     doCheck(
       args.length === params.length,
       `Bip beep. Expected ${params.length} arguments in call, but got ${args.length}.`
     );
   },
 
-  assigningVarToFunc(context, id) {
+  ifAssigningVarToFunc(context, id) {
     const lookupFuncResult = context.lookupFunctionByName(id);
     doCheck(
       !lookupFuncResult,
@@ -90,7 +90,7 @@ module.exports = {
     );
   },
 
-  assigningFuncToVar(context, id) {
+  ifAssigningFuncToVar(context, id) {
     if (!context.lookup(id)) {
       return;
     }
@@ -99,7 +99,7 @@ module.exports = {
     );
   },
 
-  unusedLocals(context) {
+  localsAreUnused(context) {
     context.locals.forEach((local) => {
       doWarn(
         local.referenced,
