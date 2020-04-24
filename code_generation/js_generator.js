@@ -16,7 +16,7 @@
 const R0B0P_TRUE = "b1p";
 const R0B0P_FALSE = "b0p";
 
-// const beautify = require("js-beautify");
+const beautify = require("js-beautify");
 const {
   Program,
   Block,
@@ -63,7 +63,7 @@ const javaScriptId = (() => {
     if (!map.has(v)) {
       map.set(v, ++lastId); // eslint-disable-line no-plusplus
     }
-    return `${v.id}_${map.get(v)}`;
+    return `${v.name}_${map.get(v)}`;
   };
 })();
 
@@ -119,7 +119,15 @@ module.exports = function (exp) {
 //   return `return ${exp.gen()}`;
 // }
 Program.prototype.gen = function () {
-  this.statements.map((statement) => statement.gen()).join(";");
+  return this.statements.map((statement) => statement.gen()).join("\n");
+};
+
+Return.prototype.gen = function () {
+  return "return " + this.exp.gen() + ";";
+};
+
+Print.prototype.gen = function () {
+  return `console.log(${this.exp.gen()});`;
 };
 
 List.prototype.gen = function () {
@@ -127,11 +135,13 @@ List.prototype.gen = function () {
 };
 
 Assignment.prototype.gen = function () {
-  return `${this.id.gen()} = ${this.exp.gen()}`;
+  return `${
+    isAllUpperCase(this.id.name) ? "const" : "let"
+  } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
-  return `(${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()})`;
+  return `${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()}`;
 };
 
 KeyValue.prototype.gen = function () {
@@ -139,7 +149,11 @@ KeyValue.prototype.gen = function () {
 };
 
 Break.prototype.gen = function () {
-  return "break";
+  return "break;";
+};
+
+Continue.prototype.gen = function () {
+  return "continue;";
 };
 
 FuncCall.prototype.gen = function () {
@@ -147,14 +161,14 @@ FuncCall.prototype.gen = function () {
   //Is this attached to the Id, this, or neither?
   if (this.builtin) {
     //Haven't done this yet
-    return builtin[this.callee.id](args);
+    return builtin[this.id](args);
   }
-  return `${javaScriptId(this.callee)}(${args.join(",")})`;
+  return `${javaScriptId(this.id.id)}(${args.join(",")});`;
 };
 
 Block.prototype.gen = function () {
   return (
-    `{ ` + this.statements.map((statement) => statement.gen()).join(";") + ` }`
+    `{ ` + this.statements.map((statement) => statement.gen()).join("\n") + ` }`
   );
 };
 
@@ -174,11 +188,11 @@ FuncDecl.prototype.gen = function () {
   const name = javaScriptId(this.id);
   const params = this.params.map(javaScriptId);
   const block = this.block.gen();
-  return `function ${name} (${params.join(",")}) {${block}}`;
+  return `function ${name} (${params.join(",")}) ${block}`;
 };
 
 Id.prototype.gen = function () {
-  return javaScriptId(this.name);
+  return javaScriptId(this);
 };
 
 Conditional.prototype.gen = function () {
@@ -188,9 +202,9 @@ Conditional.prototype.gen = function () {
           ${this.elseBlock.gen()}`;
 };
 
-ElseIfBlock.prototype.gen = function () { };
+ElseIfBlock.prototype.gen = function () {};
 
-ElseBlock.prototype.gen = function () { };
+ElseBlock.prototype.gen = function () {};
 
 IntLit.prototype.gen = function () {
   return this.value;
@@ -209,11 +223,22 @@ BoolLit.prototype.gen = function () {
 };
 
 Text.prototype.gen = function () {
-  //deal with quasi and placeholders :(
+  if (this.placeholders.length > 0) {
+    let index = 0;
+    let result = "";
+    this.placeholders.forEach((placeholder) => {
+      const currString = this.quasi.substring(index, placeholder.index);
+      result = result + currString + `\$\{${placeholder.exp.gen()}\}`;
+      index = placeholder.index + 1;
+    });
+    return result;
+  } else {
+    return '"' + this.quasi + '"';
+  }
 };
 
 NegationExp.prototype.gen = function () {
-  return `(- (${this.operand.gen()}))`;
+  return `(- ${this.operand.gen()})`;
 };
 
 //Can do this after one of the TODOs
@@ -228,3 +253,7 @@ Dict.prototype.gen = function () {
 WhileLoop.prototype.gen = function () {
   return `while (${this.condition.gen()}) ${this.block.gen()} `;
 };
+
+function isAllUpperCase(str) {
+  return str === str.toUpperCase();
+}

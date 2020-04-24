@@ -33,8 +33,8 @@ class FuncDecl {
 }
 
 class FuncCall {
-  //For built in functions, since their names are keywords
   constructor(id, params) {
+    //For built in functions, since their names are keywords
     if (id.constructor !== Id) {
       id = new Id(id);
     }
@@ -55,11 +55,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() { }
+  constructor() {}
 }
 
 class Continue {
-  constructor() { }
+  constructor() {}
 }
 
 class Conditional {
