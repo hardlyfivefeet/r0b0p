@@ -1,1 +1,5 @@
-WH1L3[y > 20] < PR3SUM1NG[y == 13] < D1SC0NT1NU3; > >
+PR0GRAM f[x, y] < SP3AK["x is " + x + " and y is " + y]; >
+f[32, 900];
+
+PR0GRAM g[x, y, z] < SP3AK["x is " + x + " and y is " + y]; >
+g[32, 900, 8];

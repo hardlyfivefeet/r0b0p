@@ -162,7 +162,7 @@ KeyValue.prototype.analyze = function (context) {
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) { };
+Key.prototype.analyze = function (context) {};
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -216,11 +216,11 @@ Id.prototype.analyze = function (context) {
   const lookupResult = context.lookup(this);
   check.isNotUndeclaredVariable(lookupResult, this.name);
   lookupResult.referenced = true;
-  this.value = this.name;
+  // this.value = this.name; // wait I dont think we need this anymore ??
 };
 
-BoolLit.prototype.analyze = function (context) { };
+BoolLit.prototype.analyze = function (context) {};
 
-IntLit.prototype.analyze = function (context) { };
+IntLit.prototype.analyze = function (context) {};
 
-FloatLit.prototype.analyze = function (context) { };
+FloatLit.prototype.analyze = function (context) {};

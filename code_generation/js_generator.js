@@ -57,10 +57,10 @@ const javaScriptId = (() => {
   let lastId = 0;
   const map = new Map();
   return (v) => {
-    if (!map.has(v)) {
-      map.set(v, ++lastId); // eslint-disable-line no-plusplus
+    if (!map.has(v.name)) {
+      map.set(v.name, ++lastId); // eslint-disable-line no-plusplus
     }
-    return `${v.name}_${map.get(v)}`;
+    return `${v.name}_${map.get(v.name)}`;
   };
 })();
 
@@ -157,7 +157,7 @@ List.prototype.gen = function () {
 Assignment.prototype.gen = function () {
   return `${
     isAllUpperCase(this.id.name) ? "const" : "let"
-    } ${this.id.gen()} = ${this.exp.gen()};`;
+  } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
@@ -224,9 +224,9 @@ Conditional.prototype.gen = function () {
           ${this.elseBlock.gen()}`;
 };
 
-ElseIfBlock.prototype.gen = function () { };
+ElseIfBlock.prototype.gen = function () {};
 
-ElseBlock.prototype.gen = function () { };
+ElseBlock.prototype.gen = function () {};
 
 IntLit.prototype.gen = function () {
   return this.value;
