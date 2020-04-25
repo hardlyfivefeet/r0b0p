@@ -55,11 +55,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() {}
+  constructor() { }
 }
 
 class Continue {
-  constructor() {}
+  constructor() { }
 }
 
 class Conditional {
@@ -127,12 +127,6 @@ class NegationExp {
   }
 }
 
-class ParensExp {
-  constructor(exp) {
-    Object.assign(this, { exp });
-  }
-}
-
 class NotExp {
   constructor(operand) {
     Object.assign(this, { operand });
@@ -196,7 +190,6 @@ module.exports = {
   Key,
   BinaryExp,
   NegationExp,
-  ParensExp,
   NotExp,
   IntLit,
   FloatLit,

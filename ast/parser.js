@@ -24,7 +24,6 @@ const {
   Placeholder,
   BinaryExp,
   NegationExp,
-  ParensExp,
   NotExp,
   IntLit,
   FloatLit,
@@ -146,7 +145,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new NegationExp(operand.ast());
   },
   Exp7_parens(_lp, exp, _rp) {
-    return new ParensExp(exp.ast());
+    return exp.ast();
   },
   Exp6_not(_not, exp) {
     return new NotExp(exp.ast());

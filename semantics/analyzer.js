@@ -24,7 +24,6 @@ const {
   Key,
   BinaryExp,
   NegationExp,
-  ParensExp,
   NotExp,
   BoolLit,
   IntLit,
@@ -146,10 +145,6 @@ NegationExp.prototype.analyze = function (context) {
   this.operand.analyze(context);
 };
 
-ParensExp.prototype.analyze = function (context) {
-  this.exp.analyze(context);
-};
-
 NotExp.prototype.analyze = function (context) {
   this.operand.analyze(context);
 };
@@ -168,7 +163,7 @@ KeyValue.prototype.analyze = function (context) {
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) {};
+Key.prototype.analyze = function (context) { };
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -225,8 +220,8 @@ Id.prototype.analyze = function (context) {
   this.value = this.name;
 };
 
-BoolLit.prototype.analyze = function (context) {};
+BoolLit.prototype.analyze = function (context) { };
 
-IntLit.prototype.analyze = function (context) {};
+IntLit.prototype.analyze = function (context) { };
 
-FloatLit.prototype.analyze = function (context) {};
+FloatLit.prototype.analyze = function (context) { };

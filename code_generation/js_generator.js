@@ -38,7 +38,6 @@ const {
   Key,
   BinaryExp,
   NegationExp,
-  ParensExp,
   NotExp,
   BoolLit,
   IntLit,
@@ -160,7 +159,7 @@ List.prototype.gen = function () {
 Assignment.prototype.gen = function () {
   return `${
     isAllUpperCase(this.id.name) ? "const" : "let"
-  } ${this.id.gen()} = ${this.exp.gen()};`;
+    } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
@@ -227,9 +226,9 @@ Conditional.prototype.gen = function () {
           ${this.elseBlock.gen()}`;
 };
 
-ElseIfBlock.prototype.gen = function () {};
+ElseIfBlock.prototype.gen = function () { };
 
-ElseBlock.prototype.gen = function () {};
+ElseBlock.prototype.gen = function () { };
 
 IntLit.prototype.gen = function () {
   return this.value;

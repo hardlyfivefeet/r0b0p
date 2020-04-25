@@ -30,7 +30,6 @@ const {
   Key,
   BinaryExp,
   NegationExp,
-  ParensExp,
   NotExp,
   Text,
   Placeholder,
@@ -182,12 +181,10 @@ const fixture = {
         new BinaryExp(
           "&&",
           new BinaryExp("==", new Id("y"), new IntLit(3)),
-          new ParensExp(
-            new BinaryExp(
-              "||",
-              new BinaryExp("==", new Id("x"), new IntLit(5)),
-              new BinaryExp("==", new Id("z"), new IntLit(6))
-            )
+          new BinaryExp(
+            "||",
+            new BinaryExp("==", new Id("x"), new IntLit(5)),
+            new BinaryExp("==", new Id("z"), new IntLit(6))
           )
         )
       ),
@@ -201,12 +198,10 @@ const fixture = {
         new BinaryExp(
           "**",
           new IntLit("8"),
-          new ParensExp(
-            new BinaryExp(
-              "*",
-              new NegationExp(new FloatLit("16.4")),
-              new IntLit("32")
-            )
+          new BinaryExp(
+            "*",
+            new NegationExp(new FloatLit("16.4")),
+            new IntLit("32")
           )
         )
       ),
