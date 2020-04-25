@@ -5,7 +5,7 @@
   "main": "r0b0p.ohm",
   "scripts": {
     "test": "jest --collect-coverage",
-    "lint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
+    "lint": "./node_modules/.bin/eslint --fix --ignore-path .gitignore . --ignore-pattern 'docs/*'"
   },
   "repository": {
     "type": "git",

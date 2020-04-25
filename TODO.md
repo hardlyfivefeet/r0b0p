@@ -9,7 +9,6 @@ stars for difficulty
 - move r0b0p false to builtins and export it there \*\* adriana
 - functions to vars and vars to functions for static semantic errors (on readme) \* adriana
 - code generation, replace all "s.replace(/\s+/g, '');", ".replace(/\_\d+/g, '')" \*\* merissa
-- linter path thing \* merissa
 
 optional future additions:
 
