@@ -36,6 +36,8 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Wrong number of arguments passed into function
 - Calling a nonfunction
 - Editing a const variable
+- Reassigning a function name to a variable
+- Reassigning a variable to a function name
 - Using D1SC0NT1NU3 (break) outside of a loop
 - Using C0NT1NU3 outside of a loop
 - Using G1V3 (return) outside of a function
