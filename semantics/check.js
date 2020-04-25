@@ -91,10 +91,9 @@ module.exports = {
   },
 
   ifAssigningFuncToVar(context, id) {
-    if (!context.lookup(id)) {
-      return;
-    }
-    throw new Error(
+    const lookupVarResult = context.lookup(id);
+    doCheck(
+      !lookupVarResult,
       `Bip beeep! Human is trying to override a variable with a function. That is not allowed.`
     );
   },
@@ -106,5 +105,12 @@ module.exports = {
         `Beep! Alert! Detecting unused variable ${local.name}`
       );
     });
+  },
+
+  isNotUndeclaredVariable(varFound, name) {
+    doCheck(
+      varFound,
+      `Bip beeep! Human has undeclared variable ${name}. That is not allowed.`
+    );
   },
 };

@@ -220,11 +220,7 @@ Placeholder.prototype.analyze = function (context) {
 
 Id.prototype.analyze = function (context) {
   const lookupResult = context.lookup(this);
-  if (!lookupResult) {
-    throw new Error(
-      `Bip beeep! Human has undeclared variable ${this.name}. That is not allowed.`
-    );
-  }
+  check.isNotUndeclaredVariable(lookupResult, this.name);
   lookupResult.referenced = true;
   this.value = this.name;
 };
