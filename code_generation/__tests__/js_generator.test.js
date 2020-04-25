@@ -15,6 +15,21 @@ const fixture = {
     String.raw`let x = Math.sqrt(49); let x = Math.abs((-10)); let x = Math.floor(10.9); let x = Math.ceil(10.9); let x = Math.round(0.5); let x = Math.random();`,
   ],
 
+  listBuiltins: [
+    String.raw`list = {1, 2, 3, 4}; SUBST1TUT3[list, 0, 100]; PLAC3_AT[list, 2, 5]; D1SCARD_AT[list, 3]; value = R3TR13V3_AT[list, 0]; list_length = S1Z3[list];`,
+    String.raw`let list = [1, 2, 3, 4]; list[0] = 100; list.splice(2, 0, 5); list.splice(3, 1); let value = list[0]; let list_length = list.length;`,
+  ],
+
+  dictBuiltins: [
+    String.raw`dict = {a: 2, b: 3}; PLAC3[dict, "c", 3]; D1SCARD[dict, "a"]; value = R3TR13V3[dict, "c"]; keys = C0D3S[dict];`,
+    String.raw`let dict = {a: 2, b: 3}; dict["c"] = 3; delete dict["a"]; let value = dict["c"]; let keys = Object.keys(dict);`,
+  ],
+
+  stringBuiltins: [
+    String.raw`s = "test string"; strlen = S1Z3[s]; has_substr = C0NTA1NS[s, "test"]; new_str = SUBT3XT[s, 0, 10]; s_array = SPL1T[s, ""]; new_str = MAK3_UPP3R[s]; new_str = MAK3_LOW3R[s];`,
+    String.raw`let s = "test string"; let strlen = s.length; let has_substr = s.includes("test"); let new_str = s.substring(0, 10); let s_array = s.split(""); let new_str = s.toUpperCase(); let new_str = s.toLowerCase();`,
+  ],
+
   maxAndMinArray: [
     String.raw`max = MAX1MUM[{1, 2, 3}]; min = M1N1MUM[{1, 2, 3}];`,
     String.raw`let max = Math.max([1, 2, 3]); let min = Math.min([1, 2, 3]);`,

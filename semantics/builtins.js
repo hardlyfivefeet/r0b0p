@@ -28,7 +28,7 @@ const standardFunctions = [
   new FuncDecl("S1Z3", ["string"]),
   new FuncDecl("C0NTA1NS", ["string", "substring"]),
   new FuncDecl("SUBT3XT", ["string", "start_index", "end_index"]),
-  new FuncDecl("SPL1T", ["string"]),
+  new FuncDecl("SPL1T", ["string", "separator"]),
   new FuncDecl("MAK3_UPP3R", ["string"]),
   new FuncDecl("MAK3_LOW3R", ["string"]),
 ];
