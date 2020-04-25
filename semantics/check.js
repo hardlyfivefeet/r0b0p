@@ -1,6 +1,5 @@
 const { BoolLit } = require("../ast");
-
-const R0B0P_FALSE = "b0p";
+const { R0B0P_FALSE } = require("./builtins");
 
 function doCheck(condition, message) {
   if (!condition) {

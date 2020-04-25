@@ -1,8 +1,6 @@
 /* eslint no-unused-vars: 0 */ // --> OFF
 // The semantic analyzer
 
-const R0B0P_TRUE = "b1p";
-
 const {
   Program,
   Block,
@@ -32,6 +30,7 @@ const {
   Placeholder,
   Id,
 } = require("../ast");
+const { R0B0P_TRUE } = require("./builtins");
 
 const check = require("./check");
 const Context = require("./context");

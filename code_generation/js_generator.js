@@ -13,9 +13,6 @@
  *   generate(tigerExpression);
  */
 
-const R0B0P_TRUE = "b1p";
-const R0B0P_FALSE = "b0p";
-
 const beautify = require("js-beautify");
 const {
   Program,
@@ -46,6 +43,7 @@ const {
   Placeholder,
   Id,
 } = require("../ast");
+const { R0B0P_TRUE, R0B0P_FALSE } = require("../semantics/builtins");
 
 function makeOp(op) {
   return { "==": "===" }[op] || op;

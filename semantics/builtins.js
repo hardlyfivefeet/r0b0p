@@ -33,10 +33,13 @@ const standardFunctions = [
   new FuncDecl("MAK3_LOW3R", ["string"]),
 ];
 
+const R0B0P_TRUE = "b1p";
+const R0B0P_FALSE = "b0p";
+
 /* eslint-disable no-param-reassign */
 standardFunctions.forEach((f) => {
   f.builtin = true;
 });
 /* eslint-enable no-param-reassign */
 
-module.exports = { standardFunctions };
+module.exports = { standardFunctions, R0B0P_TRUE, R0B0P_FALSE };
