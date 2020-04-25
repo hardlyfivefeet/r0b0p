@@ -68,56 +68,37 @@ const javaScriptId = (() => {
 })();
 
 // Let's inline the built-in functions, because we can!
-// const builtin = {
-//   print([s]) {
-//     return `console.log(${s})`;
-//   },
-//   ord([s]) {
-//     return `(${s}).charCodeAt(0)`;
-//   },
-//   chr([i]) {
-//     return `String.fromCharCode(${i})`;
-//   },
-//   size([s]) {
-//     return `${s}.length`;
-//   },
-//   substring([s, i, n]) {
-//     return `${s}.substr(${i}, ${n})`;
-//   },
-//   concat([s, t]) {
-//     return `${s}.concat(${t})`;
-//   },
-//   not(i) {
-//     return `(!(${i}))`;
-//   },
-//   exit(code) {
-//     return `process.exit(${code})`;
-//   },
-// };
+const builtin = {
+  SQRT([n]) {
+    return `Math.sqrt(${n})`;
+  },
+  ABS([n]) {
+    return `Math.abs(${n})`;
+  },
+  FL00R([n]) {
+    return `Math.floor(${n})`;
+  },
+  CE1L([n]) {
+    return `Math.ceil(${n})`;
+  },
+  R0UND([n]) {
+    return `Math.round(${n})`;
+  },
+  MAX1MUM([list]) {
+    return `Math.max(${list})`;
+  },
+  M1N1MUM([list]) {
+    return `Math.min(${list})`;
+  },
+  UNPR3D1CTABL3() {
+    return `Math.random()`;
+  },
+};
 
 module.exports = function (exp) {
   return beautify(exp.gen(), { indent_size: 2 });
 };
 
-// // This only exists because Tiger is expression-oriented and JavaScript is not.
-// // It's pretty crazy! In the case where the expression is actually a sequence,
-// // we have to dig in and stick a 'return' before the last expression. And this
-// // as to be recursive, because the last expression of a sequence could actually
-// // be a sequence....
-// function makeReturn(exp) {
-//   if (exp.constructor === LetExp) {
-//     const filteredDecs = exp.decs.filter((d) => d.constructor !== TypeDec);
-//     const all = [...filteredDecs, ...exp.body.slice(0, -1)].map((e) => e.gen());
-//     all.push(makeReturn(exp.body[exp.body.length - 1]));
-//     return all.join(";");
-//   }
-//   if (exp.constructor === ExpSeq) {
-//     const generated = exp.exps.slice(0, -1).map((e) => e.gen());
-//     generated.push(makeReturn(exp.exps[exp.exps.length - 1]));
-//     return generated.join(";");
-//   }
-//   return `return ${exp.gen()}`;
-// }
 Program.prototype.gen = function () {
   return this.statements.map((statement) => statement.gen()).join("\n");
 };
@@ -131,7 +112,7 @@ Print.prototype.gen = function () {
 };
 
 List.prototype.gen = function () {
-  return `Array(${this.items.length().gen()}).fill(${this.items.gen()})`;
+  return `[${this.items.map((item) => item.gen()).join(",")}]`;
 };
 
 Assignment.prototype.gen = function () {
@@ -158,10 +139,8 @@ Continue.prototype.gen = function () {
 
 FuncCall.prototype.gen = function () {
   const args = this.params.map((a) => a.gen());
-  //Is this attached to the Id, this, or neither?
-  if (this.builtin) {
-    //Haven't done this yet
-    return builtin[this.id](args);
+  if (this.id.builtin) {
+    return builtin[this.id.id.name](args);
   }
   return `${javaScriptId(this.id.id)}(${args.join(",")});`;
 };

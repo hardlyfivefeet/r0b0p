@@ -4,7 +4,7 @@ const standardFunctions = [
   // Math functions
   new FuncDecl("SQRT", ["n"]),
   new FuncDecl("ABS", ["n"]),
-  new FuncDecl("FLOOR", ["n"]),
+  new FuncDecl("FL00R", ["n"]),
   new FuncDecl("CE1L", ["n"]),
   new FuncDecl("R0UND", ["n"]),
   new FuncDecl("MAX1MUM", ["list"]),

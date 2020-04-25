@@ -10,6 +10,16 @@ const analyze = require("../../semantics/analyzer");
 const generate = require("../js_generator");
 
 const fixture = {
+  mathBuiltins: [
+    String.raw`x = SQRT[49]; x = ABS[-10]; x = FL00R[10.9]; x = CE1L[10.9]; x = R0UND[0.5]; x = UNPR3D1CTABL3[];`,
+    String.raw`let x = Math.sqrt(49); let x = Math.abs((-10)); let x = Math.floor(10.9); let x = Math.ceil(10.9); let x = Math.round(0.5); let x = Math.random();`,
+  ],
+
+  maxAndMinArray: [
+    String.raw`max = MAX1MUM[{1, 2, 3}]; min = M1N1MUM[{1, 2, 3}];`,
+    String.raw`let max = Math.max([1, 2, 3]); let min = Math.min([1, 2, 3]);`,
+  ],
+
   hello: [
     String.raw`SP3AK["Hello, world\n"];`,
     String.raw`console.log("Hello, world\n");`,
@@ -27,10 +37,10 @@ const fixture = {
     String.raw`function f(x, y) { console.log("x is " + x + " and y is " + y); } f(32, 900);`,
   ],
 
-  // whileLoop: [
-  //   String.raw`x = 7; WH1L3[x == 7] < x = x + 1; >`,
-  //   String.raw`let x = 7; while (x === 7) { x = x + 1; }`,
-  // ],
+  whileLoop: [
+    String.raw`x = 7; WH1L3[x == 7] < x = x + 1; >`,
+    String.raw`let x = 7; while (x === 7) { let x = x + 1; }`,
+  ],
 
   // forLoop: [
   //   String.raw`C0UNT[i:0->10] < SP3AK[i]; >`,
