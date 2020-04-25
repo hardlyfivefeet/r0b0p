@@ -12,22 +12,19 @@ const generate = require("../js_generator");
 const fixture = {
   hello: [
     String.raw`SP3AK["Hello, world\n"];`,
-    String.raw`console.log("Hello, world\n")`,
+    String.raw`console.log("Hello, world\n");`,
   ],
 
-  assign: [String.raw`x = 5 * -2 + 8;`, String.raw`let x_1 = 5 * (-2) + 8;`],
+  assign: [String.raw`x = 5 * -2 + 8;`, String.raw`let x = 5 * (-2) + 8;`],
 
   constAssign: [
     String.raw`X = 5 * -2 + 8;`,
-    String.raw`const X_2 = 5 * (-2) + 8;`,
+    String.raw`const X = 5 * (-2) + 8;`,
   ],
 
   funcDeclAndCall: [
     String.raw`PR0GRAM f[x, y] < SP3AK["x is " + x + " and y is " + y]; > f[32, 900];`,
-    String.raw`function f_3(x_4, y_5) {
-  console.log("x is " + x_6 + " and y is " + y_7);
-}
-f_3(32, 900);`,
+    String.raw`function f(x, y) { console.log("x is " + x + " and y is " + y); } f(32, 900);`,
   ],
 
   // whileLoop: [
@@ -88,12 +85,16 @@ f_3(32, 900);`,
   // ],
 };
 
+function normalize(str) {
+  return str.replace(/\s+/g, "").replace(/_\d+/g, "");
+}
+
 describe("The JavaScript generator", () => {
   Object.entries(fixture).forEach(([name, [source, expected]]) => {
     test(`produces the correct output for ${name}`, (done) => {
-      // const ast = parse(source);
-      // analyze(ast);
-      // expect(generate(ast)).toMatch(expected);
+      const ast = parse(source);
+      analyze(ast);
+      expect(normalize(generate(ast))).toEqual(normalize(expected));
       done();
     });
   });
