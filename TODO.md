@@ -3,9 +3,20 @@
 stars for difficulty
 
 - work on lightning talk slides
-- make unclear as a primitive type like we intended? + more tests
+- either silence warnings or make variables used \*\* maddie
+- try and put built ins from generator into separate file and export/import \* adriana
+- semicolons for simple statements in code generation (let z = add(5, 4);;) **\*\*\*\***
+- bool lit problem--in generator, we have to assume that all boollits are true or false because of branching coverage issues!!! \***\*\*\*\***
+- fix coverage because of unclear \* merissa
+- add notexp to generation \* merissa
 
 optional future additions:
 
+- that darned dollar sign
 - add classes
 - add kwargs
+
+questions for toal:
+
+- bool lit problem
+- semicolons

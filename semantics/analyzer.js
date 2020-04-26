@@ -24,6 +24,7 @@ const {
   NegationExp,
   NotExp,
   BoolLit,
+  Undefined,
   IntLit,
   FloatLit,
   Text,
@@ -224,3 +225,5 @@ BoolLit.prototype.analyze = function (context) {};
 IntLit.prototype.analyze = function (context) {};
 
 FloatLit.prototype.analyze = function (context) {};
+
+Undefined.prototype.analyze = function (context) {};

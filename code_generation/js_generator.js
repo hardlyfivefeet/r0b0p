@@ -37,10 +37,10 @@ const {
   NegationExp,
   NotExp,
   BoolLit,
+  Undefined,
   IntLit,
   FloatLit,
   Text,
-  Placeholder,
   Id,
 } = require("../ast");
 const { R0B0P_TRUE, R0B0P_FALSE } = require("../semantics/builtins");
@@ -195,15 +195,15 @@ Block.prototype.gen = function () {
 };
 
 ForLoop.prototype.gen = function () {
-  const i = javaScriptId(this.id ? this.id : "i");
+  const i = javaScriptId(this.id ? this.id : new Id("i"));
   const low = this.start.gen();
   const hi = this.end.gen();
   //What is this for???? VV
   // const hi = javaScriptId(new Variable("hi"));
   // const preAssign = `let ${hi} = ${this.high.gen()};`;
-  const loopControl = `for (let ${i} = ${low}; ${i} <= ${hi}; ${i}++)`;
+  const loopControl = `for (let ${i} = ${low}; ${i} < ${hi}; ${i}++)`;
   const block = this.block.gen();
-  return `${loopControl} {${block}}`;
+  return `${loopControl} ${block}`;
 };
 
 FuncDecl.prototype.gen = function () {
@@ -219,14 +219,27 @@ Id.prototype.gen = function () {
 
 Conditional.prototype.gen = function () {
   const thenPart = this.block.gen();
+
+  let elseIfBlocks = "";
+  if (this.elseIfBlocks.length !== 0) {
+    this.elseIfBlocks.forEach((block) => {
+      elseIfBlocks += block.gen();
+    });
+  }
+  const elseBlock = this.elseBlock === null ? "" : this.elseBlock.gen();
   return `if (${this.condition.gen()}) ${thenPart}
-          ${this.elseIfBlocks.forEach((block) => block.gen())}
-          ${this.elseBlock.gen()}`;
+          ${elseIfBlocks}
+          ${elseBlock}`;
 };
 
-ElseIfBlock.prototype.gen = function () {};
+ElseIfBlock.prototype.gen = function () {
+  const thenPart = this.block.gen();
+  return `else if (${this.condition.gen()}) ${thenPart}`;
+};
 
-ElseBlock.prototype.gen = function () {};
+ElseBlock.prototype.gen = function () {
+  return `else ${this.block.gen()}`;
+};
 
 IntLit.prototype.gen = function () {
   return this.value;
@@ -239,7 +252,7 @@ FloatLit.prototype.gen = function () {
 BoolLit.prototype.gen = function () {
   if (this.value === R0B0P_TRUE) {
     return `true`;
-  } else if (this.value === R0B0P_FALSE) {
+  } else {
     return `false`;
   }
 };
@@ -253,7 +266,8 @@ Text.prototype.gen = function () {
       result = result + currString + `\$\{${placeholder.exp.gen()}\}`;
       index = placeholder.index + 1;
     });
-    return result;
+    result = result + this.quasi.substring(index);
+    return '"' + result + '"';
   } else {
     return '"' + this.quasi + '"';
   }
@@ -263,10 +277,9 @@ NegationExp.prototype.gen = function () {
   return `(- ${this.operand.gen()})`;
 };
 
-//Can do this after one of the TODOs
-// Nil.prototype.gen = function () {
-//   return "null";
-// };
+Undefined.prototype.gen = function () {
+  return "null";
+};
 
 Dict.prototype.gen = function () {
   return `{${this.pairs.map((pair) => pair.gen()).join(",")}}`;

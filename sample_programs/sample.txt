@@ -1,5 +1,1 @@
-PR0GRAM f[x, y] < SP3AK["x is " + x + " and y is " + y]; >
-f[32, 900];
-
-PR0GRAM g[x, y, z] < SP3AK["x is " + x + " and y is " + y]; >
-g[32, 900, 8];
+PR0GRAM add[x, y] < G1V3 x + y; > z = add[5, 4];

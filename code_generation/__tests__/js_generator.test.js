@@ -57,57 +57,52 @@ const fixture = {
     String.raw`let x = 7; while (x === 7) { let x = x + 1; }`,
   ],
 
-  // forLoop: [
-  //   String.raw`C0UNT[i:0->10] < SP3AK[i]; >`,
-  //   String.raw`for (let i = 0; i < 10; i++) { console.log(i); }`,
-  // ],
+  forLoopWithId: [
+    String.raw`C0UNT[i:0->10] < SP3AK[i]; >`,
+    String.raw`for (let i = 0; i < 10; i++) { console.log(i); }`,
+  ],
 
-  // ifElse: [
-  //   String.raw`x = 2; PR3SUM1NG[x == 2] < SP3AK["X is two."]; > 3LS3 < SP3AK["X is not two."]; >`,
-  //   String.raw`let x = 2; if (x === 2) { console.log("X is two."); } else { console.log("X is not two."); }`,
-  // ],
+  forLoopWithoutId: [
+    String.raw`C0UNT[0->10] < SP3AK["hi there"]; >`,
+    String.raw`for (let i = 0; i < 10; i++) { console.log("hi there"); }`,
+  ],
 
-  // ifElseIfElse: [
-  //   String.raw`x = 2; PR3SUM1NG[x == 2] < SP3AK["X is two."]; > 3LS3 1F[x == 3] { SP3AK["X is three."]; } 3LS3 < SP3AK["X is not two."]; >`,
-  //   String.raw`let x = 2; if (x === 2) { console.log("X is two."); } else if(x === 3) { console.log("X is three."); } else { console.log("X is not two."); }`,
-  // ],
+  if: [
+    String.raw`x = 2; PR3SUM1NG[x == 2] < SP3AK["X is two."]; >`,
+    String.raw`let x = 2; if (x === 2) { console.log("X is two."); }`,
+  ],
 
-  //TODO: From this point on it's not r0b0p, need to be converted.
+  ifElse: [
+    String.raw`x = 2; PR3SUM1NG[x == 2] < SP3AK["X is two."]; > 3LS3 < SP3AK["X is not two."]; >`,
+    String.raw`let x = 2; if (x === 2) { console.log("X is two."); } else { console.log("X is not two."); }`,
+  ],
 
-  // member: [
-  //   String.raw`let type r = {x:string} var p := r{x="@"} in print(p.x) end`,
-  //   /let p_(\d+) = \{\s*x: "@"\s*\};\s*console.log\(p_\1\.x\)/,
-  // ],
+  ifElseIfElse: [
+    String.raw`x = 2; PR3SUM1NG[x == 2] < SP3AK["X is two."]; > 3LS3 1F[x == 3] < SP3AK["X is three."]; > 3LS3 < SP3AK["X is not two."]; >`,
+    String.raw`let x = 2; if (x === 2) { console.log("X is two."); } else if(x === 3) { console.log("X is three."); } else { console.log("X is not two."); }`,
+  ],
 
-  // subscript: [
-  //   String.raw`let type r = array of string var a := r[3] of "" in print(a[0]) end`,
-  //   /let a_(\d+) = Array\(3\).fill\(""\);\s*console.log\(a_\1\[0\]\)/,
-  // ],
+  function: [
+    String.raw`PR0GRAM add[x, y] < G1V3 x + y; > z = add[5, 4];`,
+    String.raw`function add(x, y) { return x + y; } let z = add(5, 4);;`,
+  ],
 
-  // letInFunction: [
-  //   String.raw`let function f():int = let var x:= 1 in x end in () end`,
-  //   /function f_(\d+)\(\) \{\s*let x_(\d+) = 1;\s*return x_\2\s*\};/,
-  // ],
+  breakAndContinue: [
+    String.raw`x = 5; WH1L3[x == 5] < PR3SUM1NG[x == 5] < D1SC0NT1NU3; > 3LS3 < x = x + 1; C0NT1NU3; > >`,
+    String.raw`let x = 5; while(x === 5) { if(x === 5) { break; } else { let x = x + 1; continue;} }`,
+  ],
 
-  // letAsValue: [
-  //   String.raw`print(let var x := "dog" in concat(x, "s") end)`,
-  //   /console.log\(\(\(\) => \{\s*let x_(\d+) = "dog";\s*return x_\1.concat\("s"\);\s*\}\)\(\)\)/,
-  // ],
+  trueAndFalse: [
+    String.raw`x = b1p; y = b0p;`,
+    String.raw`let x = true; let y = false;`,
+  ],
 
-  // returnExpressionSequence: [
-  //   String.raw`let function f():int = let var x:= 1 in (1;nil;3) end in () end`,
-  //   /function f_(\d+)\(\) {\s*let x_(\d+) = 1;\s*1;\s*null;\s*return 3\s*\};/,
-  // ],
-
-  // moreBuiltIns: [
-  //   String.raw`(ord("x"); chr(30); substring("abc", 0, 1))`,
-  //   /\("x"\).charCodeAt\(0\);\s*String.fromCharCode\(30\);\s*"abc".substr\(0, 1\)/,
-  // ],
-
-  // evenMoreBuiltIns: [
-  //   String.raw`(not(1) ; size(""); exit(3))`,
-  //   /\(!\(1\)\);\s*"".length;\s*process\.exit\(3\)/,
-  // ],
+  interpolation: [
+    String.raw`bananas = 3; x = "I have 'bananas' bananas"; SP3AK[x];`,
+    'let bananas = 3; let x = "I have ${' +
+      "bananas" +
+      '} bananas"; console.log(x);',
+  ],
 };
 
 function normalize(str) {

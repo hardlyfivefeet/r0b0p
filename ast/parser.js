@@ -28,6 +28,7 @@ const {
   IntLit,
   FloatLit,
   BoolLit,
+  Undefined,
   Id,
 } = require("../ast");
 
@@ -177,6 +178,9 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   },
   EmptyListOf() {
     return [];
+  },
+  undefined(_value) {
+    return new Undefined();
   },
 });
 /* eslint-enable no-unused-vars */
