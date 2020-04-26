@@ -43,7 +43,7 @@ const {
   Text,
   Id,
 } = require("../ast");
-const { R0B0P_TRUE, R0B0P_FALSE } = require("../semantics/builtins");
+const { R0B0P_TRUE } = require("../semantics/builtins");
 
 function makeOp(op) {
   return { "==": "===" }[op] || op;
@@ -202,9 +202,6 @@ ForLoop.prototype.gen = function () {
   const i = javaScriptId(this.id ? this.id : new Id("i"));
   const low = this.start.gen();
   const hi = this.end.gen();
-  //What is this for???? VV
-  // const hi = javaScriptId(new Variable("hi"));
-  // const preAssign = `let ${hi} = ${this.high.gen()};`;
   const loopControl = `for (let ${i} = ${low}; ${i} < ${hi}; ${i}++)`;
   const block = this.block.gen();
   return `${loopControl} ${block}`;
@@ -267,7 +264,7 @@ Text.prototype.gen = function () {
     let result = "";
     this.placeholders.forEach((placeholder) => {
       const currString = this.quasi.substring(index, placeholder.index);
-      result = result + currString + `\$\{${placeholder.exp.gen()}\}`;
+      result = result + currString + `$\{${placeholder.exp.gen()}}`;
       index = placeholder.index + 1;
     });
     result = result + this.quasi.substring(index);
