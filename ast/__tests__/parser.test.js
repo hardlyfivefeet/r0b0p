@@ -36,6 +36,7 @@ const {
   IntLit,
   FloatLit,
   BoolLit,
+  Undefined,
   Id,
 } = require("../../ast");
 
@@ -197,12 +198,12 @@ const fixture = {
         new Id("z"),
         new BinaryExp(
           "**",
-          new IntLit("8"),
           new BinaryExp(
             "*",
             new NegationExp(new FloatLit("16.4")),
             new IntLit("32")
-          )
+          ),
+          new IntLit("8")
         )
       ),
     ]),
@@ -418,6 +419,13 @@ const fixture = {
   escapeSequences: [
     String.raw`quote = "\\";`,
     new Program([new Assignment(new Id("quote"), new Text("\\\\"))]),
+  ],
+  undefined: [
+    String.raw`x = uncl3ar; SP3AK[x];`,
+    new Program([
+      new Assignment(new Id("x"), new Undefined()),
+      new Print(new Id("x")),
+    ]),
   ],
 };
 

@@ -164,6 +164,10 @@ BinaryExp.prototype.gen = function () {
   return `${this.left.gen()} ${makeOp(this.op)} ${this.right.gen()}`;
 };
 
+NotExp.prototype.gen = function () {
+  return `!${this.operand.gen()}`;
+};
+
 KeyValue.prototype.gen = function () {
   return `${this.key.gen()} : ${this.value.gen()}`;
 };

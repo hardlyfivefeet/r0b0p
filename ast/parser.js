@@ -140,7 +140,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new BinaryExp(op.ast(), left.ast(), right.ast());
   },
   Exp5_binary(left, op, right) {
-    return new BinaryExp(op.ast(), right.ast(), left.ast());
+    return new BinaryExp(op.ast(), left.ast(), right.ast());
   },
   Exp4_negation(_neg, operand) {
     return new NegationExp(operand.ast());

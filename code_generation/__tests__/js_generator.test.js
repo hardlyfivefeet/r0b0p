@@ -40,7 +40,10 @@ const fixture = {
     String.raw`console.log("Hello, world\n");`,
   ],
 
-  assign: [String.raw`x = 5 * -2 + 8;`, String.raw`let x = 5 * (-2) + 8;`],
+  assign: [
+    String.raw`x = 5 * -2 + 8 % 2 / 3 ** 2;`,
+    String.raw`let x = 5 * (-2) + 8 % 2 / 3 ** 2;`,
+  ],
 
   constAssign: [
     String.raw`X = 5 * -2 + 8;`,
@@ -102,6 +105,16 @@ const fixture = {
     'let bananas = 3; let x = "I have ${' +
       "bananas" +
       '} bananas"; console.log(x);',
+  ],
+
+  undefined: [
+    String.raw`x = uncl3ar; SP3AK[x];`,
+    String.raw`let x = null; console.log(x);`,
+  ],
+
+  notexp: [
+    String.raw`x = N0T b1p; SP3AK[x];`,
+    String.raw`let x = !true; console.log(x);`,
   ],
 };
 
