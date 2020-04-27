@@ -87,7 +87,7 @@ const fixture = {
 
   function: [
     String.raw`PR0GRAM add[x, y] < G1V3 x + y; > z = add[5, 4];`,
-    String.raw`function add(x, y) { return x + y; } let z = add(5, 4);;`,
+    String.raw`function add(x, y) { return x + y; } let z = add(5, 4);`,
   ],
 
   breakAndContinue: [

@@ -1,1 +1,2 @@
 PR0GRAM add[x, y] < G1V3 x + y; > z = add[5, 4];
+PR0GRAM hi[] < SP3AK["hi!"]; > hi[];

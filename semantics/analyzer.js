@@ -7,6 +7,8 @@ const {
   Assignment,
   Return,
   FuncDecl,
+  FuncCall,
+  FuncCallStmt,
   WhileLoop,
   ForLoop,
   Break,
@@ -14,7 +16,6 @@ const {
   Conditional,
   ElseBlock,
   ElseIfBlock,
-  FuncCall,
   Print,
   List,
   Dict,
@@ -83,6 +84,10 @@ FuncCall.prototype.analyze = function (context) {
     check.ifLegalArguments(this.params, this.id.params); // Checks whether the lengths match
     this.params.forEach((param) => param.analyze(context));
   }
+};
+
+FuncCallStmt.prototype.analyze = function (context) {
+  this.func.analyze(context);
 };
 
 Program.prototype.analyze = function (context) {

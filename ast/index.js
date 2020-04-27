@@ -42,6 +42,12 @@ class FuncCall {
   }
 }
 
+class FuncCallStmt {
+  constructor(func) {
+    Object.assign(this, { func });
+  }
+}
+
 class WhileLoop {
   constructor(condition, block) {
     Object.assign(this, { condition, block });
@@ -179,6 +185,8 @@ module.exports = {
   Assignment,
   Return,
   FuncDecl,
+  FuncCall,
+  FuncCallStmt,
   WhileLoop,
   ForLoop,
   Break,
@@ -186,7 +194,6 @@ module.exports = {
   Conditional,
   ElseBlock,
   ElseIfBlock,
-  FuncCall,
   Print,
   List,
   Dict,

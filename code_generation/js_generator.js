@@ -20,6 +20,8 @@ const {
   Assignment,
   Return,
   FuncDecl,
+  FuncCall,
+  FuncCallStmt,
   WhileLoop,
   ForLoop,
   Break,
@@ -27,7 +29,6 @@ const {
   Conditional,
   ElseBlock,
   ElseIfBlock,
-  FuncCall,
   Print,
   List,
   Dict,
@@ -91,25 +92,25 @@ const builtin = {
     return `Math.random()`;
   },
   PLAC3_AT([list, i, value]) {
-    return `${list}.splice(${i}, 0, ${value});`;
+    return `${list}.splice(${i}, 0, ${value})`;
   },
   D1SCARD_AT([list, i]) {
-    return `${list}.splice(${i}, 1);`;
+    return `${list}.splice(${i}, 1)`;
   },
   R3TR13V3_AT([list, i]) {
     return `${list}[${i}]`;
   },
   SUBST1TUT3([list, i, value]) {
-    return `${list}[${i}] = ${value};`;
+    return `${list}[${i}] = ${value}`;
   },
   S1Z3([list]) {
     return `${list}.length`;
   },
   PLAC3([dict, key, value]) {
-    return `${dict}[${key}] = ${value};`;
+    return `${dict}[${key}] = ${value}`;
   },
   D1SCARD([dict, key]) {
-    return `delete ${dict}[${key}];`;
+    return `delete ${dict}[${key}]`;
   },
   R3TR13V3([dict, key]) {
     return `${dict}[${key}]`;
@@ -184,12 +185,23 @@ Continue.prototype.gen = function () {
   return "continue;";
 };
 
+FuncDecl.prototype.gen = function () {
+  const name = javaScriptId(this.id);
+  const params = this.params.map(javaScriptId);
+  const block = this.block.gen();
+  return `function ${name} (${params.join(",")}) ${block}`;
+};
+
 FuncCall.prototype.gen = function () {
   const args = this.params.map((a) => a.gen());
   if (this.id.builtin) {
     return builtin[this.id.id.name](args);
   }
-  return `${javaScriptId(this.id.id)}(${args.join(",")});`;
+  return `${javaScriptId(this.id.id)}(${args.join(",")})`;
+};
+
+FuncCallStmt.prototype.gen = function () {
+  return `${this.func.gen()};`;
 };
 
 Block.prototype.gen = function () {
@@ -205,13 +217,6 @@ ForLoop.prototype.gen = function () {
   const loopControl = `for (let ${i} = ${low}; ${i} < ${hi}; ${i}++)`;
   const block = this.block.gen();
   return `${loopControl} ${block}`;
-};
-
-FuncDecl.prototype.gen = function () {
-  const name = javaScriptId(this.id);
-  const params = this.params.map(javaScriptId);
-  const block = this.block.gen();
-  return `function ${name} (${params.join(",")}) ${block}`;
 };
 
 Id.prototype.gen = function () {

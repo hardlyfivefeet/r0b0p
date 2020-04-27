@@ -7,6 +7,8 @@ const {
   Assignment,
   Return,
   FuncDecl,
+  FuncCall,
+  FuncCallStmt,
   WhileLoop,
   ForLoop,
   Break,
@@ -14,7 +16,6 @@ const {
   Conditional,
   ElseBlock,
   ElseIfBlock,
-  FuncCall,
   Print,
   List,
   Dict,
@@ -139,20 +140,23 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
   Exp3_binary(left, op, right) {
     return new BinaryExp(op.ast(), left.ast(), right.ast());
   },
-  Exp5_binary(left, op, right) {
-    return new BinaryExp(op.ast(), left.ast(), right.ast());
-  },
   Exp4_negation(_neg, operand) {
     return new NegationExp(operand.ast());
   },
-  Exp7_parens(_lp, exp, _rp) {
-    return exp.ast();
+  Exp5_binary(left, op, right) {
+    return new BinaryExp(op.ast(), left.ast(), right.ast());
   },
   Exp6_not(_not, exp) {
     return new NotExp(exp.ast());
   },
+  Exp7_parens(_lp, exp, _rp) {
+    return exp.ast();
+  },
   Statement_simple(statement, _semicolon) {
     return statement.ast();
+  },
+  SimpStmt_call(func) {
+    return new FuncCallStmt(func.ast());
   },
   Id(value) {
     return new Id(value.ast());
@@ -170,7 +174,6 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     return new BoolLit(this.sourceString);
   },
   _terminal() {
-    // console.log("this source string is ", this.sourceString);
     return this.sourceString;
   },
   NonemptyListOf(first, _separator, rest) {

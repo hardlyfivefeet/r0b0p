@@ -15,6 +15,8 @@ const {
   Assignment,
   Return,
   FuncDecl,
+  FuncCall,
+  FuncCallStmt,
   WhileLoop,
   ForLoop,
   Break,
@@ -22,7 +24,6 @@ const {
   Conditional,
   ElseIfBlock,
   ElseBlock,
-  FuncCall,
   Print,
   List,
   Dict,
@@ -230,7 +231,13 @@ const fixture = {
       ),
     ]),
   ],
-  funcCall: [
+  funcCallStmt: [
+    String.raw`show_print["hi"];`,
+    new Program([
+      new FuncCallStmt(new FuncCall(new Id("show_print"), [new Text("hi")])),
+    ]),
+  ],
+  Stmt: [
     String.raw`y = add_five[26];`,
     new Program([
       new Assignment(
@@ -268,134 +275,154 @@ const fixture = {
   listSubstitute: [
     String.raw`SUBST1TUT3[{1, 2, 3, 4}, 0, 50];`,
     new Program([
-      new FuncCall("SUBST1TUT3", [
-        new List([
-          new IntLit("1"),
-          new IntLit("2"),
-          new IntLit("3"),
-          new IntLit("4"),
-        ]),
-        new IntLit(0),
-        new IntLit(50),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("SUBST1TUT3", [
+          new List([
+            new IntLit("1"),
+            new IntLit("2"),
+            new IntLit("3"),
+            new IntLit("4"),
+          ]),
+          new IntLit(0),
+          new IntLit(50),
+        ])
+      ),
     ]),
   ],
   listSize: [
     String.raw`S1Z3[{3, 4, 5, 6}];`,
     new Program([
-      new FuncCall("S1Z3", [
-        new List([
-          new IntLit("3"),
-          new IntLit("4"),
-          new IntLit("5"),
-          new IntLit("6"),
-        ]),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("S1Z3", [
+          new List([
+            new IntLit("3"),
+            new IntLit("4"),
+            new IntLit("5"),
+            new IntLit("6"),
+          ]),
+        ])
+      ),
     ]),
   ],
   listRetrieve: [
     String.raw`R3TR13V3_AT[{7, 7, 7, 7}, 0];`,
     new Program([
-      new FuncCall("R3TR13V3_AT", [
-        new List([
-          new IntLit("7"),
-          new IntLit("7"),
-          new IntLit("7"),
-          new IntLit("7"),
-        ]),
-        new IntLit(0),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("R3TR13V3_AT", [
+          new List([
+            new IntLit("7"),
+            new IntLit("7"),
+            new IntLit("7"),
+            new IntLit("7"),
+          ]),
+          new IntLit(0),
+        ])
+      ),
     ]),
   ],
   listDiscard: [
     String.raw`D1SCARD_AT[{7, 7, 7, 7}, 3];`,
     new Program([
-      new FuncCall("D1SCARD_AT", [
-        new List([
-          new IntLit("7"),
-          new IntLit("7"),
-          new IntLit("7"),
-          new IntLit("7"),
-        ]),
-        new IntLit(3),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("D1SCARD_AT", [
+          new List([
+            new IntLit("7"),
+            new IntLit("7"),
+            new IntLit("7"),
+            new IntLit("7"),
+          ]),
+          new IntLit(3),
+        ])
+      ),
     ]),
   ],
   listPlace: [
     String.raw`PLAC3_AT[{7, 7, 7, 7}, 3, 2];`,
     new Program([
-      new FuncCall("PLAC3_AT", [
-        new List([
-          new IntLit("7"),
-          new IntLit("7"),
-          new IntLit("7"),
-          new IntLit("7"),
-        ]),
-        new IntLit(3),
-        new IntLit(2),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("PLAC3_AT", [
+          new List([
+            new IntLit("7"),
+            new IntLit("7"),
+            new IntLit("7"),
+            new IntLit("7"),
+          ]),
+          new IntLit(3),
+          new IntLit(2),
+        ])
+      ),
     ]),
   ],
   dictSubstitute: [
     String.raw`SUBST1TUT3[{a: 1, b: 2}, "a", 50];`,
     new Program([
-      new FuncCall("SUBST1TUT3", [
-        new Dict([
-          new KeyValue(new Key("a"), new IntLit(1)),
-          new KeyValue(new Key("b"), new IntLit(2)),
-        ]),
-        new Text("a", []),
-        new IntLit(50),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("SUBST1TUT3", [
+          new Dict([
+            new KeyValue(new Key("a"), new IntLit(1)),
+            new KeyValue(new Key("b"), new IntLit(2)),
+          ]),
+          new Text("a", []),
+          new IntLit(50),
+        ])
+      ),
     ]),
   ],
   dictCodes: [
     String.raw`C0D3S[{a: 1, b: 2}];`,
     new Program([
-      new FuncCall("C0D3S", [
-        new Dict([
-          new KeyValue(new Key("a"), new IntLit(1)),
-          new KeyValue(new Key("b"), new IntLit(2)),
-        ]),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("C0D3S", [
+          new Dict([
+            new KeyValue(new Key("a"), new IntLit(1)),
+            new KeyValue(new Key("b"), new IntLit(2)),
+          ]),
+        ])
+      ),
     ]),
   ],
   dictRetrieve: [
     String.raw`R3TR13V3[{hi: "a", hello: "b"}, "hello"];`,
     new Program([
-      new FuncCall("R3TR13V3", [
-        new Dict([
-          new KeyValue(new Key("hi"), new Text("a")),
-          new KeyValue(new Key("hello"), new Text("b")),
-        ]),
-        new Text("hello"),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("R3TR13V3", [
+          new Dict([
+            new KeyValue(new Key("hi"), new Text("a")),
+            new KeyValue(new Key("hello"), new Text("b")),
+          ]),
+          new Text("hello"),
+        ])
+      ),
     ]),
   ],
   dictDiscard: [
     String.raw`D1SCARD[{a: "b", c: "d", e: "f"}, "a"];`,
     new Program([
-      new FuncCall("D1SCARD", [
-        new Dict([
-          new KeyValue(new Key("a"), new Text("b")),
-          new KeyValue(new Key("c"), new Text("d")),
-          new KeyValue(new Key("e"), new Text("f")),
-        ]),
-        new Text("a"),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("D1SCARD", [
+          new Dict([
+            new KeyValue(new Key("a"), new Text("b")),
+            new KeyValue(new Key("c"), new Text("d")),
+            new KeyValue(new Key("e"), new Text("f")),
+          ]),
+          new Text("a"),
+        ])
+      ),
     ]),
   ],
   dictPlace: [
     String.raw`PLAC3[{a: 1, b: 2}, "a", 3];`,
     new Program([
-      new FuncCall("PLAC3", [
-        new Dict([
-          new KeyValue(new Key("a"), new IntLit(1)),
-          new KeyValue(new Key("b"), new IntLit(2)),
-        ]),
-        new Text("a"),
-        new IntLit(3),
-      ]),
+      new FuncCallStmt(
+        new FuncCall("PLAC3", [
+          new Dict([
+            new KeyValue(new Key("a"), new IntLit(1)),
+            new KeyValue(new Key("b"), new IntLit(2)),
+          ]),
+          new Text("a"),
+          new IntLit(3),
+        ])
+      ),
     ]),
   ],
   stringInterpolation: [
