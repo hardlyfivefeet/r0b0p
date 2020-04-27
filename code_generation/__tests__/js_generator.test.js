@@ -9,6 +9,10 @@ const parse = require("../../ast/parser");
 const analyze = require("../../semantics/analyzer");
 const generate = require("../js_generator");
 
+//In order to silence our warnings in the test files, so that we don't have to "use" all
+//of the test variables and ruin the integrity of the tests, we redefine console.warn.
+console.warn = function () { }
+
 const fixture = {
   mathBuiltins: [
     String.raw`x = SQRT[49]; x = ABS[-10]; x = FL00R[10.9]; x = CE1L[10.9]; x = R0UND[0.5]; x = UNPR3D1CTABL3[];`,
@@ -103,8 +107,8 @@ const fixture = {
   interpolation: [
     String.raw`bananas = 3; x = "I have 'bananas' bananas"; SP3AK[x];`,
     'let bananas = 3; let x = "I have ${' +
-      "bananas" +
-      '} bananas"; console.log(x);',
+    "bananas" +
+    '} bananas"; console.log(x);',
   ],
 
   undefined: [

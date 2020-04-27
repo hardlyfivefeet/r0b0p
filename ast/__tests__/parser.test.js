@@ -9,6 +9,10 @@
 
 const parse = require("../parser");
 
+//In order to silence our warnings in the test files, so that we don't have to "use" all
+//of the test variables and ruin the integrity of the tests, we redefine console.warn.
+console.warn = function () { }
+
 const {
   Program,
   Block,

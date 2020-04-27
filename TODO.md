@@ -3,7 +3,6 @@
 stars for difficulty
 
 - work on lightning talk slides
-- either silence warnings or make variables used \*\* maddie
 - try and put built ins from generator into separate file and export/import \* adriana
 - bool lit problem--in generator, we have to assume that all boollits are true or false because of branching coverage issues!!! \***\*\*\*\***
 

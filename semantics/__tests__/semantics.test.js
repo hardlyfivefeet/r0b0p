@@ -8,18 +8,17 @@
 const parse = require("../../ast/parser");
 const analyze = require("../analyzer");
 
+//In order to silence our warnings in the test files, so that we don't have to "use" all
+//of the test variables and ruin the integrity of the tests, we redefine console.warn.
+console.warn = function () { }
+
 const program = String.raw`
 SP3AK["Hello, world!"];
 num_of_members = 3;
-SP3AK[num_of_members];
 NUM_OF_MEMBERS = 38;
-SP3AK[NUM_OF_MEMBERS];
 name = "r0b0p";
-SP3AK[name];
 AGE_TOTAL = 62;
-SP3AK[AGE_TOTAL];
 age_total = 16;
-SP3AK[age_total];
 x = b1p;
 y = b0p;
 
@@ -28,9 +27,7 @@ SUBST1TUT3[list, 0, 100];
 PLAC3_AT[list, 2, 5];
 D1SCARD_AT[list, 3];
 value = R3TR13V3_AT[list, 0];
-SP3AK[value];
 list_length = S1Z3[list];
-SP3AK[list_length];
 
 dict = {a: 2, b: 3};
 PLAC3[dict, "c", 3];
@@ -51,15 +48,12 @@ SP3AK[new_num];
 
 s = "This is a test string!";
 strlen = S1Z3[s];
-SP3AK[strlen];
 has_substr = C0NTA1NS[s, "test"];
-SP3AK[has_substr];
 new_str = SUBT3XT[s, 0, 10];
 s_array = SPL1T[s, ""];
 SP3AK[S1Z3[s_array]];
 new_str = MAK3_UPP3R[s];
 new_str = MAK3_LOW3R[s];
-SP3AK[new_str];
 
 x = 3;
 PR3SUM1NG[x < 6] <
@@ -109,7 +103,6 @@ PR0GRAM area_of_circle[r] <
 >
 
 area = area_of_circle[10];
-SP3AK[area];
 
 PR0GRAM gcd[a, b] <
   PR3SUM1NG[b == 0] <
