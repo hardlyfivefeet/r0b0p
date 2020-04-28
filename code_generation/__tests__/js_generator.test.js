@@ -120,6 +120,23 @@ const fixture = {
     String.raw`x = N0T b1p; SP3AK[x];`,
     String.raw`let x = !true; console.log(x);`,
   ],
+
+  funcCallback: [
+    String.raw`PR0GRAM powers[base, limit, callback] <
+    current = 1;
+    i = 1;
+    WH1L3[current <= limit] <
+      callback[current];
+      current = base ** i;
+      i = i + 1;
+    >
+    >`,
+    String.raw`function powers(base, limit, callback) { let current = 1; let i = 1; while(current <= limit) {
+    callback(current);
+    let current = base ** i;
+    let i = i + 1;
+    }}`
+  ],
 };
 
 function normalize(str) {

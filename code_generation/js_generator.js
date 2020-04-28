@@ -158,7 +158,7 @@ List.prototype.gen = function () {
 Assignment.prototype.gen = function () {
   return `${
     isAllUpperCase(this.id.name) ? "const" : "let"
-  } ${this.id.gen()} = ${this.exp.gen()};`;
+    } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
@@ -197,7 +197,14 @@ FuncCall.prototype.gen = function () {
   if (this.id.builtin) {
     return builtin[this.id.id.name](args);
   }
-  return `${javaScriptId(this.id.id)}(${args.join(",")})`;
+
+  //If we do not have this.id.id, that means that the function has not been declared yet,
+  //which is legal in some cases such as callback functions passed in as parameters.
+  if (this.id.id) {
+    return `${javaScriptId(this.id.id)}(${args.join(",")})`;
+  } else {
+    return `${javaScriptId(this.id)}(${args.join(",")})`;
+  }
 };
 
 FuncCallStmt.prototype.gen = function () {
