@@ -168,9 +168,6 @@ Conditional.prototype.optimize = function () {
     if (this.elseBlock) {
         this.elseBlock = this.elseBlock.optimize();
     }
-    // if (isFalse(this.condition)) {
-    //     return new Undefined();
-    // }
     return this;
 };
 

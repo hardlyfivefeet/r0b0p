@@ -5,9 +5,11 @@ stars for difficulty
 - work on lightning talk slides
 - try and put built ins from generator into separate file and export/import \* adriana
 - bool lit problem--in generator, we have to assume that all boollits are true or false because of branching coverage issues!!! \***\*\*\*\***
-- OPERNAD SHOULDNT BE THE NAME IN THE NEGATION AND THE UNARY STUFF AHHHH
-- maybe do something so that floats have .0 lol
-- pull out checking for block statements length, make function called 'reduce blocks to statement'
+- OPERNAD SHOULDNT BE THE NAME IN THE NEGATION AND THE UNARY STUFF AHHHH \*maddie
+- maybe do something so that floats have .0 lol \*adriana
+- pull out checking for block statements length, make function called 'reduce blocks to statement' \*merissa
+- everyone try and look at optimizations
+- binary optimization \*merissa
 
 optional future additions:
 
@@ -18,3 +20,4 @@ optional future additions:
 questions for toal:
 
 - bool lit problem
+- do we have enough optimization?
