@@ -94,7 +94,7 @@ Assignment.prototype.optimize = function () {
   this.id = this.id.optimize();
   this.exp = this.exp.optimize();
   if (this.id === this.exp) {
-    return null;
+    return new Undefined();
   }
   return this;
 };
@@ -102,17 +102,25 @@ Assignment.prototype.optimize = function () {
 BinaryExp.prototype.optimize = function () {
   this.left = this.left.optimize();
   this.right = this.right.optimize();
-  if (this.op === "+" && isZero(this.right)) return this.left;
-  if (this.op === "+" && isZero(this.left)) return this.right;
-  if (this.op === "*" && (isZero(this.right) || isZero(this.left)))
-    return new IntLit(0);
-  if (this.op === "*" && isOne(this.right)) return this.left;
-  if (this.op === "*" && isOne(this.left)) return this.right;
-  if (this.op === "**" && isOne(this.right)) return this.left;
-  if (this.op === "**" && isZero(this.right)) return IntLit(1);
-  if (this.op === "%" && isOne(this.right)) return IntLit(0);
-  if (this.op === "%" && this.left === this.right) return IntLit(0);
+  if (bothNumLits(this)) {
+    if (this.op === "+" && isZero(this.right)) return this.left;
+    if (this.op === "+" && isZero(this.left)) return this.right;
+    if (this.op === "*" && (isZero(this.right) || isZero(this.left)))
+      return new IntLit(0);
+    if (this.op === "*" && isOne(this.right)) return this.left;
+    if (this.op === "*" && isOne(this.left)) return this.right;
+    if (this.op === "**" && isOne(this.right)) return this.left;
+    if (this.op === "**" && isZero(this.right)) return new IntLit(1);
+    if (this.op === "%" && isOne(this.right)) return new IntLit(0);
+    if (this.op === "%" && this.left === this.right) return new IntLit(0);
 
+    const [x, y] = [this.left.value, this.right.value];
+    if (this.op === "+") return new FloatLit(x + y);
+    if (this.op === "*") return new FloatLit(x * y);
+    if (this.op === "/") return new FloatLit(x / y);
+    if (this.op === "%") return new FloatLit(x % y);
+    if (this.op === "**") return new FloatLit(x ** y);
+  }
   if (this.op === "+" && bothStringLits(this)) {
     let combinedPlaceholders = this.left.placeholders;
     let leftQuasiLen = this.left.quasi.length;
@@ -138,14 +146,6 @@ BinaryExp.prototype.optimize = function () {
     if (isFalse(this.left) && isFalse(this.right)) {
       return new BoolLit(R0B0P_FALSE);
     }
-  }
-  if (bothNumLits(this)) {
-    const [x, y] = [this.left.value, this.right.value];
-    if (this.op === "+") return new FloatLit(x + y);
-    if (this.op === "*") return new FloatLit(x * y);
-    if (this.op === "/") return new FloatLit(x / y);
-    if (this.op === "%") return new FloatLit(x % y);
-    if (this.op === "**") return new FloatLit(x ** y);
   }
   return this;
 };
@@ -285,7 +285,6 @@ KeyValue.prototype.optimize = function () {
 
 WhileLoop.prototype.optimize = function () {
   this.condition = this.condition.optimize();
-  // While-false is a no-operation, don't even need the body
   if (isFalse(this.condition)) {
     return new Undefined();
   }
