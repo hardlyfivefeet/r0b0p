@@ -114,7 +114,7 @@ const astGenerator = grammar.createSemantics().addOperation("ast", {
     for (let i = 0; i < chars.ast().length; i++) {
       const value = chars.ast()[i];
       if (value.constructor === Placeholder) {
-        value.index = i;
+        value.index = i - placeholders.length;
         placeholders.push(value);
       } else {
         quasi += value;
