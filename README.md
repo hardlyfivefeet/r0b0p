@@ -46,10 +46,10 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 
 - Unreachable code in an PR3SUM1NG\[b0p\]
 - Unreachable code in a WH1L3\[b0p\]
-- COMING SOON: Unreachable code after a G1V3
-- COMING SOON: Unreachable code after a D1SC0NT1NU3
-- COMING SOON: Potential infinite loop in a WH1L3\[b1p\]
-- COMING SOON: Unused variable
+- Unreachable code after a G1V3
+- Unreachable code after a D1SC0NT1NU3
+- Potential infinite loop in a WH1L3\[b1p\]
+- Unused variable
 
 ## JavaScript vs. r0b0p
 
