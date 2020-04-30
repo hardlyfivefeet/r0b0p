@@ -215,9 +215,9 @@ Text.prototype.gen = function () {
       index = placeholder.index;
     });
     result = result + this.quasi.substring(index);
-    return '"' + result + '"';
+    return `\`${result}\``;
   } else {
-    return '"' + this.quasi + '"';
+    return `"${this.quasi}"`;
   }
 };
 
