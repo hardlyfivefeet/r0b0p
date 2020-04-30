@@ -51,6 +51,10 @@ function makeOp(op) {
   return { "==": "===" }[op] || op;
 }
 
+function isAllUpperCase(str) {
+  return str === str.toUpperCase();
+}
+
 // javaScriptId(e) takes any r0b0p object with an id property, such as a Variable,
 // Param, or Func, and produces a JavaScript name by appending a unique identifying
 // suffix, such as '_1' or '_503'. It uses a cache so it can return the same exact
@@ -88,7 +92,7 @@ List.prototype.gen = function () {
 
 Assignment.prototype.gen = function () {
   return `${
-    isAllUpperCase(this.id.name) ? "const" : "let"
+    isAllUpperCase(this.id.name) ? "const" : this.firstAssignment ? "let" : ""
   } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
@@ -232,7 +236,3 @@ Dict.prototype.gen = function () {
 WhileLoop.prototype.gen = function () {
   return `while (${this.condition.gen()}) ${this.block.gen()} `;
 };
-
-function isAllUpperCase(str) {
-  return str === str.toUpperCase();
-}

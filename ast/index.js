@@ -11,8 +11,8 @@ class Block {
 }
 
 class Assignment {
-  constructor(id, exp) {
-    Object.assign(this, { id, exp });
+  constructor(id, exp, firstAssignment = true) {
+    Object.assign(this, { id, exp, firstAssignment });
   }
 }
 
@@ -61,11 +61,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() { }
+  constructor() {}
 }
 
 class Continue {
-  constructor() { }
+  constructor() {}
 }
 
 class Conditional {
@@ -158,7 +158,7 @@ class BoolLit {
 }
 
 class Undefined {
-  constructor() { }
+  constructor() {}
 }
 
 class Text {

@@ -11,12 +11,12 @@ const generate = require("../js_generator");
 
 //In order to silence our warnings in the test files, so that we don't have to "use" all
 //of the test variables and ruin the integrity of the tests, we redefine console.warn.
-console.warn = function () { };
+console.warn = function () {};
 
 const fixture = {
   mathBuiltins: [
     String.raw`x = SQRT[49]; x = ABS[-10]; x = FL00R[10.9]; x = CE1L[10.9]; x = R0UND[0.5]; x = UNPR3D1CTABL3[];`,
-    String.raw`let x = Math.sqrt(49); let x = Math.abs((-10)); let x = Math.floor(10.9); let x = Math.ceil(10.9); let x = Math.round(0.5); let x = Math.random();`,
+    String.raw`let x = Math.sqrt(49); x = Math.abs((-10)); x = Math.floor(10.9); x = Math.ceil(10.9); x = Math.round(0.5); x = Math.random();`,
   ],
 
   listBuiltins: [
@@ -31,7 +31,7 @@ const fixture = {
 
   stringBuiltins: [
     String.raw`s = "test string"; strlen = S1Z3[s]; has_substr = C0NTA1NS[s, "test"]; new_str = SUBT3XT[s, 0, 10]; s_array = SPL1T[s, ""]; new_str = MAK3_UPP3R[s]; new_str = MAK3_LOW3R[s];`,
-    String.raw`let s = "test string"; let strlen = s.length; let has_substr = s.includes("test"); let new_str = s.substring(0, 10); let s_array = s.split(""); let new_str = s.toUpperCase(); let new_str = s.toLowerCase();`,
+    String.raw`let s = "test string"; let strlen = s.length; let has_substr = s.includes("test"); let new_str = s.substring(0, 10); let s_array = s.split(""); new_str = s.toUpperCase(); new_str = s.toLowerCase();`,
   ],
 
   maxAndMinArray: [
@@ -61,7 +61,7 @@ const fixture = {
 
   whileLoop: [
     String.raw`x = 7; WH1L3[x == 7] < x = x + 1; >`,
-    String.raw`let x = 7; while (x === 7) { let x = x + 1; }`,
+    String.raw`let x = 7; while (x === 7) { x = x + 1; }`,
   ],
 
   forLoopWithId: [
@@ -96,7 +96,7 @@ const fixture = {
 
   breakAndContinue: [
     String.raw`x = 5; WH1L3[x == 5] < PR3SUM1NG[x == 5] < D1SC0NT1NU3; > 3LS3 < x = x + 1; C0NT1NU3; > >`,
-    String.raw`let x = 5; while(x === 5) { if(x === 5) { break; } else { let x = x + 1; continue;} }`,
+    String.raw`let x = 5; while(x === 5) { if(x === 5) { break; } else { x = x + 1; continue;} }`,
   ],
 
   trueAndFalse: [
@@ -107,15 +107,17 @@ const fixture = {
   interpolation: [
     String.raw`bananas = 3; x = "I have 'bananas' bananas"; SP3AK[x];`,
     'let bananas = 3; let x = "I have ${' +
-    "bananas" +
-    '} bananas"; console.log(x);',
+      "bananas" +
+      '} bananas"; console.log(x);',
   ],
 
   multipleInterpolations: [
     String.raw`bananas = 3; oranges = 22; x = "I have 'bananas' bananas and 'oranges' oranges"; SP3AK[x];`,
     'let bananas = 3; let oranges = 22; let x = "I have ${' +
-    "bananas" +
-    '} bananas and ${' + 'oranges' + '} oranges"; console.log(x);',
+      "bananas" +
+      "} bananas and ${" +
+      "oranges" +
+      '} oranges"; console.log(x);',
   ],
 
   undefined: [
@@ -138,10 +140,13 @@ const fixture = {
       i = i + 1;
     >
     >`,
-    String.raw`function powers(base, limit, callback) { let current = 1; let i = 1; while(current <= limit) {
-    callback(current);
-    let current = base ** i;
-    let i = i + 1;
+    String.raw`function powers(base, limit, callback) { 
+      let current = 1; 
+      let i = 1; 
+      while(current <= limit) {
+        callback(current);
+        current = base ** i;
+        i = i + 1;
     }}`,
   ],
 };

@@ -47,6 +47,7 @@ Assignment.prototype.analyze = function (context) {
     check.ifAssigningVarToFunc(context, this.id.name);
     context.add(this.id);
   } else {
+    this.firstAssignment = false;
     check.isNotReadOnly(this.id.name);
   }
 };
@@ -168,7 +169,7 @@ KeyValue.prototype.analyze = function (context) {
   this.value.analyze(context);
 };
 
-Key.prototype.analyze = function (context) { };
+Key.prototype.analyze = function (context) {};
 
 List.prototype.analyze = function (context) {
   this.items.forEach((item) => {
@@ -225,10 +226,10 @@ Id.prototype.analyze = function (context) {
   // this.value = this.name; // wait I dont think we need this anymore ??
 };
 
-BoolLit.prototype.analyze = function (context) { };
+BoolLit.prototype.analyze = function (context) {};
 
-IntLit.prototype.analyze = function (context) { };
+IntLit.prototype.analyze = function (context) {};
 
-FloatLit.prototype.analyze = function (context) { };
+FloatLit.prototype.analyze = function (context) {};
 
-Undefined.prototype.analyze = function (context) { };
+Undefined.prototype.analyze = function (context) {};
