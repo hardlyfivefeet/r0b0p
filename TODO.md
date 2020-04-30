@@ -5,7 +5,10 @@ stars for difficulty
 - work on lightning talk slides
 - OPERNAD SHOULDNT BE THE NAME IN THE NEGATION AND THE UNARY STUFF AHHHH \*maddie
 - maybe do something so that floats have .0 lol \*adriana
-- everyone try and look at optimizations
+- add optimization for string with '+' in binary exp \* merissa
+- add optimization for booleans with addor op in binary exp \* maddie
+- add list of optimizations to README
+
 
 optional future additions:
 
