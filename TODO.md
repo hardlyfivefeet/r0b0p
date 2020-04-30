@@ -3,12 +3,12 @@
 stars for difficulty
 
 - work on lightning talk slides
-- try and put built ins from generator into separate file and export/import \* adriana
 - OPERNAD SHOULDNT BE THE NAME IN THE NEGATION AND THE UNARY STUFF AHHHH \*maddie
 - maybe do something so that floats have .0 lol \*adriana
 - pull out checking for block statements length, make function called 'reduce blocks to statement' \*merissa
 - everyone try and look at optimizations
 - binary optimization \*merissa
+- make dicts double curly braces instead of single lol
 
 optional future additions:
 
