@@ -1,0 +1,11 @@
+C0UNT[i:1->21] <
+    PR3SUM1NG[i % 15 == 0] <
+        SP3AK["FizzBuzz"];
+    > 3LS3 1F[i % 3 == 0] <
+        SP3AK["Fizz"];
+    > 3LS3 1F[i % 5 == 0] <
+        SP3AK["Buzz"];
+    > 3LS3 <
+        SP3AK[i];
+    >
+>

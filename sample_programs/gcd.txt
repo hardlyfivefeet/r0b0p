@@ -1,0 +1,6 @@
+PR0GRAM gcd[a, b] <
+  PR3SUM1NG[b == 0] <
+    G1V3 a;
+  >
+  G1V3 gcd[b, (a % b)];
+>

@@ -1,0 +1,12 @@
+PR0GRAM collatz_steps[n] <
+  steps = 0;
+  WH1L3[N0T (n == 1)] <
+    PR3SUM1NG[n % 2 == 0] <
+      n = n / 2;
+    > 3LS3 <
+      n = (3 * n) + 1;
+    >
+    steps = steps + 1;
+  >
+  G1V3 steps;
+>

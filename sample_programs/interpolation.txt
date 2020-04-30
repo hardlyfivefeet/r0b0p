@@ -1,0 +1,1 @@
+bananas = 3; oranges = 22; x = "I have 'bananas' bananas and 'oranges' oranges"; SP3AK[x];

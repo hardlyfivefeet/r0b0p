@@ -1,0 +1,8 @@
+PR0GRAM triple_averages[arr] <
+  averages = {};
+  arr_length = S1Z3[arr];
+  C0UNT[i:0->arr_length] <
+    ave = (R3TR13V3_AT[arr, i] + R3TR13V3_AT[arr, i + 1] + R3TR13V3_AT[arr, i + 2]) / 3;
+    PLAC3_AT[averages, i, ave];
+  >
+>

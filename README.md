@@ -52,6 +52,7 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Unused variable
 
 ## Optimizations
+
 - Remove statements that are undefined after optimization
 - No-op if attempting to assign an ID to itself
 - No-op for While-false
@@ -358,9 +359,14 @@ function calculateDistanceFromCenter(x, y) {
 ```r0b0p
 RADIUS = 1;
 
-PR0GRAM calculate_pi[num_darts] <
-  num_darts_in_circle = throw_darts[num_darts];
-  G1V3 (4 * (num_darts_in_circle / num_darts));
+PR0GRAM calculate_distance_from_center[x, y] <
+  G1V3 SQRT[((x - RADIUS) ** 2) + ((y - RADIUS) ** 2)];
+>
+
+PR0GRAM throw_dart[] <
+  x = UNPR3D1CTABL3[] * 2;
+  y = UNPR3D1CTABL3[] * 2;
+  G1V3 calculate_distance_from_center[x, y];
 >
 
 PR0GRAM throw_darts[num_darts] <
@@ -373,14 +379,9 @@ PR0GRAM throw_darts[num_darts] <
   G1V3 circle_count;
 >
 
-PR0GRAM throw_dart[] <
-  x = UNPR3D1CTABL3 * 2;
-  y = UNPR3D1CTABL3 * 2;
-  G1V3 calculate_distance_from_center[x, y];
->
-
-PR0GRAM calculate_distance_from_center[x, y] <
-  G1V3 SQRT[((x - RADIUS) ** 2) + ((y - RADIUS) ** 2)];
+PR0GRAM calculate_pi[num_darts] <
+  num_darts_in_circle = throw_darts[num_darts];
+  G1V3 (4 * (num_darts_in_circle / num_darts));
 >
 ```
 

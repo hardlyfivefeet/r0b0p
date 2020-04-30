@@ -1,0 +1,7 @@
+PR0GRAM fibb[n] <
+  PR3SUM1NG[n <= 2] <
+    G1V3 1;
+  > 3LS3 <
+    G1V3 fibb[n - 1] + fibb[n - 2];
+  >
+>
