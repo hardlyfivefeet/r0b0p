@@ -8,6 +8,7 @@ stars for difficulty
 - pull out checking for block statements length, make function called 'reduce blocks to statement' \*merissa
 - everyone try and look at optimizations
 - binary optimization \*merissa
+- make dicts double curly braces instead of single lol
 
 optional future additions:
 
