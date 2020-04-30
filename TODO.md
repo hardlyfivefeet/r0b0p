@@ -6,5 +6,4 @@ stars for difficulty
 
 optional future additions:
 
-- that darned dollar sign
 - make print a builtin lol

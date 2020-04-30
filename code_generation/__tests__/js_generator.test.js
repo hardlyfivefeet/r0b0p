@@ -106,18 +106,12 @@ const fixture = {
 
   interpolation: [
     String.raw`bananas = 3; x = "I have 'bananas' bananas"; SP3AK[x];`,
-    'let bananas = 3; let x = "I have ${' +
-      "bananas" +
-      '} bananas"; console.log(x);',
+    "let bananas = 3; let x = `I have ${bananas} bananas`; console.log(x);",
   ],
 
   multipleInterpolations: [
     String.raw`bananas = 3; oranges = 22; x = "I have 'bananas' bananas and 'oranges' oranges"; SP3AK[x];`,
-    'let bananas = 3; let oranges = 22; let x = "I have ${' +
-      "bananas" +
-      "} bananas and ${" +
-      "oranges" +
-      '} oranges"; console.log(x);',
+    "let bananas = 3; let oranges = 22; let x = `I have ${bananas} bananas and ${oranges} oranges`; console.log(x);",
   ],
 
   undefined: [
