@@ -11,7 +11,7 @@ const parse = require("../parser");
 
 //In order to silence our warnings in the test files, so that we don't have to "use" all
 //of the test variables and ruin the integrity of the tests, we redefine console.warn.
-console.warn = function () { }
+console.warn = function () {};
 
 const {
   Program,
@@ -265,7 +265,7 @@ const fixture = {
     ]),
   ],
   dict: [
-    String.raw`y = {a: 1, b: 2};`,
+    String.raw`y = {{a: 1, b: 2}};`,
     new Program([
       new Assignment(
         new Id("y"),
@@ -358,7 +358,7 @@ const fixture = {
     ]),
   ],
   dictSubstitute: [
-    String.raw`SUBST1TUT3[{a: 1, b: 2}, "a", 50];`,
+    String.raw`SUBST1TUT3[{{a: 1, b: 2}}, "a", 50];`,
     new Program([
       new FuncCallStmt(
         new FuncCall("SUBST1TUT3", [
@@ -373,7 +373,7 @@ const fixture = {
     ]),
   ],
   dictCodes: [
-    String.raw`C0D3S[{a: 1, b: 2}];`,
+    String.raw`C0D3S[{{a: 1, b: 2}}];`,
     new Program([
       new FuncCallStmt(
         new FuncCall("C0D3S", [
@@ -386,7 +386,7 @@ const fixture = {
     ]),
   ],
   dictRetrieve: [
-    String.raw`R3TR13V3[{hi: "a", hello: "b"}, "hello"];`,
+    String.raw`R3TR13V3[{{hi: "a", hello: "b"}}, "hello"];`,
     new Program([
       new FuncCallStmt(
         new FuncCall("R3TR13V3", [
@@ -400,7 +400,7 @@ const fixture = {
     ]),
   ],
   dictDiscard: [
-    String.raw`D1SCARD[{a: "b", c: "d", e: "f"}, "a"];`,
+    String.raw`D1SCARD[{{a: "b", c: "d", e: "f"}}, "a"];`,
     new Program([
       new FuncCallStmt(
         new FuncCall("D1SCARD", [
@@ -415,7 +415,7 @@ const fixture = {
     ]),
   ],
   dictPlace: [
-    String.raw`PLAC3[{a: 1, b: 2}, "a", 3];`,
+    String.raw`PLAC3[{{a: 1, b: 2}}, "a", 3];`,
     new Program([
       new FuncCallStmt(
         new FuncCall("PLAC3", [

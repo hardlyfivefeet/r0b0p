@@ -11,7 +11,7 @@ const generate = require("../js_generator");
 
 //In order to silence our warnings in the test files, so that we don't have to "use" all
 //of the test variables and ruin the integrity of the tests, we redefine console.warn.
-console.warn = function () { }
+console.warn = function () {};
 
 const fixture = {
   mathBuiltins: [
@@ -25,7 +25,7 @@ const fixture = {
   ],
 
   dictBuiltins: [
-    String.raw`dict = {a: 2, b: 3}; PLAC3[dict, "c", 3]; D1SCARD[dict, "a"]; value = R3TR13V3[dict, "c"]; keys = C0D3S[dict];`,
+    String.raw`dict = {{a: 2, b: 3}}; PLAC3[dict, "c", 3]; D1SCARD[dict, "a"]; value = R3TR13V3[dict, "c"]; keys = C0D3S[dict];`,
     String.raw`let dict = {a: 2, b: 3}; dict["c"] = 3; delete dict["a"]; let value = dict["c"]; let keys = Object.keys(dict);`,
   ],
 
@@ -107,8 +107,8 @@ const fixture = {
   interpolation: [
     String.raw`bananas = 3; x = "I have 'bananas' bananas"; SP3AK[x];`,
     'let bananas = 3; let x = "I have ${' +
-    "bananas" +
-    '} bananas"; console.log(x);',
+      "bananas" +
+      '} bananas"; console.log(x);',
   ],
 
   undefined: [
@@ -135,7 +135,7 @@ const fixture = {
     callback(current);
     let current = base ** i;
     let i = i + 1;
-    }}`
+    }}`,
   ],
 };
 

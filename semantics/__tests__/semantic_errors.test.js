@@ -10,7 +10,7 @@ const Context = require("../context");
 
 //In order to silence our warnings in the test files, so that we don't have to "use" all
 //of the test variables and ruin the integrity of the tests, we redefine console.warn.
-console.warn = function () { }
+console.warn = function () {};
 
 const errors = [
   ["use of undeclared variable", "y = x + 6;"],
@@ -18,7 +18,7 @@ const errors = [
     "use of declared variable outside the inner block",
     "PR0GRAM declare_x[] < x = 3; > SP3AK[x];",
   ],
-  ["same key repeated", "y = {a: 1, a: 2};"],
+  ["same key repeated", "y = {{a: 1, a: 2}};"],
   [
     "wrong number of parameters",
     "PR0GRAM area_of_circle[r] < G1V3 3.14159265 * r * r; > x = area_of_circle[];",

@@ -7,7 +7,6 @@ stars for difficulty
 - maybe do something so that floats have .0 lol \*adriana
 - everyone try and look at optimizations
 - binary optimization \*merissa
-- make dicts double curly braces instead of single lol
 
 optional future additions:
 

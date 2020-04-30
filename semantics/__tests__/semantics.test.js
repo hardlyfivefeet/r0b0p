@@ -10,7 +10,7 @@ const analyze = require("../analyzer");
 
 //In order to silence our warnings in the test files, so that we don't have to "use" all
 //of the test variables and ruin the integrity of the tests, we redefine console.warn.
-console.warn = function () { }
+console.warn = function () {};
 
 const program = String.raw`
 SP3AK["Hello, world!"];
@@ -29,7 +29,7 @@ D1SCARD_AT[list, 3];
 value = R3TR13V3_AT[list, 0];
 list_length = S1Z3[list];
 
-dict = {a: 2, b: 3};
+dict = {{a: 2, b: 3}};
 PLAC3[dict, "c", 3];
 D1SCARD[dict, "a"];
 value = R3TR13V3[dict, "c"];

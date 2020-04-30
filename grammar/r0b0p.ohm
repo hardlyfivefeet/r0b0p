@@ -34,8 +34,8 @@ r0b0p {
               | number
               | Text
               | boolean
-              | List
               | Dict
+              | List
               | undefined
               
   Return      = kwReturn Exp
@@ -54,7 +54,7 @@ r0b0p {
   Print       = "SP3AK" "[" (Exp) "]"
 
   List        = "{" (ListOf<Exp, ",">)? "}"
-  Dict        = "{" ListOf<KeyValue, ",">? "}"
+  Dict        = "{{" ListOf<KeyValue, ",">? "}}"
   KeyValue    = (Key | Text) ":" Exp
   
   kwProgram   = "PR0GRAM" ~idchar

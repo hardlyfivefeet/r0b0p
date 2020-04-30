@@ -132,11 +132,11 @@ describe("strings", () => {
 
 describe("lists and dictionaries", () => {
   it("lets us create a dictionary variable", () => {
-    results = r0b0p.match("x = {a: 1, b: 2};");
+    results = r0b0p.match("x = {{a: 1, b: 2}};");
     assert(results.succeeded());
   });
   it("does not let us use a statement as dictionary value", () => {
-    results = r0b0p.match("y = {a: x = 3};");
+    results = r0b0p.match("y = {{a: x = 3}};");
     assert(results.succeeded() === false);
   });
   it("lets us create a list variable", () => {

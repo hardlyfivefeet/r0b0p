@@ -89,7 +89,7 @@ List.prototype.gen = function () {
 Assignment.prototype.gen = function () {
   return `${
     isAllUpperCase(this.id.name) ? "const" : "let"
-    } ${this.id.gen()} = ${this.exp.gen()};`;
+  } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
