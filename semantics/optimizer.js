@@ -108,6 +108,25 @@ BinaryExp.prototype.optimize = function () {
   if (this.op === "**" && isZero(this.right)) return IntLit(1);
   if (this.op === "%" && isOne(this.right)) return IntLit(0);
   if (this.op === "%" && this.left === this.right) return IntLit(0);
+
+  if (this.op === "&&") {
+    if (isFalse(this.left) || isFalse(this.right)) {
+      return new BoolLit(R0B0P_FALSE);
+    }
+    if (isTrue(this.left) && isTrue(this.right)) {
+      return new BoolLit(R0B0P_TRUE);
+    }
+  }
+
+  if (this.op === "||") {
+    if (isTrue(this.left) || isTrue(this.right)) {
+      return new BoolLit(R0B0P_TRUE);
+    }
+    if (isFalse(this.left) && isFalse(this.right)) {
+      return new BoolLit(R0B0P_FALSE);
+    }
+  }
+
   if (bothNumLits(this)) {
     const [x, y] = [this.left.value, this.right.value];
     if (this.op === "+") return new FloatLit(x + y);
