@@ -45,6 +45,10 @@ function bothNumLits(b) {
   return isNumLit(b.left) && isNumLit(b.right);
 }
 
+function bothStringLits(b) {
+  return b.left instanceof Text && b.right instanceof Text;
+}
+
 function isNumLit(n) {
   return isIntLit(n) || isFloatLit(n);
 }
@@ -100,14 +104,24 @@ BinaryExp.prototype.optimize = function () {
   this.right = this.right.optimize();
   if (this.op === "+" && isZero(this.right)) return this.left;
   if (this.op === "+" && isZero(this.left)) return this.right;
-  if (this.op === "*" && isZero(this.right)) return new IntLit(0);
-  if (this.op === "*" && isZero(this.left)) return new IntLit(0);
+  if (this.op === "*" && (isZero(this.right) || isZero(this.left)))
+    return new IntLit(0);
   if (this.op === "*" && isOne(this.right)) return this.left;
   if (this.op === "*" && isOne(this.left)) return this.right;
   if (this.op === "**" && isOne(this.right)) return this.left;
   if (this.op === "**" && isZero(this.right)) return IntLit(1);
   if (this.op === "%" && isOne(this.right)) return IntLit(0);
   if (this.op === "%" && this.left === this.right) return IntLit(0);
+
+  if (this.op === "+" && bothStringLits(this)) {
+    let combinedPlaceholders = this.left.placeholders;
+    let leftQuasiLen = this.left.quasi.length;
+    this.right.placeholders.forEach((placeholder) => {
+      let newIndex = placeholder.index + leftQuasiLen;
+      combinedPlaceholders.push(new Placeholder(placeholder.exp, newIndex));
+    });
+    return new Text(this.left.quasi + this.right.quasi, combinedPlaceholders);
+  }
 
   if (this.op === "&&") {
     if (isFalse(this.left) || isFalse(this.right)) {
@@ -117,7 +131,6 @@ BinaryExp.prototype.optimize = function () {
       return new BoolLit(R0B0P_TRUE);
     }
   }
-
   if (this.op === "||") {
     if (isTrue(this.left) || isTrue(this.right)) {
       return new BoolLit(R0B0P_TRUE);
@@ -126,7 +139,6 @@ BinaryExp.prototype.optimize = function () {
       return new BoolLit(R0B0P_FALSE);
     }
   }
-
   if (bothNumLits(this)) {
     const [x, y] = [this.left.value, this.right.value];
     if (this.op === "+") return new FloatLit(x + y);
@@ -240,18 +252,18 @@ Placeholder.prototype.optimize = function () {
 };
 
 NegationExp.prototype.optimize = function () {
-  this.operand = this.operand.optimize();
-  if (isNumLit(this.operand)) {
-    return new FloatLit(-this.operand.value);
+  this.exp = this.exp.optimize();
+  if (isNumLit(this.exp)) {
+    return new FloatLit(-this.exp.value);
   }
   return this;
 };
 
 NotExp.prototype.optimize = function () {
-  this.operand = this.operand.optimize();
-  if (isFalse(this.operand)) {
+  this.exp = this.exp.optimize();
+  if (isFalse(this.exp)) {
     return new BoolLit(R0B0P_TRUE);
-  } else if (isTrue(this.operand)) {
+  } else if (isTrue(this.exp)) {
     return new BoolLit(R0B0P_FALSE);
   }
   return this;

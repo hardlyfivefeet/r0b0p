@@ -89,7 +89,7 @@ List.prototype.gen = function () {
 Assignment.prototype.gen = function () {
   return `${
     isAllUpperCase(this.id.name) ? "const" : "let"
-    } ${this.id.gen()} = ${this.exp.gen()};`;
+  } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
@@ -208,7 +208,7 @@ Text.prototype.gen = function () {
     this.placeholders.forEach((placeholder) => {
       const currString = this.quasi.substring(index, placeholder.index);
       result = result + currString + `$\{${placeholder.exp.gen()}}`;
-      index = placeholder.index + 1;
+      index = placeholder.index;
     });
     result = result + this.quasi.substring(index);
     return '"' + result + '"';
