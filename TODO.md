@@ -3,6 +3,7 @@
 stars for difficulty
 
 - maybe do something so that floats have .0 lol \*adriana
+- figure out how to differentiate first time assignment and repeated assignment for the 'let' problem
 
 optional future additions:
 
