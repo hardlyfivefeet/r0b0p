@@ -61,11 +61,11 @@ class ForLoop {
 }
 
 class Break {
-  constructor() {}
+  constructor() { }
 }
 
 class Continue {
-  constructor() {}
+  constructor() { }
 }
 
 class Conditional {
@@ -128,14 +128,14 @@ class BinaryExp {
 }
 
 class NegationExp {
-  constructor(operand) {
-    Object.assign(this, { operand });
+  constructor(exp) {
+    Object.assign(this, { exp });
   }
 }
 
 class NotExp {
-  constructor(operand) {
-    Object.assign(this, { operand });
+  constructor(exp) {
+    Object.assign(this, { exp });
   }
 }
 
@@ -158,7 +158,7 @@ class BoolLit {
 }
 
 class Undefined {
-  constructor() {}
+  constructor() { }
 }
 
 class Text {

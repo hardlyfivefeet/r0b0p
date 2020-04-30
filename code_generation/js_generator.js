@@ -89,7 +89,7 @@ List.prototype.gen = function () {
 Assignment.prototype.gen = function () {
   return `${
     isAllUpperCase(this.id.name) ? "const" : "let"
-  } ${this.id.gen()} = ${this.exp.gen()};`;
+    } ${this.id.gen()} = ${this.exp.gen()};`;
 };
 
 BinaryExp.prototype.gen = function () {
@@ -97,7 +97,7 @@ BinaryExp.prototype.gen = function () {
 };
 
 NotExp.prototype.gen = function () {
-  return `!${this.operand.gen()}`;
+  return `!${this.exp.gen()}`;
 };
 
 KeyValue.prototype.gen = function () {
@@ -218,7 +218,7 @@ Text.prototype.gen = function () {
 };
 
 NegationExp.prototype.gen = function () {
-  return `(- ${this.operand.gen()})`;
+  return `(- ${this.exp.gen()})`;
 };
 
 Undefined.prototype.gen = function () {
