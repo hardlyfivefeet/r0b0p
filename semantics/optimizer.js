@@ -104,11 +104,17 @@ BinaryExp.prototype.optimize = function () {
   if (this.op === "*" && isZero(this.left)) return new IntLit(0);
   if (this.op === "*" && isOne(this.right)) return this.left;
   if (this.op === "*" && isOne(this.left)) return this.right;
+  if (this.op === "**" && isOne(this.right)) return this.left;
+  if (this.op === "**" && isZero(this.right)) return IntLit(1);
+  if (this.op === "%" && isOne(this.right)) return IntLit(0);
+  if (this.op === "%" && this.left === this.right) return IntLit(0);
   if (bothNumLits(this)) {
     const [x, y] = [this.left.value, this.right.value];
     if (this.op === "+") return new FloatLit(x + y);
     if (this.op === "*") return new FloatLit(x * y);
     if (this.op === "/") return new FloatLit(x / y);
+    if (this.op === "%") return new FloatLit(x % y);
+    if (this.op === "**") return new FloatLit(x ** y);
   }
   return this;
 };

@@ -6,7 +6,6 @@ stars for difficulty
 - OPERNAD SHOULDNT BE THE NAME IN THE NEGATION AND THE UNARY STUFF AHHHH \*maddie
 - maybe do something so that floats have .0 lol \*adriana
 - everyone try and look at optimizations
-- binary optimization \*merissa
 
 optional future additions:
 
