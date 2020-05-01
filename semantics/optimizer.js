@@ -97,8 +97,6 @@ List.prototype.optimize = function () {
 Assignment.prototype.optimize = function () {
   this.id = this.id.optimize();
   this.exp = this.exp.optimize();
-  // console.log("this id is ", this.id);
-  // console.log("this exp is ", this.exp);
   if (isId(this.exp) && (this.id.name === this.exp.name)) {
     return new Undefined();
   }
