@@ -56,6 +56,7 @@ Have you ever written JavaScript and wished it felt more robotic? Beep boop bop?
 - Remove statements that are undefined after optimization
 - No-op if attempting to assign an ID to itself
 - No-op for While-false
+- No-op for If-false
 - No-op for ElseIf-false
 - Reduce block to single statement if it only contains one statement
 - Binary expressions:

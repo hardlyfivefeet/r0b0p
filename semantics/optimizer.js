@@ -73,6 +73,10 @@ function isUndefined(e) {
   return e instanceof Undefined;
 }
 
+function isId(e) {
+  return e instanceof Id;
+}
+
 function reduceBlockToStatement(block) {
   if (block.statements.length === 1) {
     return block.statements[0];
@@ -82,7 +86,7 @@ function reduceBlockToStatement(block) {
 
 Program.prototype.optimize = function () {
   this.statements = this.statements.map((s) => s.optimize());
-  this.statements.filter((s) => !isUndefined(s));
+  this.statements = this.statements.filter((s) => !isUndefined(s));
 };
 
 List.prototype.optimize = function () {
@@ -93,7 +97,9 @@ List.prototype.optimize = function () {
 Assignment.prototype.optimize = function () {
   this.id = this.id.optimize();
   this.exp = this.exp.optimize();
-  if (this.id === this.exp) {
+  // console.log("this id is ", this.id);
+  // console.log("this exp is ", this.exp);
+  if (isId(this.exp) && (this.id.name === this.exp.name)) {
     return new Undefined();
   }
   return this;
@@ -180,6 +186,7 @@ FuncCallStmt.prototype.optimize = function () {
 
 Block.prototype.optimize = function () {
   this.statements = this.statements.map((s) => s.optimize());
+  this.statements = this.statements.filter((s) => !isUndefined(s));
   return this;
 };
 
@@ -205,6 +212,7 @@ Conditional.prototype.optimize = function () {
   this.block = reduceBlockToStatement(this.block);
   this.block = this.block.optimize();
   this.elseIfBlocks = this.elseIfBlocks.map((block) => block.optimize());
+  this.elseIfBlocks = this.elseIfBlocks.filter((block) => !isUndefined(block));
   if (this.elseBlock) {
     this.elseBlock = this.elseBlock.optimize();
   }

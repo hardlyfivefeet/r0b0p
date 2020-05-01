@@ -1,0 +1,29 @@
+x = 5;
+x = x;
+
+WH1L3[b0p] <
+    SP3AK["Nobody will read this."];
+>
+
+PR3SUM1NG[b0p] <
+    SP3AK["Nobody will read this either."];
+> 3LS3 1F [b0p] <
+    SP3AK["Or this."];
+> 3LS3 <
+    SP3AK["But you can read this!"];
+>
+
+PR3SUM1NG[b1p] <
+    SP3AK["This will be reduced to a single statement instead of a full block."];
+>
+
+y = 5 * 1;
+y = 6 * 0;
+
+
+w = "Hello " + "world";
+
+PR3SUM1NG[b1p && b0p] <>
+PR3SUM1NG[b1p || b0p] <>
+
+PR3SUM1NG[N0T b1p] <>
